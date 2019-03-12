@@ -42,7 +42,7 @@ function handleResponse(response) {
     if (!response.ok) {
       if (response.status === 401) {
         logout();
-        location.reload(true)
+        window.location.reload(true)
       }
 
       const error = (data && data.message) || response.statusText;

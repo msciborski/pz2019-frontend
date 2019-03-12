@@ -21,6 +21,7 @@ class App extends Component {
     const { anchorEl } = this.props.profileMenu;
     const { classes, handleProfileMenuOpen, handleProfileMenuClose } = this.props;
     const isMenuOpen = Boolean(anchorEl);
+    const { loggedIn } = this.props;
 
     const renderMenu = (
       <Menu
@@ -53,15 +54,16 @@ class App extends Component {
                 >
                   Title
                 </Typography>
-                <IconButton
-                  color="inherit"
-                  aria-owns="material-appbar"
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  className={classes.profileMenu}
-                >
-                  <AccountCircle />
-                </IconButton>
+                {loggedIn &&
+                  <IconButton
+                    color="inherit"
+                    aria-owns="material-appbar"
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                    className={classes.profileMenu}
+                  >
+                    <AccountCircle />
+                  </IconButton>}
               </Toolbar>
             </AppBar>
           </Grid>
@@ -73,9 +75,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   const { profileMenu } = state;
+  const { loggedIn } = state.authentication;
   return {
     profileMenu,
+    loggedIn,
   };
 }
 
