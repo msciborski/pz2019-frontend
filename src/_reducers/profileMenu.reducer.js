@@ -1,4 +1,4 @@
-import { profileMenuConstants } from "../constants";
+import { profileMenuConstants } from "../_constants";
 
 export const profileMenu = (state = {}, action) => {
   switch (action.type) {

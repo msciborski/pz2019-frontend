@@ -1,4 +1,4 @@
-import { alertConstants } from "../constants";
+import { alertConstants } from "../_constants";
 
 const success = message => ({ type: alertConstants.SUCCESS, message});
 const error = message => ({ type: alertConstants.ERROR, message});

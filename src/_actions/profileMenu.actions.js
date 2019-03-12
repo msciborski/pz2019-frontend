@@ -1,4 +1,4 @@
-import { profileMenuConstants } from "../constants";
+import { profileMenuConstants } from "../_constants";
 
 const open = (payload) => {
   return {
