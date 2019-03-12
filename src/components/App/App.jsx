@@ -7,12 +7,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { profileMenuActions } from "../../actions";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleProfileMenuOpen = event => {
-    // this.setState({ anchorEl: event.currentTarget });
     const { dispatch } = this.props;
     dispatch(profileMenuActions.open(event.currentTarget));
   }
@@ -25,6 +20,7 @@ class App extends Component {
   render() {
     const { anchorEl } = this.props.profileMenu;
     const isMenuOpen = Boolean(anchorEl);
+
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
