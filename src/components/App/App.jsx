@@ -4,21 +4,22 @@ import { connect } from "react-redux";
 import { Grid, AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { withStyles } from '@material-ui/core/styles';
 import { profileMenuActions } from "../../actions";
 
+const styles = {
+  root: {
+    dispaly: 'flex',
+  },
+  profileMenu: {
+    marginLeft: 'auto',
+  }
+};
+
 class App extends Component {
-  handleProfileMenuOpen = event => {
-    const { dispatch } = this.props;
-    dispatch(profileMenuActions.open(event.currentTarget));
-  }
-
-  handleProfileMenuClose = () => {
-    const { dispatch } = this.props;
-    dispatch(profileMenuActions.close());
-  }
-
   render() {
     const { anchorEl } = this.props.profileMenu;
+    const { classes, handleProfileMenuOpen, handleProfileMenuClose } = this.props;
     const isMenuOpen = Boolean(anchorEl);
 
     const renderMenu = (
@@ -27,7 +28,7 @@ class App extends Component {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMenuOpen}
-        onClose={this.handleProfileMenuClose}
+        onClose={handleProfileMenuClose}
       >
         <MenuItem>Profile</MenuItem>
       </Menu>
@@ -35,7 +36,7 @@ class App extends Component {
 
     return (
       <div>
-        <Grid container>
+        <Grid container className={classes.root}>
           <Grid item xs={12}>
             <AppBar position="static">
               <Toolbar>
@@ -56,7 +57,8 @@ class App extends Component {
                   color="inherit"
                   aria-owns="material-appbar"
                   aria-haspopup="true"
-                  onClick={this.handleProfileMenuOpen}
+                  onClick={handleProfileMenuOpen}
+                  className={classes.profileMenu}
                 >
                   <AccountCircle />
                 </IconButton>
@@ -70,15 +72,23 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log(state);
+const mapStateToProps = state => {
   const { profileMenu } = state;
   return {
     profileMenu,
-  }
+  };
 }
-const connectedApp = connect(mapStateToProps)(App);
-export { connectedApp as App };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleProfileMenuOpen: event => dispatch(profileMenuActions.open(event.currentTarget)),
+    handleProfileMenuClose: () => dispatch(profileMenuActions.close()),
+  };
+}
+
+const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+const styledConnectedApp = withStyles(styles)(connectedApp);
+export { styledConnectedApp as App };
 
 
 
