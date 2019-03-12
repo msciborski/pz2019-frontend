@@ -1,98 +1,34 @@
 import React from "react";
 import { Component } from "react";
-import { connect } from "react-redux";
-import { Grid, AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import { Grid } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
-import { profileMenuActions } from "../../actions";
+import { NavBar } from "../NavBar/NavBar";
 
 const styles = {
   root: {
     dispaly: 'flex',
-  },
-  profileMenu: {
-    marginLeft: 'auto',
   }
 };
 
 class App extends Component {
   render() {
-    const { anchorEl } = this.props.profileMenu;
-    const { classes, handleProfileMenuOpen, handleProfileMenuClose } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
-    const { loggedIn } = this.props;
+    const { classes } = this.props;
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={handleProfileMenuClose}
-      >
-        <MenuItem>Profile</MenuItem>
-      </Menu>
-    )
+
 
     return (
       <div>
         <Grid container className={classes.root}>
           <Grid item xs={12}>
-            <AppBar position="static">
-              <Toolbar>
-                <IconButton
-                  color="inherit"
-                  aria-label="Open menu"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Typography
-                  variant="h6"
-                  color="inherit"
-                  noWrap
-                >
-                  Title
-                </Typography>
-                {loggedIn &&
-                  <IconButton
-                    color="inherit"
-                    aria-owns="material-appbar"
-                    aria-haspopup="true"
-                    onClick={handleProfileMenuOpen}
-                    className={classes.profileMenu}
-                  >
-                    <AccountCircle />
-                  </IconButton>}
-              </Toolbar>
-            </AppBar>
+            <NavBar />
           </Grid>
         </Grid>
-        {renderMenu}
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state);
-  const { profileMenu } = state;
-  const { loggedIn } = state.authentication;
-  return {
-    profileMenu,
-    loggedIn,
-  };
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    handleProfileMenuOpen: event => dispatch(profileMenuActions.open(event.currentTarget)),
-    handleProfileMenuClose: () => dispatch(profileMenuActions.close()),
-  };
-}
-
-const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
-const styledConnectedApp = withStyles(styles)(connectedApp);
+const styledConnectedApp = withStyles(styles)(App);
 export { styledConnectedApp as App };
 
 
