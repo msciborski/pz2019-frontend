@@ -19,7 +19,7 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
       submitted: '',
     };
@@ -32,20 +32,21 @@ class LoginPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
+    console.log('Submit pressed');
     const { login } = this.props;
 
     this.setState({ submitted: true });
-    const { username, password } = this.state;
+    const { email, password } = this.state;
+    console.log(`${email} ${password}`);
 
-    if (username && password) {
-      login(username, password);
+    if (email && password) {
+      login(email, password);
     }
   }
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props);
     return (
       <Grid item xs={12} className={classes.loginForm}>
         <LoginForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />

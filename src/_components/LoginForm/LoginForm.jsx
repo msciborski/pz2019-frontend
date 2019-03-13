@@ -23,7 +23,7 @@ const LoginForm = (props) => {
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="password">Password</InputLabel>
-          <Input id="password" name="password" autoComplete="current-password" onChange={handleChange} />
+          <Input type="password" id="password" name="password" autoComplete="current-password" onChange={handleChange} />
         </FormControl>
         <Button
           type="submit"
