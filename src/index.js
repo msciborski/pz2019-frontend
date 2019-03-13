@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LoginPage } from "./LoginPage/LoginPage";
-import { App } from "./components/App/App.jsx";
-import { RegisterPage } from "./RegisterPage";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { App } from "./App";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import store from "./_store";
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-    <Switch>
-      <Route exact path="/" component={App} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/register" component={RegisterPage} />
-    </Switch>
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root'));

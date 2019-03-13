@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { userActions } from "../_actions";
 import { LoginForm } from "../components/LoginForm";
-import { NavBar } from "../components/NavBar/NavBar";
 import { withStyles } from "@material-ui/styles";
 
 const styles = {
@@ -48,13 +47,8 @@ class LoginPage extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container >
-        <Grid item xs={12}>
-          <NavBar />
-        </Grid>
-        <Grid item xs={12} className={classes.loginForm}>
-          <LoginForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-        </Grid>
+      <Grid item xs={12} className={classes.loginForm}>
+        <LoginForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </Grid>
     )
   }

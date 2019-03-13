@@ -2,7 +2,6 @@ import React from "react";
 import { Component } from "react";
 import { withStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import { NavBar} from "../components/NavBar";
 import { RegisterForm } from "../components/RegisterForm";
 import { Grid } from "@material-ui/core";
 import { userActions } from "../_actions";
@@ -60,14 +59,9 @@ class RegisterPage extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container >
-      <Grid item xs={12}>
-        <NavBar />
-      </Grid>
       <Grid item xs={12} className={classes.registerForm}>
         <RegisterForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </Grid>
-    </Grid>
     );
   }
 }
@@ -87,4 +81,4 @@ const mapDispatchToProps = dispatch => {
 
 const connectedRegisterPage = connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
 const styledConnectedRegisterPage = withStyles(styles)(connectedRegisterPage);
-export { styledConnectedRegisterPage as RegisterPage};
+export { styledConnectedRegisterPage as RegisterPage };
