@@ -1,14 +1,19 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-  profileMenu: {
+  loginButton: {
+    color: 'inherit',
     marginLeft: 'auto',
+  },
+  title: {
+    textDecoration: 'none',
   }
 };
 
@@ -25,8 +30,11 @@ class NavBar extends Component {
   handleProfileMenuClose = () => this.setState({ anchorEl: null });
 
   render() {
-    const { anchorEl, loggedIn, classes } = this.state;
+    const { anchorEl, loggedIn } = this.state;
+    const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
+
+    console.log(this.props);
 
     const renderMenu = (
       <Menu
@@ -54,19 +62,32 @@ class NavBar extends Component {
               variant="h6"
               color="inherit"
               noWrap
+              component={Link}
+              to="/"
+              className={classes.title}
             >
               Title
                 </Typography>
-            {loggedIn &&
-              <IconButton
-                color="inherit"
-                aria-owns="material-appbar"
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                className={classes.profileMenu}
-              >
-                <AccountCircle />
-              </IconButton>}
+            {
+              !!loggedIn ?
+                <IconButton
+                  color="inherit"
+                  aria-owns="material-appbar"
+                  aria-haspopup="true"
+                  onClick={this.handleProfileMenuOpen}
+                >
+                  <AccountCircle />
+                </IconButton> :
+                <Button
+                  variant="text"
+                  color="secondary"
+                  className={classes.loginButton}
+                  component={Link}
+                  to="/login"
+                >
+                  Login
+                </Button>
+            }
           </Toolbar>
         </AppBar>
         {renderMenu}
@@ -84,5 +105,5 @@ const mapStateToProps = state => {
 
 const connectedNavBar = connect(mapStateToProps)(NavBar);
 const styledConnectedNavBar = withStyles(styles)(connectedNavBar);
-export { styledConnectedNavBar as NavBar};
+export { styledConnectedNavBar as NavBar };
 
