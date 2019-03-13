@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Grid, Paper, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { userActions } from "../_actions";
 import { LoginForm } from "../components/LoginForm";
 import { NavBar } from "../components/NavBar/NavBar";
@@ -11,7 +11,7 @@ const styles = {
   loginForm: {
     display: 'flex',
     justifyContent: 'center',
-    height: '85vh',
+    minHeight: '85vh',
     alignItems: 'center',
   },
 }

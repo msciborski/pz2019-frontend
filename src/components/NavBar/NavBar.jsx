@@ -78,15 +78,24 @@ class NavBar extends Component {
                 >
                   <AccountCircle />
                 </IconButton> :
-                <Button
-                  variant="text"
-                  color="secondary"
-                  className={classes.loginButton}
-                  component={Link}
-                  to="/login"
-                >
-                  Login
-                </Button>
+                <div className={classes.loginButton}>
+                  <Button
+                    variant="text"
+                    color="inherit"
+                    component={Link}
+                    to="/login"
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    variant="text"
+                    color="inherit"
+                    component={Link}
+                    to="/register"
+                  >
+                    Register
+                  </Button>
+                </div>
             }
           </Toolbar>
         </AppBar>

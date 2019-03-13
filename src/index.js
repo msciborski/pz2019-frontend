@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { LoginPage } from "./LoginPage/LoginPage";
 import { App } from "./components/App/App.jsx";
+import { RegisterPage } from "./RegisterPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./_store";
@@ -13,6 +14,7 @@ ReactDOM.render(
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/register" component={RegisterPage} />
     </Switch>
     </Router>
   </Provider>,
