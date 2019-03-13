@@ -37,5 +37,6 @@ const LoginForm = (props) => {
     </Paper>
   );
 }
+
 const styledLoginForm = withStyles(styles)(LoginForm);
 export { styledLoginForm as LoginForm };

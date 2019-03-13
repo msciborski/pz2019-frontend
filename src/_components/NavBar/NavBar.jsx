@@ -34,7 +34,6 @@ class NavBar extends Component {
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
 
-    console.log(this.props);
 
     const renderMenu = (
       <Menu

@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, FormControl, InputLabel, Input, Button } from "@material-ui/core";
+import { Paper, Typography, FormControl, InputLabel, Input, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 
 const styles = {
@@ -10,7 +10,7 @@ const styles = {
 }
 
 const RegisterForm = (props) => {
-  const { handleChange, handleSubmit, classes} = props;
+  const { handleChange, handleSubmit, isDoctor, classes} = props;
   return (
     <Paper className={classes.paper}>
       <Typography component="h1" variant="h5" align="center">
@@ -23,15 +23,15 @@ const RegisterForm = (props) => {
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="name">Name</InputLabel>
-          <Input id="name" name="name" autoComplete="name" autoFocus onChange={handleChange} />
+          <Input id="name" name="name" autoComplete="name" onChange={handleChange} />
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="surname">Surname</InputLabel>
-          <Input id="surname" name="surname" autoComplete="surname" autoFocus onChange={handleChange} />
+          <Input id="surname" name="surname" autoComplete="surname" onChange={handleChange} />
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="pesel">Pesel</InputLabel>
-          <Input id="pesel" name="pesel" autoComplete="pesel" autoFocus onChange={handleChange} />
+          <Input id="pesel" name="pesel" autoComplete="pesel" onChange={handleChange} />
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="password">Password</InputLabel>
@@ -41,6 +41,24 @@ const RegisterForm = (props) => {
           <InputLabel htmlFor="passwordConfirmation">Password Confirmation</InputLabel>
           <Input id="passwordConfirmation" name="passwordConfirmation" autoComplete="current-password" onChange={handleChange} />
         </FormControl>
+        {
+          isDoctor &&
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="doctorToken">Doctor Token</InputLabel>
+            <Input id="doctorToken" name="doctorToken" onChange={handleChange} />
+          </FormControl>
+        }
+
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={isDoctor}
+              onChange={handleChange}
+              name="isDoctor"
+            />
+          }
+          label="Are you a doctor?"
+        />
         <Button
           type="submit"
           fullWidth

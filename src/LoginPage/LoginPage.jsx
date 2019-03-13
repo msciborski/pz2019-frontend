@@ -3,7 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { userActions } from "../_actions";
-import { LoginForm } from "../components/LoginForm";
+import { LoginForm } from "../_components/LoginForm";
 import { withStyles } from "@material-ui/styles";
 
 const styles = {
@@ -32,12 +32,10 @@ class LoginPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('Submit pressed');
     const { login } = this.props;
 
     this.setState({ submitted: true });
     const { email, password } = this.state;
-    console.log(`${email} ${password}`);
 
     if (email && password) {
       login(email, password);
@@ -46,7 +44,7 @@ class LoginPage extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props);
+
     return (
       <Grid item xs={12} className={classes.loginForm}>
         <LoginForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />

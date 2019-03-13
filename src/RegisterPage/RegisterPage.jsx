@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { withStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
-import { RegisterForm } from "../components/RegisterForm";
+import { RegisterForm } from "../_components/RegisterForm";
 import { Grid } from "@material-ui/core";
 import { userActions } from "../_actions";
 
@@ -20,6 +20,8 @@ class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isDoctor: false,
+      doctorToken: '',
       user: {
         email: '',
         name: '',
@@ -36,12 +38,18 @@ class RegisterPage extends Component {
     const { name, value } = event.target;
     const { user } = this.state;
 
-    this.setState({
-      user: {
-        ...user,
-        [name]: value,
-      }
-    });
+    if ( name === 'isDoctor') {
+      this.setState({ isDoctor: event.target.checked });
+    } else if (name === 'doctorToken') {
+      this.setState({ 'doctorToken': value });
+    } else {
+      this.setState({
+        user: {
+          ...user,
+          [name]: value,
+        }
+      });
+    }
   }
 
   handleSubmit = event => {
@@ -57,10 +65,11 @@ class RegisterPage extends Component {
 
   render() {
     const { classes } = this.props;
+    const { isDoctor } = this.state;
 
     return (
       <Grid item xs={12} className={classes.registerForm}>
-        <RegisterForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <RegisterForm isDoctor={isDoctor} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </Grid>
     );
   }

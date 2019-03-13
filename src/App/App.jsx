@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { Grid } from "@material-ui/core";
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../_components/NavBar";
 import { LoginPage } from "../LoginPage";
 import { RegisterPage } from "../RegisterPage";
 import { RandomPage } from "../RandomPage";
