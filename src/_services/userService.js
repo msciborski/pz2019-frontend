@@ -1,24 +1,24 @@
 import { config } from "../config.js";
+import { authHeader } from "../_helpers/index.js";
 
 export const userService = {
   login,
   logout,
   register,
+  getById,
 };
 
-function login(username, password) {
+function login(email, password) {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    mode: 'no-cors',
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, password }),
   };
 
   return fetch(`${config.apiUrl}/api/v1/user/login`, options)
     .then(handleResponse)
     .then(user => {
       localStorage.setItem('user', JSON.stringify(user));
-
       return user;
     });
 }
@@ -34,8 +34,16 @@ function register(user) {
     mode: 'no-cors',
     body: JSON.stringify(user),
   };
-  console.log(config.apiUrl);
   return fetch(`${config.apiUrl}/api/v1/user`, options);
+}
+
+function getById(id) {
+  const options = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/user/${id}`, options);
 }
 
 function handleResponse(response) {

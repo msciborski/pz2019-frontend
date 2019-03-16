@@ -8,13 +8,13 @@ export const userActions = {
   register,
 };
 
-function login(username, password) {
+function login(email, password) {
   return dispatch => {
-    dispatch(request({ username }));
-    return userService.login(username, password)
+    dispatch(request({ email }));
+    return userService.login(email, password)
       .then(user => {
         dispatch(success(user))
-        history.push('/');
+        history.push('/register');
       }, error => {
         dispatch(failure(error.message));
         dispatch(alertActions.error(error.message));
@@ -27,7 +27,6 @@ function login(username, password) {
 }
 
 function register(user) {
-  console.log(user);
   return dispatch => {
     dispatch(request(user));
 

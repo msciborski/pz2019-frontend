@@ -27,7 +27,6 @@ class LoginPage extends Component {
 
   handleChange = event => {
     const { name, value } = event.target;
-    console.log(`Handle change: ${name} ${value}`);
     this.setState({ [name]: value });
   }
 
@@ -37,7 +36,6 @@ class LoginPage extends Component {
 
     this.setState({ submitted: true });
     const { email, password } = this.state;
-    console.log(`Handle submit: ${email} ${password}`);
     if (email && password) {
       login(email, password);
     }

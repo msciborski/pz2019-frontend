@@ -7,7 +7,7 @@ import { history } from "./_helpers";
 
 import store from "./_store";
 import * as serviceWorker from './serviceWorker';
-
+console.log(store);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

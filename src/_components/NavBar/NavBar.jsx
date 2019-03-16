@@ -14,7 +14,10 @@ const styles = {
   },
   title: {
     textDecoration: 'none',
-  }
+  },
+  profileIcon: {
+    marginLeft: 'auto',
+  },
 };
 
 class NavBar extends Component {
@@ -26,14 +29,15 @@ class NavBar extends Component {
     };
   }
 
-  handleProfileMenuOpen = event => this.setState({ anchorEl: event.targetCurrent });
+  handleProfileMenuOpen = event => this.setState({ anchorEl: event.currentTarget });
+
   handleProfileMenuClose = () => this.setState({ anchorEl: null });
 
   render() {
-    const { anchorEl, loggedIn } = this.state;
-    const { classes } = this.props;
+    const { anchorEl } = this.state;
+    const { classes, loggedIn } = this.props;
     const isMenuOpen = Boolean(anchorEl);
-
+    console.log(anchorEl);
 
     const renderMenu = (
       <Menu
@@ -43,7 +47,7 @@ class NavBar extends Component {
         open={isMenuOpen}
         onClose={this.handleProfileMenuClose}
       >
-        <MenuItem>Profile</MenuItem>
+        <MenuItem onClick={this.handleProfileMenuClose} component={Link} to="/">Profile</MenuItem>
       </Menu>
     )
 
@@ -74,6 +78,7 @@ class NavBar extends Component {
                   aria-owns="material-appbar"
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
+                  className={classes.profileIcon}
                 >
                   <AccountCircle />
                 </IconButton> :
@@ -105,7 +110,9 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   const { loggedIn } = state.authentication;
+  console.log(loggedIn);
   return {
     loggedIn,
   };
