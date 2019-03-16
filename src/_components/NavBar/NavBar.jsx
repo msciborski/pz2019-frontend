@@ -6,6 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
+import { userActions } from "../../_actions";
 
 const styles = {
   loginButton: {
@@ -33,11 +34,16 @@ class NavBar extends Component {
 
   handleProfileMenuClose = () => this.setState({ anchorEl: null });
 
+  handleLogoutClick = () => {
+    this.setState({ anchorEl: null });
+    const { logout } = this.props;
+    logout();
+  }
+
   render() {
     const { anchorEl } = this.state;
     const { classes, loggedIn } = this.props;
     const isMenuOpen = Boolean(anchorEl);
-    console.log(anchorEl);
 
     const renderMenu = (
       <Menu
@@ -48,6 +54,7 @@ class NavBar extends Component {
         onClose={this.handleProfileMenuClose}
       >
         <MenuItem onClick={this.handleProfileMenuClose} component={Link} to="/">Profile</MenuItem>
+        <MenuItem onClick={this.handleLogoutClick} component={Link} to="/">Logout</MenuItem>
       </Menu>
     )
 
@@ -110,15 +117,19 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   const { loggedIn } = state.authentication;
-  console.log(loggedIn);
   return {
     loggedIn,
   };
 }
 
-const connectedNavBar = connect(mapStateToProps)(NavBar);
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(userActions.logout()),
+  };
+}
+
+const connectedNavBar = connect(mapStateToProps, mapDispatchToProps)(NavBar);
 const styledConnectedNavBar = withStyles(styles)(connectedNavBar);
 export { styledConnectedNavBar as NavBar };
 

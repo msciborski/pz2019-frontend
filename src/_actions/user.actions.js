@@ -6,6 +6,8 @@ import { history } from "../_helpers";
 export const userActions = {
   login,
   register,
+  logout,
+  getById,
 };
 
 function login(email, password) {
@@ -26,6 +28,28 @@ function login(email, password) {
   function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } };
 }
 
+function logout() {
+  userService.logout();
+  return { type: userConstants.LOGOUT };
+}
+
+function getById(id) {
+  return dispatch => {
+    dispatch(request({ id }))
+      .then(user => {
+        dispatch(success(user));
+        history.push('/profile');
+      }, error => {
+        dispatch(failure(error.message));
+        dispatch(alertActions.error(error.message));
+      })
+  }
+
+  function request(user) { return { type: userConstants.GET_REQUEST, user }};
+  function success(user) { return { type: userConstants.GET_SUCCESS, user }};
+  function failure(error) { return { type: userConstants.GET_FAILURE, error }};
+}
+
 function register(user) {
   return dispatch => {
     dispatch(request(user));
@@ -44,5 +68,4 @@ function register(user) {
   function request(user) { return { type: userConstants.REGISTER_REQUEST, user } };
   function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } };
   function failure(error) { return { type: userConstants.REGISTER_FAILURE, error }};
-
 }

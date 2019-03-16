@@ -82,7 +82,7 @@ class RegisterPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { registering } = state.registration;
   return {
     registering,
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    register: (user) => dispatch(userActions.register(user)),
+    register: user => dispatch(userActions.register(user)),
   };
 }
 
