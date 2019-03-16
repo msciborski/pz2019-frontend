@@ -10,10 +10,11 @@ function login(username, password) {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    mode: 'no-cors',
     body: JSON.stringify({ username, password }),
   };
 
-  return fetch(`${config.apiUrl}/users/login`, options)
+  return fetch(`${config.apiUrl}/api/v1/user/login`, options)
     .then(handleResponse)
     .then(user => {
       localStorage.setItem('user', JSON.stringify(user));
@@ -27,13 +28,13 @@ function logout() {
 }
 
 function register(user) {
-  console.log(user);
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    mode: 'no-cors',
     body: JSON.stringify(user),
   };
-
+  console.log(config.apiUrl);
   return fetch(`${config.apiUrl}/api/v1/user`, options);
 }
 

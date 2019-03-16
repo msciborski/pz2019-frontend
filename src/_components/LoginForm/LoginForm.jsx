@@ -23,7 +23,7 @@ const LoginForm = (props) => {
           isRequired={true}
           label="Email Address"
           name="email"
-          handleChange={handleChange}
+          onChange={handleChange}
           autoComplete="email address"
           isFullWidth={true}
           hasAutoFocus={true}
@@ -33,7 +33,7 @@ const LoginForm = (props) => {
           isRequired={true}
           label="Password"
           name="password"
-          handleChange={handleChange}
+          onChange={handleChange}
           autoComplete="current-password"
           isFullWidth={true}
           type="password"

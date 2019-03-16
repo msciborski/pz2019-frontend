@@ -56,10 +56,17 @@ class RegisterPage extends Component {
     event.preventDefault();
 
     this.setState({ submitted: true });
-    const { user } = this.state;
+    const { user, isDoctor } = this.state;
     const { register } = this.props;
-
-    register(user);
+    const { email, name, surname, pesel, password} = user;
+    register({
+      userType: isDoctor ? 'doctor' : 'patient',
+      email,
+      name,
+      surname,
+      pesel,
+      password,
+    });
 
   }
 

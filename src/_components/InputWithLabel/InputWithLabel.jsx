@@ -16,7 +16,6 @@ export const InputWithLabel = (props) => {
     classInputLabel,
     classInput,
   } = props;
-  console.log(type);
   return (
     <FormControl margin={margin} required={isRequired} fullWidth={isFullWidth} >
       <InputLabel htmlFor={name}>{label}</InputLabel>
