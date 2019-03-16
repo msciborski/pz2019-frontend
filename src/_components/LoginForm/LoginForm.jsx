@@ -1,6 +1,7 @@
 import React from "react";
 import { Paper, Typography, FormControl, Input, InputLabel, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+import { InputWithLabel } from "../InputWithLabel";
 
 const styles = {
   paper: {
@@ -17,14 +18,25 @@ const LoginForm = (props) => {
         Sign In
     </Typography>
       <form onSubmit={handleSubmit}>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="email">Email Address</InputLabel>
-          <Input id="email" name="email" autoComplete="email" autoFocus onChange={handleChange} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <Input type="password" id="password" name="password" autoComplete="current-password" onChange={handleChange} />
-        </FormControl>
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          label="Email Address"
+          name="email"
+          handleChange={handleChange}
+          autoComplete="email address"
+          isFullWidth={true}
+          hasAutoFocus={true}
+        />
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          label="Password"
+          name="password"
+          handleChange={handleChange}
+          autoComplete="current-password"
+          isFullWidth={true}
+        />
         <Button
           type="submit"
           fullWidth

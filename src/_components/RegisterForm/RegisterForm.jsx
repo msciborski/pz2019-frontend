@@ -1,6 +1,7 @@
 import React from "react";
 import { Paper, Typography, FormControl, InputLabel, Input, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+import { InputWithLabel } from "../InputWithLabel";
 
 const styles = {
   paper: {
@@ -17,36 +18,73 @@ const RegisterForm = (props) => {
         Register
       </Typography>
       <form onSubmit={handleSubmit}>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="email">Email Address</InputLabel>
-          <Input id="email" name="email" autoComplete="email" autoFocus onChange={handleChange} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="name">Name</InputLabel>
-          <Input id="name" name="name" autoComplete="name" onChange={handleChange} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="surname">Surname</InputLabel>
-          <Input id="surname" name="surname" autoComplete="surname" onChange={handleChange} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="pesel">Pesel</InputLabel>
-          <Input id="pesel" name="pesel" autoComplete="pesel" onChange={handleChange} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <Input id="password" name="password" autoComplete="current-password" onChange={handleChange} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="passwordConfirmation">Password Confirmation</InputLabel>
-          <Input id="passwordConfirmation" name="passwordConfirmation" autoComplete="current-password" onChange={handleChange} />
-        </FormControl>
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          isFullWidth={true}
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          hasAutoFocus={true}
+          onChange={handleChange}
+        />
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          isFullWidth={true}
+          label="Name"
+          name="name"
+          autoComplete="name"
+          onChange={handleChange}
+        />
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          isFullWidth={true}
+          label="Surname"
+          name="surname"
+          autoComplete="surname"
+          onChange={handleChange}
+        />
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          isFullWidth={true}
+          label="Pesel"
+          name="pesel"
+          autoComplete="pesel"
+          onChange={handleChange}
+        />
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          isFullWidth={true}
+          label="Password"
+          name="password"
+          autoComplete="current-passsword"
+          onChange={handleChange}
+        />
+        <InputWithLabel
+          margin="normal"
+          isRequired={true}
+          isFullWidth={true}
+          label="Password Confirmation"
+          name="passwordConfirmation"
+          autoComplete="current-password"
+          onChange={handleChange}
+        />
+
         {
           isDoctor &&
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="doctorToken">Doctor Token</InputLabel>
-            <Input id="doctorToken" name="doctorToken" onChange={handleChange} />
-          </FormControl>
+            <InputWithLabel
+              margin="normal"
+              isRequired={true}
+              isFullWidth={true}
+              label="Doctor Token"
+              name="doctorToken"
+              autoComplete="current-password"
+              onChange={handleChange}
+            />
         }
 
         <FormControlLabel
