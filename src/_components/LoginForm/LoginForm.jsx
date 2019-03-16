@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, FormControl, Input, InputLabel, Button } from "@material-ui/core";
+import { Paper, Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { InputWithLabel } from "../InputWithLabel";
 
@@ -36,6 +36,7 @@ const LoginForm = (props) => {
           handleChange={handleChange}
           autoComplete="current-password"
           isFullWidth={true}
+          type="password"
         />
         <Button
           type="submit"

@@ -7,19 +7,20 @@ export const InputWithLabel = (props) => {
     label,
     name,
     autoComplete,
-    handleChange,
+    onChange,
     hasAutoFocus,
     isFullWidth,
     isRequired,
+    type,
     classFormControl,
     classInputLabel,
     classInput,
   } = props;
-
+  console.log(type);
   return (
     <FormControl margin={margin} required={isRequired} fullWidth={isFullWidth} >
       <InputLabel htmlFor={name}>{label}</InputLabel>
-      <Input id={name} name={name} autoComplete={autoComplete} autoFocus={hasAutoFocus} onChange={handleChange} />
+      <Input type={type || 'text'} id={name} name={name} autoComplete={autoComplete} autoFocus={hasAutoFocus} onChange={onChange} />
     </FormControl>
   )
 }

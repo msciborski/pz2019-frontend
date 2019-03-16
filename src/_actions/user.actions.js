@@ -27,6 +27,7 @@ function login(username, password) {
 }
 
 function register(user) {
+  console.log(user);
   return dispatch => {
     dispatch(request(user));
 
@@ -37,7 +38,7 @@ function register(user) {
         dispatch(alertActions.success('Registratioon successful'));
       }, error => {
         dispatch(failure(error.message))
-        dispatch(alertActions.failure(error.message));
+        dispatch(alertActions.error(error.message));
       });
   }
 

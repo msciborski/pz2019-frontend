@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, FormControl, InputLabel, Input, Button, FormControlLabel, Checkbox } from "@material-ui/core";
+import { Paper, Typography, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { InputWithLabel } from "../InputWithLabel";
 
@@ -63,6 +63,7 @@ const RegisterForm = (props) => {
           name="password"
           autoComplete="current-passsword"
           onChange={handleChange}
+          type="password"
         />
         <InputWithLabel
           margin="normal"
@@ -72,6 +73,7 @@ const RegisterForm = (props) => {
           name="passwordConfirmation"
           autoComplete="current-password"
           onChange={handleChange}
+          type="password"
         />
 
         {

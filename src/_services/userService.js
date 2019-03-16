@@ -27,13 +27,14 @@ function logout() {
 }
 
 function register(user) {
+  console.log(user);
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   };
 
-  return fetch(`${config.apiUrl}/users`, options);
+  return fetch(`${config.apiUrl}/api/v1/user`, options);
 }
 
 function handleResponse(response) {
