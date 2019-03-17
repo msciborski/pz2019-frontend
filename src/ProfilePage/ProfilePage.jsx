@@ -7,6 +7,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/styles";
 import { BasicUserInfo } from "../_components/BasicUserInfo";
 import LocalHospital from "@material-ui/icons/LocalHospital";
+import { MedicalInformation } from "../_components/MedicalInformation";
+
 const styles = {
   paper: {
     margin: '20px 0 20px 0',
@@ -35,73 +37,96 @@ const styles = {
 }
 
 class ProfilePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      editBasicOpen: false,
+      editMedicalInformationOpen: false,
+    };
+  }
+
   componentDidMount() {
     const { getUser, id } = this.props;
     getUser(id);
 
   }
+
+  handleEditBasicClick = () => {
+    this.setState({ editBasicOpen: true });
+  }
+
+  handleEditMedicalInformationOpen = () => {
+    this.setState({ editMedicalInformationOpen: true });
+  }
+
   render() {
     const { user, classes } = this.props;
+    console.log('Profile user:')
     console.log(user);
-    // const isDoctor = user.type === 'doctor';
-
-    return (
-      <Grid item xs={12}>
-        {
-          user &&
-          <div>
-            <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
-            <Paper className={classes.paper}>
-              <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography>Basic information</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Grid container>
-                    <Grid item xs={2}>
-                      {
-                        user.avatarUrl ?
+    // const isDoctor = user.userType === 'doctor';
+      return (
+        <Grid item xs={12}>
+          {
+            !!user &&
+            <div>
+              <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+              <Paper className={classes.paper}>
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography>Basic information</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+                    <Grid container>
+                      <Grid item xs={2}>
+                        {
+                          user.avatarUrl ?
+                            <div className={classes.avatarSection}>
+                              <Avatar src={user.avatarUrl} className={classes.avatar} />
+                              <Button color="primary" className={classes.editButton}>Edit</Button>
+                            </div>
+                            :
+                            <div className={classes.avatarSection}>
+                              <Avatar className={classes.avatar}>{user.name[0]}{user.surname[0]}</Avatar>
+                              <Button className={classes.editButton} color="primary" onClick={this.handleEditBasicClick}>Edit</Button>
+                            </div>
+                        }
+                      </Grid>
+                      <Grid item xs>
+                        <BasicUserInfo user={user} />
+                      </Grid>
+                    </Grid>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+                {
+                  user.userType === 'patient' &&
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography>Medical information</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Grid container>
+                        <Grid item xs={2}>
                           <div className={classes.avatarSection}>
-                            <Avatar src={user.avatarUrl} className={classes.avatar} />
-                            <Button color="primary" className={classes.editButton}>Edit</Button>
+                            <Avatar className={classes.avatar}>
+                              <LocalHospital className={classes.hospitalIcon} />
+                            </Avatar>
+                            <Button className={classes.editButton} color="primary" onClick={this.handleEditMedicalInformationOpen}>Edit</Button>
                           </div>
-                          :
-                          <div className={classes.avatarSection}>
-                            <Avatar className={classes.avatar}>{user.name[0]}{user.surname[0]}</Avatar>
-                            <Button className={classes.editButton} color="primary">Edit</Button>
-                          </div>
-                      }
-                    </Grid>
-                    <Grid item xs>
-                      <BasicUserInfo user={user} />
-                    </Grid>
-                  </Grid>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-              <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography>Medical information</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Grid container>
-                    <Grid item xs={2}>
-                      <div className={classes.avatarSection}>
-                        <Avatar className={classes.avatar}>
-                          <LocalHospital className={classes.hospitalIcon} />
-                        </Avatar>
-                        <Button className={classes.editButton} color="primary">Edit</Button>
-                      </div>
-                    </Grid>
-                  </Grid>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            </Paper>
-          </div>
-        }
-      </Grid>
-
-    );
-  }
+                        </Grid>
+                        <Grid item xs>
+                          <MedicalInformation medicalInformation={{ weight: user.weight, height: user.height, bloodType: user.bloodType }} />
+                        </Grid>
+                      </Grid>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                }
+              </Paper>
+            </div>
+          }
+        </Grid>
+      );
+    }
 }
 
 const mapStateToProps = state => {
