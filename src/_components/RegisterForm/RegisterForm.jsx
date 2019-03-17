@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, Typography, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { InputWithLabel } from "../InputWithLabel";
-
+import { ValidatorForm } from "react-material-ui-form-validator"
 const styles = {
   paper: {
     padding: '10px 10px 10px 10px',
@@ -11,82 +11,96 @@ const styles = {
 }
 
 const RegisterForm = (props) => {
-  const { handleChange, handleSubmit, isDoctor, classes} = props;
+  const { handleChange, handleSubmit, isDoctor, user, classes } = props;
   return (
     <Paper className={classes.paper}>
       <Typography component="h1" variant="h5" align="center">
         Register
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <ValidatorForm onSubmit={handleSubmit}>
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
-          isFullWidth={true}
           label="Email Address"
+          onChange={handleChange}
+          value={user.email}
           name="email"
-          autoComplete="email"
+          validators={['required', 'isEmail']}
+          errorMessages={['This field is required', 'Email is not valid']}
+          margin="normal"
+          autoComplete="email address"
           hasAutoFocus={true}
-          onChange={handleChange}
+          isFullWidth={true}
         />
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
-          isFullWidth={true}
           label="Name"
+          onChange={handleChange}
+          value={user.name}
           name="name"
+          validators={['required', 'matchRegexp:^[A-Za-z]+$']}
+          errorMessages={['This field is required', 'Name is not valid']}
+          margin="normal"
           autoComplete="name"
-          onChange={handleChange}
+          isFullWidth={true}
         />
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
-          isFullWidth={true}
           label="Surname"
+          onChange={handleChange}
+          value={user.surname}
           name="surname"
+          validators={['required', 'matchRegexp:^[A-Za-z]+$']}
+          errorMessages={['This field is required', 'Surname is not valid']}
+          margin="normal"
           autoComplete="surname"
-          onChange={handleChange}
+          isFullWidth={true}
         />
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
-          isFullWidth={true}
           label="Pesel"
+          onChange={handleChange}
+          value={user.pesel}
           name="pesel"
+          validators={['required']}
+          errorMessages={['This field is required']}
+          margin="normal"
           autoComplete="pesel"
-          onChange={handleChange}
+          isFullWidth={true}
         />
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
-          isFullWidth={true}
           label="Password"
-          name="password"
-          autoComplete="current-passsword"
           onChange={handleChange}
+          value={user.password}
+          name="password"
+          validators={['required']}
+          errorMessages={['This field is required']}
+          margin="normal"
+          autoComplete="current-password"
           type="password"
+          isFullWidth={true}
         />
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
-          isFullWidth={true}
           label="Password Confirmation"
-          name="passwordConfirmation"
-          autoComplete="current-password"
           onChange={handleChange}
+          value={user.passwordConfirmation}
+          name="passwordConfirmation"
+          validators={['required']}
+          errorMessages={['This field is required']}
+          margin="normal"
+          autoComplete="current-password"
           type="password"
+          isFullWidth={true}
         />
 
         {
           isDoctor &&
-            <InputWithLabel
-              margin="normal"
-              isRequired={true}
-              isFullWidth={true}
-              label="Doctor Token"
-              name="doctorToken"
-              autoComplete="current-password"
-              onChange={handleChange}
-            />
+          <InputWithLabel
+            label="Doctor Token"
+            onChange={handleChange}
+            value={user.doctorToken}
+            name="doctorToken"
+            validators={['required']}
+            errorMessages={['This field is required']}
+            margin="normal"
+            autoComplete="token"
+            isFullWidth={true}
+          />
         }
 
         <FormControlLabel
@@ -107,7 +121,7 @@ const RegisterForm = (props) => {
         >
           Register
       </Button>
-      </form>
+      </ValidatorForm>
     </Paper>
   )
 

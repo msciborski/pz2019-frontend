@@ -72,11 +72,11 @@ class RegisterPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isDoctor } = this.state;
+    const { isDoctor, user } = this.state;
 
     return (
       <Grid item xs={12} className={classes.registerForm}>
-        <RegisterForm isDoctor={isDoctor} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <RegisterForm user={user} isDoctor={isDoctor} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </Grid>
     );
   }

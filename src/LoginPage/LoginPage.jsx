@@ -43,10 +43,16 @@ class LoginPage extends Component {
 
   render() {
     const { classes } = this.props;
+    const { email, password } = this.state;
 
     return (
       <Grid item xs={12} className={classes.loginForm}>
-        <LoginForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <LoginForm
+          email={email}
+          password={password}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
       </Grid>
     )
   }

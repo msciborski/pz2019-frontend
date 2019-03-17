@@ -2,41 +2,52 @@ import React from "react";
 import { Paper, Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { InputWithLabel } from "../InputWithLabel";
+import { ValidatorForm } from "react-material-ui-form-validator";
 
 const styles = {
   paper: {
     padding: '10px 10px 10px 10px',
+    width: '50%',
+    minWidth: '250px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
   }
 }
 const LoginForm = (props) => {
 
-  const { handleChange, handleSubmit, classes } = props;
+  const { handleChange, handleSubmit, email, password, classes } = props;
 
   return (
     <Paper className={classes.paper}>
       <Typography component="h1" variant="h5" align="center">
         Sign In
     </Typography>
-      <form onSubmit={handleSubmit}>
+      <ValidatorForm onSubmit={handleSubmit} className={classes.form}  >
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
           label="Email Address"
-          name="email"
           onChange={handleChange}
+          value={email}
+          name="email"
+          validators={['required', 'isEmail']}
+          errorMessages={['This field is required', 'Email is not valid']}
+          margin="normal"
           autoComplete="email address"
-          isFullWidth={true}
           hasAutoFocus={true}
+          isFullWidth={true}
         />
         <InputWithLabel
-          margin="normal"
-          isRequired={true}
           label="Password"
-          name="password"
           onChange={handleChange}
+          value={password}
+          name="password"
+          validators={['required']}
+          errorMessages={['This field is required']}
+          margin="normal"
+          type="password"
           autoComplete="current-password"
           isFullWidth={true}
-          type="password"
         />
         <Button
           type="submit"
@@ -46,7 +57,7 @@ const LoginForm = (props) => {
         >
           Sign in
         </Button>
-      </form>
+      </ValidatorForm>
     </Paper>
   );
 }
