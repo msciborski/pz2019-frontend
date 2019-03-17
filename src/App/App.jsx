@@ -7,17 +7,22 @@ import { RegisterPage } from "../RegisterPage";
 import { RandomPage } from "../RandomPage";
 import { Route, Switch } from "react-router-dom";
 import { ProfilePage } from "../ProfilePage";
+import { withStyles } from "@material-ui/styles";
 
-
+const styles = {
+  root: {
+    justifyContent: 'center',
+  },
+}
 class App extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-
+    const { classes } = this.props;
     return (
-      <Grid container >
+      <Grid container className={classes.root}>
         <Grid item xs={12}>
           <NavBar />
         </Grid>
@@ -32,4 +37,5 @@ class App extends Component {
   }
 }
 
-export { App };
+const styledApp = withStyles(styles)(App);
+export { styledApp as App };

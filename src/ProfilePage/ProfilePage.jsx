@@ -10,6 +10,10 @@ import LocalHospital from "@material-ui/icons/LocalHospital";
 import { MedicalInformation } from "../_components/MedicalInformation";
 
 const styles = {
+  root: {
+    maxWidth: '1500px !important',
+    margin: '20px 0 20px 0 !important',
+  },
   paper: {
     margin: '20px 0 20px 0',
   },
@@ -23,13 +27,13 @@ const styles = {
   },
   avatar: {
     margin: '20px',
-    width: 200,
-    height: 200,
-    fontSize: '5.25rem',
+    width: '200px !important',
+    height: '200px !important',
+    fontSize: '5.25rem !important',
   },
   hospitalIcon: {
-    width: '8rem',
-    height: '8rem',
+    width: '8rem !important',
+    height: '8rem !important',
   },
   editButton: {
     width: '80%',
@@ -63,12 +67,13 @@ class ProfilePage extends Component {
   render() {
     const { user, classes } = this.props;
     console.log('Profile user:')
+    const { userType, medicalInformation } = {...user}
     console.log(user);
     // const isDoctor = user.userType === 'doctor';
       return (
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.root}>
           {
-            !!user &&
+            user &&
             <div>
               <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
               <Paper className={classes.paper}>
@@ -115,7 +120,7 @@ class ProfilePage extends Component {
                           </div>
                         </Grid>
                         <Grid item xs>
-                          <MedicalInformation medicalInformation={{ weight: user.weight, height: user.height, bloodType: user.bloodType }} />
+                          <MedicalInformation medicalInformation={medicalInformation} />
                         </Grid>
                       </Grid>
                     </ExpansionPanelDetails>
