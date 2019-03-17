@@ -1,5 +1,5 @@
 import { userConstants } from "../_constants";
-import { userService} from "../_services";
+import { userService } from "../_services";
 import { alertActions } from "../_actions";
 import { history } from "../_helpers";
 
@@ -35,8 +35,11 @@ function logout() {
 
 function getById(id) {
   return dispatch => {
-    dispatch(request({ id }))
+    dispatch(request({ id }));
+    userService.getById(id)
       .then(user => {
+        console.log('Action:');
+        console.log(user);
         dispatch(success(user));
         history.push('/profile');
       }, error => {
@@ -45,9 +48,9 @@ function getById(id) {
       })
   }
 
-  function request(user) { return { type: userConstants.GET_REQUEST, user }};
-  function success(user) { return { type: userConstants.GET_SUCCESS, user }};
-  function failure(error) { return { type: userConstants.GET_FAILURE, error }};
+  function request(user) { return { type: userConstants.GET_REQUEST, user } };
+  function success(user) { return { type: userConstants.GET_SUCCESS, user } };
+  function failure(error) { return { type: userConstants.GET_FAILURE, error } };
 }
 
 function register(user) {
@@ -67,5 +70,5 @@ function register(user) {
 
   function request(user) { return { type: userConstants.REGISTER_REQUEST, user } };
   function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } };
-  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error }};
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } };
 }

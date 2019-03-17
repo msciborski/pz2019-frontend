@@ -2,30 +2,43 @@ import React from "react";
 import { Component } from "react";
 import { userActions } from "../_actions";
 import { connect } from "react-redux";
+import { Typography, Divider, Grid } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 
 class ProfilePage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { getUser, id } = this.props;
     getUser(id);
-  }
 
+  }
   render() {
+    console.log(this.props);
+    const { user } = this.props;
+    console.log(user);
     return (
-      <div></div>
+      <Grid item xs={12}>
+      {
+        user &&
+
+        <div>
+          <Typography variant="h2">{user.surname}, {user.name}</Typography>
+          <Divider />
+        </div>
+
+      }
+      </Grid>
+
     );
   }
 }
 
 const mapStateToProps = state => {
   const { authentication } = state;
+  console.log(authentication);
   const { user } = state.users;
   return {
     user,
-    id: authentication.user.id,
+    id: authentication.user.user.id,
   };
 }
 
@@ -36,4 +49,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 const connectedProfilePage = connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export { connectedProfilePage as ProfilePage }
 

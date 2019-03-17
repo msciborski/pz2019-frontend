@@ -15,7 +15,7 @@ function login(email, password) {
     body: JSON.stringify({ email, password }),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/user/login`, options)
+  return fetch(`${config.apiUrl}/api/v1/users/login`, options)
     .then(handleResponse)
     .then(user => {
       localStorage.setItem('user', JSON.stringify(user));
@@ -34,7 +34,7 @@ function register(user) {
     mode: 'no-cors',
     body: JSON.stringify(user),
   };
-  return fetch(`${config.apiUrl}/api/v1/user`, options);
+  return fetch(`${config.apiUrl}/api/v1/users`, options);
 }
 
 function getById(id) {
@@ -43,7 +43,11 @@ function getById(id) {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/user/${id}`, options);
+  return fetch(`${config.apiUrl}/api/v1/users/${id}`, options)
+    .then(handleResponse)
+    .then(user => {
+      return user;
+    });
 }
 
 function handleResponse(response) {
@@ -58,7 +62,7 @@ function handleResponse(response) {
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
-
+    console.log(data);
     return data;
   })
 }

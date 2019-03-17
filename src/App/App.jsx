@@ -6,6 +6,7 @@ import { LoginPage } from "../LoginPage";
 import { RegisterPage } from "../RegisterPage";
 import { RandomPage } from "../RandomPage";
 import { Route, Switch } from "react-router-dom";
+import { ProfilePage } from "../ProfilePage";
 
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/" component={RandomPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </Grid>
     )
