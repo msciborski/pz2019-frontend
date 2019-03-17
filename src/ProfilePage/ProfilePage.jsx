@@ -32,8 +32,8 @@ const styles = {
     fontSize: '5.25rem !important',
   },
   hospitalIcon: {
-    width: '8rem !important',
-    height: '8rem !important',
+    width: '8rem',
+    height: '8rem',
   },
   editButton: {
     width: '80%',

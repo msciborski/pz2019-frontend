@@ -18,8 +18,9 @@ function login(email, password) {
         dispatch(success(user))
         history.push('/register');
       }, error => {
-        dispatch(failure(error.message));
-        dispatch(alertActions.error(error.message));
+        console.log('Login error:', error)
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
       });
   }
 
@@ -43,8 +44,8 @@ function getById(id) {
         dispatch(success(user));
         history.push('/profile');
       }, error => {
-        dispatch(failure(error.message));
-        dispatch(alertActions.error(error.message));
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
       })
   }
 
@@ -63,8 +64,8 @@ function register(user) {
         history.push('/login');
         dispatch(alertActions.success('Registratioon successful'));
       }, error => {
-        dispatch(failure(error.message))
-        dispatch(alertActions.error(error.message));
+        dispatch(failure(error))
+        dispatch(alertActions.error(error));
       });
   }
 
