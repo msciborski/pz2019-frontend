@@ -53,7 +53,7 @@ class NavBar extends Component {
         open={isMenuOpen}
         onClose={this.handleProfileMenuClose}
       >
-        <MenuItem onClick={this.handleProfileMenuClose} component={Link} to="/">Profile</MenuItem>
+        <MenuItem onClick={this.handleProfileMenuClose} component={Link} to="/profile">Profile</MenuItem>
         <MenuItem onClick={this.handleLogoutClick} component={Link} to="/">Logout</MenuItem>
       </Menu>
     )

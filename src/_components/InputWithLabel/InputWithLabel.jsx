@@ -19,6 +19,7 @@ export const InputWithLabel = (props) => {
     classInputLabel,
     classInput,
   } = props;
+
   return (
     <TextValidator
       label={label}
@@ -33,9 +34,5 @@ export const InputWithLabel = (props) => {
       autoFocus={hasAutoFocus}
       fullWidth={isFullWidth}
     />
-    // <FormControl margin={margin} required={isRequired} fullWidth={isFullWidth} >
-    //   <InputLabel htmlFor={name}>{label}</InputLabel>
-    //   <Input type={type || 'text'} id={name} name={name} autoComplete={autoComplete} autoFocus={hasAutoFocus} onChange={onChange} />
-    // </FormControl>
-  )
+  );
 }
