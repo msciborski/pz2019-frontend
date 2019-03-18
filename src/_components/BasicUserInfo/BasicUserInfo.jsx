@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Typography, Divider } from "@material-ui/core";
+import { connect } from "react-redux";
 
-export const BasicUserInfo = (props) => {
-  const { user } = props;
-
+const BasicUserInfo = (props) => {
+  const { user } = {...props};
   return (
     // Need to be refactored
     <Grid container>
@@ -73,3 +73,14 @@ export const BasicUserInfo = (props) => {
     </Grid>
   )
 }
+
+const mapStateToProps = state => {
+  const { user } = state.users;
+  return {
+    user,
+  }
+}
+
+const connectedBasicUserInfo = connect(mapStateToProps)(BasicUserInfo);
+
+export { connectedBasicUserInfo as BasicUserInfo };
