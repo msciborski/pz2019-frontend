@@ -14,6 +14,12 @@ export const users = (state={}, action) => {
       return {
         error: action.errr,
       };
+    case userConstants.UPDATE_USER_REQUEST:
+      return { updatingUser: true};
+    case userConstants.UPDATE_USER_SUCCESS:
+      return {};
+    case userConstants.UPDATE_USER_FAILURE:
+      return {};
     default:
       return state;
   }

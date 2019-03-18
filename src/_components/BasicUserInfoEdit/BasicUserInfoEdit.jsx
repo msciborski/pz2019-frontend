@@ -4,35 +4,61 @@ import { connect } from "react-redux";
 import { Slide, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@material-ui/core";
 import { InputWithLabel } from "../InputWithLabel";
 import { ValidatorForm } from "react-material-ui-form-validator";
-
+import { userActions } from "../../_actions";
 
 const Transition = props => (<Slide direction="up" {...props} />);
 
 class BasicUserInfoEdit extends Component {
   constructor(props) {
     super(props);
-    const { user, open } = this.props;
-
+    const { user } = this.props;
+    console.log('Constructor');
     this.state = {
-      ...user,
+      userToUpdate: {
+        voivodeship: user.address.voivodeship,
+        city: user.address.city,
+        street: user.address.street,
+        number: user.address.number,
+        zipCode: user.address.zipCode,
+      },
     }
   }
 
   handleEditChange = event => {
     const { name, value } = event.target;
+    const { userToUpdate } = this.state;
+
+    console.log('UserToUpdate:', userToUpdate);
+    console.log(`${name} ${value}`);
+
     this.setState({
-      ...this.props,
-      [name]: value,
+      userToUpdate: {
+        ...userToUpdate,
+        [name]: value,
+      }
     });
   }
 
-  handleSubmit = () => {
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const { updateUser, user } = this.props;
+    const { userToUpdate } = this.state;
+
     this.setState({ open: false });
+
+    console.log(userToUpdate);
+    updateUser({
+      ...user,
+      address: {
+        ...userToUpdate,
+      },
+    });
   }
 
   render() {
-    const { user, open, handleClose } = this.props;
-    const { address } = user;
+    const { open, handleClose } = this.props;
+    const { userToUpdate } = this.state;
 
     return (
       <Dialog
@@ -43,20 +69,19 @@ class BasicUserInfoEdit extends Component {
         aria-labelledby="edit-basic-info"
         aria-describedby="edit-basic-info-description"
       >
-        <DialogTitle id="edit-basic-info-title">
-          {"Edit"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {`Update user: ${user.name} ${user.surname}`}
-          </DialogContentText>
-          <ValidatorForm onSubmit={this.handleSubmit}>
+        <ValidatorForm onSubmit={this.handleSubmit}>
+          <DialogTitle id="edit-basic-info-title">
+            {"Edit"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {`Update user: ${userToUpdate.name} ${userToUpdate.surname}`}
+            </DialogContentText>
             <InputWithLabel
               label="Voivodeship"
               onChange={this.handleEditChange}
-              value={address.voivodeship}
+              value={userToUpdate.voivodeship}
               name="voivodeship"
-              validators={['required']}
               margin="normal"
               autoComplete="voivodeship"
               isFullWidth={true}
@@ -64,9 +89,8 @@ class BasicUserInfoEdit extends Component {
             <InputWithLabel
               label="Street"
               onChange={this.handleEditChange}
-              value={address.street}
+              value={userToUpdate.street}
               name="street"
-              validators={['required']}
               margin="normal"
               autoComplete="street"
               isFullWidth={true}
@@ -74,9 +98,8 @@ class BasicUserInfoEdit extends Component {
             <InputWithLabel
               label="City"
               onChange={this.handleEditChange}
-              value={address.city}
+              value={userToUpdate.city}
               name="city"
-              validators={['required']}
               margin="normal"
               autoComplete="city"
               isFullWidth={true}
@@ -84,9 +107,8 @@ class BasicUserInfoEdit extends Component {
             <InputWithLabel
               label="Number"
               onChange={this.handleEditChange}
-              value={address.number}
+              value={userToUpdate.number}
               name="number"
-              validators={['required']}
               margin="normal"
               autoComplete="number"
               isFullWidth={true}
@@ -94,23 +116,25 @@ class BasicUserInfoEdit extends Component {
             <InputWithLabel
               label="Zip Code"
               onChange={this.handleEditChange}
-              value={address.zipCode}
+              value={userToUpdate.zipCode}
               name="zipCode"
-              validators={['required']}
               margin="normal"
               autoComplete="zipCode"
               isFullWidth={true}
             />
-          </ValidatorForm>
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={handleClose}>
-            Cancel
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" onClick={handleClose}>
+              Cancel
             </Button>
-          <Button color="primary">
-            Subscribe
-            </Button>
-        </DialogActions>
+            <Button
+              color="primary"
+              type="submit"
+            >
+              Save
+          </Button>
+          </DialogActions>
+        </ValidatorForm>
       </Dialog>
     )
   }
@@ -125,5 +149,11 @@ const mapStateToProps = state => {
   };
 }
 
-const connectedBasicUserInfoEdit = connect(mapStateToProps)(BasicUserInfoEdit);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateUser: updatedUser => dispatch(userActions.updateUser(updatedUser)),
+  };
+}
+
+const connectedBasicUserInfoEdit = connect(mapStateToProps, mapDispatchToProps)(BasicUserInfoEdit);
 export { connectedBasicUserInfoEdit as BasicUserInfoEdit };

@@ -76,11 +76,9 @@ class ProfilePage extends Component {
   render() {
     const { user, classes } = this.props;
     const { editBasicOpen } = this.state;
-    console.log('User', user);
-    console.log('EditBasicOpen:', editBasicOpen);
 
     const { userType, medicalInformation } = {...user}
-    // const isDoctor = user.userType === 'doctor';
+
       return (
         <Grid item xs={12} className={classes.root}>
           {

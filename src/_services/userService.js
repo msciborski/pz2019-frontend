@@ -6,6 +6,15 @@ export const userService = {
   logout,
   register,
   getById,
+  updateUser,
+};
+
+const userAddress = {
+  voivodeship: '',
+  city: '',
+  street: '',
+  number: '',
+  zipCode: '',
 };
 
 function login(email, password) {
@@ -47,8 +56,23 @@ function getById(id) {
   return fetch(`${config.apiUrl}/api/v1/users/${id}`, options)
     .then(handleResponse)
     .then(user => {
+      user.address = {
+        ...userAddress,
+        ...user.address,
+      }
       return user;
     });
+}
+
+function updateUser(updatedUser) {
+  const options = {
+    method: 'PUT',
+    headers: authHeader(),
+    body: JSON.stringify(updateUser),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${updatedUser.id}`, options)
+    .then(handleResponse);
 }
 
 function handleResponse(response) {

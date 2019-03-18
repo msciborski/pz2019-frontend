@@ -9,6 +9,6 @@ export const registration = (state = {}, action) => {
     case userConstants.REGISTER_FAILURE:
       return {};
     default:
-      return {};
+      return state;
   }
 };
