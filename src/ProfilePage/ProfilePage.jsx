@@ -47,6 +47,8 @@ class ProfilePage extends Component {
     this.state = {
       editBasicOpen: false,
       editMedicalInformationOpen: false,
+      userEdit: {
+      },
     };
   }
 
@@ -66,6 +68,7 @@ class ProfilePage extends Component {
 
   render() {
     const { user, classes } = this.props;
+    console.log('User', user);
     const { userType, medicalInformation } = {...user}
     // const isDoctor = user.userType === 'doctor';
       return (
@@ -81,7 +84,7 @@ class ProfilePage extends Component {
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
                     <Grid container>
-                      <Grid item xs={2}>
+                      <Grid item lg={2} sm={6}>
                         {
                           user.avatarUrl ?
                             <div className={classes.avatarSection}>
@@ -95,14 +98,14 @@ class ProfilePage extends Component {
                             </div>
                         }
                       </Grid>
-                      <Grid item xs>
+                      <Grid item lg={9} sm={6}>
                         <BasicUserInfo user={user} />
                       </Grid>
                     </Grid>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
                 {
-                  user.userType === 'patient' &&
+                  userType === 'patient' &&
                   <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography>Medical information</Typography>
