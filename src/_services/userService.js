@@ -31,10 +31,11 @@ function register(user) {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    mode: 'no-cors',
     body: JSON.stringify(user),
   };
-  return fetch(`${config.apiUrl}/api/v1/users`, options);
+
+  return fetch(`${config.apiUrl}/api/v1/users`, options)
+    .then(handleResponse);
 }
 
 function getById(id) {
@@ -53,17 +54,16 @@ function getById(id) {
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
+    console.log('Response ok:', response.ok);
     if (!response.ok) {
       if (response.status === 401) {
         logout();
         window.location.reload(true)
       }
-      console.log('data:', data);
-      const error = (data && data.error.message) || response.statusText;
-      console.log('error:', error);
+      const error = (data && data.message) || response.statusText;
+      console.log('Register error:', error);
       return Promise.reject(error);
     }
-    console.log(data);
     return data;
   })
 }

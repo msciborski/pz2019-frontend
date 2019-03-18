@@ -18,7 +18,6 @@ function login(email, password) {
         dispatch(success(user))
         history.push('/register');
       }, error => {
-        console.log('Login error:', error)
         dispatch(failure(error));
         dispatch(alertActions.error(error));
       });
@@ -39,8 +38,6 @@ function getById(id) {
     dispatch(request({ id }));
     userService.getById(id)
       .then(user => {
-        console.log('Action:');
-        console.log(user);
         dispatch(success(user));
         history.push('/profile');
       }, error => {
@@ -64,6 +61,7 @@ function register(user) {
         history.push('/login');
         dispatch(alertActions.success('Registratioon successful'));
       }, error => {
+        console.log('Register error:', error);
         dispatch(failure(error))
         dispatch(alertActions.error(error));
       });

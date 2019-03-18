@@ -66,9 +66,7 @@ class ProfilePage extends Component {
 
   render() {
     const { user, classes } = this.props;
-    console.log('Profile user:')
     const { userType, medicalInformation } = {...user}
-    console.log(user);
     // const isDoctor = user.userType === 'doctor';
       return (
         <Grid item xs={12} className={classes.root}>
@@ -136,7 +134,6 @@ class ProfilePage extends Component {
 
 const mapStateToProps = state => {
   const { authentication } = state;
-  console.log(authentication);
   const { user } = state.users;
   return {
     user,

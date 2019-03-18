@@ -21,7 +21,6 @@ class RegisterPage extends Component {
     super(props);
     this.state = {
       isDoctor: false,
-      doctorToken: '',
       user: {
         email: '',
         name: '',
@@ -29,6 +28,7 @@ class RegisterPage extends Component {
         pesel: '',
         password: '',
         confirmationPassword: '',
+        doctorToken: '',
       },
       submitted: false,
     };
@@ -40,8 +40,6 @@ class RegisterPage extends Component {
 
     if ( name === 'isDoctor') {
       this.setState({ isDoctor: event.target.checked });
-    } else if (name === 'doctorToken') {
-      this.setState({ 'doctorToken': value });
     } else {
       this.setState({
         user: {
@@ -58,14 +56,10 @@ class RegisterPage extends Component {
     this.setState({ submitted: true });
     const { user, isDoctor } = this.state;
     const { register } = this.props;
-    const { email, name, surname, pesel, password} = user;
+
     register({
       userType: isDoctor ? 'doctor' : 'patient',
-      email,
-      name,
-      surname,
-      pesel,
-      password,
+      ...user,
     });
 
   }

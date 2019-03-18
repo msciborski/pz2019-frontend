@@ -47,8 +47,6 @@ class App extends Component {
     const { type, message } = {...alert};
     let { alertOpen } = this.state;
 
-    console.log('Render type:', type);
-    console.log('AlertOpen:', alertOpen);
 
     return (
       <div>
@@ -88,9 +86,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('Map', state);
   const { alert } = state;
-  console.log('Map:', alert);
   return {
     alert,
   };
