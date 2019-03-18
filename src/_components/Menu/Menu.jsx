@@ -10,13 +10,14 @@ const styles = {
     width: 150,
   },
   title: {
-    fontSize: '25rem',
+    fontSize: '2rem !important',
+    paddingLeft: '30px',
 
   },
   divider: {
-    paddingLeft: '0px !important',
   },
   listItem: {
+    marginLeft: '30px',
     '&:hover': {
 
     }
@@ -43,8 +44,8 @@ const Menu = (props) => {
             Menu
           </Typography>
           <Divider light className={classes.divider} />
-          <List className={classes.listItem} >
-            <ListItemText primary="Doctors" />
+          <List>
+            <ListItemText className={classes.listItem} primary="Doctors" />
           </List>
         </div>
       </div>

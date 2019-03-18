@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 const BasicUserInfo = (props) => {
   const { user } = {...props};
+  const { address } = user;
+
   return (
     // Need to be refactored
     <Grid container>
@@ -16,20 +18,25 @@ const BasicUserInfo = (props) => {
       <Grid item sm={12}>
         <Divider light />
       </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Pesel</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6} >
-        <Typography>{user.pesel}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
+      {
+        user.userType !== 'doctor' &&
+          <div>
+            <Grid item sm={4} xs={6}>
+              <Typography>Pesel</Typography>
+            </Grid>
+            <Grid item sm={8} xs={6} >
+              <Typography>{user.pesel}</Typography>
+            </Grid>
+            <Grid item sm={12}>
+              <Divider light />
+            </Grid>
+          </div>
+      }
       <Grid item sm={4} xs={6}>
         <Typography>Voivodeship</Typography>
       </Grid>
       <Grid item sm={8} xs={6}>
-        <Typography>Wielkopolska</Typography>
+        <Typography>{address.voivodeship}</Typography>
       </Grid>
       <Grid item sm={12}>
         <Divider light />
@@ -38,7 +45,7 @@ const BasicUserInfo = (props) => {
         <Typography>City</Typography>
       </Grid>
       <Grid item sm={8} xs={6}>
-        <Typography>Poznań</Typography>
+        <Typography>{address.city}</Typography>
       </Grid>
       <Grid item sm={12}>
         <Divider light />
@@ -47,7 +54,7 @@ const BasicUserInfo = (props) => {
         <Typography>Street</Typography>
       </Grid>
       <Grid item sm={8} xs={6}>
-        <Typography>Poznańska</Typography>
+        <Typography>{address.street}</Typography>
       </Grid>
       <Grid item sm={12}>
         <Divider light />
@@ -56,7 +63,7 @@ const BasicUserInfo = (props) => {
         <Typography>Number</Typography>
       </Grid>
       <Grid item sm={8} xs={6}>
-        <Typography>4A/6</Typography>
+        <Typography>{address.number}</Typography>
       </Grid>
       <Grid item sm={12}>
         <Divider light />
@@ -65,7 +72,7 @@ const BasicUserInfo = (props) => {
         <Typography>Zip code</Typography>
       </Grid>
       <Grid item sm={8} xs={6}>
-        <Typography>00-000</Typography>
+        <Typography>{address.zipCode}</Typography>
       </Grid>
       <Grid item sm={12}>
         <Divider light />

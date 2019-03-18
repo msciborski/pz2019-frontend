@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/styles";
 import { BasicUserInfo } from "../_components/BasicUserInfo";
 import LocalHospital from "@material-ui/icons/LocalHospital";
 import { MedicalInformation } from "../_components/MedicalInformation";
+import { BasicUserInfoEdit } from "../_components/BasicUserInfoEdit/BasicUserInfoEdit";
 
 const styles = {
   root: {
@@ -47,20 +48,26 @@ class ProfilePage extends Component {
     this.state = {
       editBasicOpen: false,
       editMedicalInformationOpen: false,
-      userEdit: {
-      },
     };
   }
 
   componentDidMount() {
     const { getUser, id } = this.props;
     getUser(id);
-
   }
 
-  handleEditBasicClick = () => {
-    this.setState({ editBasicOpen: true });
+  handleEditChange = event => {
+    const { name, value } = event.target;
+    const { basicEditField } = this.props;
+    this.setState({
+      ...basicEditField,
+      [name]: value,
+    });
   }
+
+  handleEditBasicOpen = () => this.setState({ editBasicOpen: true });
+  handleEditBasicClose = () => this.setState({ editBasicOpen: false });
+
 
   handleEditMedicalInformationOpen = () => {
     this.setState({ editMedicalInformationOpen: true });
@@ -68,7 +75,10 @@ class ProfilePage extends Component {
 
   render() {
     const { user, classes } = this.props;
+    const { editBasicOpen } = this.state;
     console.log('User', user);
+    console.log('EditBasicOpen:', editBasicOpen);
+
     const { userType, medicalInformation } = {...user}
     // const isDoctor = user.userType === 'doctor';
       return (
@@ -89,12 +99,12 @@ class ProfilePage extends Component {
                           user.avatarUrl ?
                             <div className={classes.avatarSection}>
                               <Avatar src={user.avatarUrl} className={classes.avatar} />
-                              <Button color="primary" className={classes.editButton}>Edit</Button>
+                              <Button color="primary" onClick={this.handleEditBasicOpen} className={classes.editButton}>Edit</Button>
                             </div>
                             :
                             <div className={classes.avatarSection}>
                               <Avatar className={classes.avatar}>{user.name[0]}{user.surname[0]}</Avatar>
-                              <Button className={classes.editButton} color="primary" onClick={this.handleEditBasicClick}>Edit</Button>
+                              <Button className={classes.editButton} color="primary" onClick={this.handleEditBasicOpen}>Edit</Button>
                             </div>
                         }
                       </Grid>
@@ -128,6 +138,10 @@ class ProfilePage extends Component {
                   </ExpansionPanel>
                 }
               </Paper>
+              <BasicUserInfoEdit
+                open={editBasicOpen}
+                handleClose={this.handleEditBasicClose}
+              />
             </div>
           }
         </Grid>
