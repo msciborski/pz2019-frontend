@@ -13,6 +13,7 @@ import { alertActions } from "../_actions";
 import { connect } from "react-redux";
 import { history } from "../_helpers";
 import { Snackbar } from "@material-ui/core";
+import { Menu } from "../_components/Menu";
 
 const styles = {
   root: {
@@ -30,6 +31,7 @@ class App extends Component {
 
     this.state = {
       alertOpen: false,
+      menuOpen: false,
     };
 
   }
@@ -41,18 +43,19 @@ class App extends Component {
   }
 
   handleAlertClose = () => this.setState(prevState => ({alertOpen: !prevState.alertOpen}));
+  toggleMenu = () => this.setState(prevState => ({ menuOpen: !prevState.menuOpen}));
 
   render() {
     const { classes, alert } = {...this.props};
     const { type, message } = {...alert};
-    let { alertOpen } = this.state;
+    let { alertOpen, menuOpen } = this.state;
 
 
     return (
       <div>
         <Grid container className={classes.root}>
           <Grid item xs={12}>
-            <NavBar />
+            <NavBar toggleMenu={this.toggleMenu} />
           </Grid>
           <Switch>
             <Route exact path="/" component={RandomPage} />
@@ -73,13 +76,13 @@ class App extends Component {
             onClose={this.handleAlertClose}
           >
             <Alert
-              variant={alert.type}
+              variant={type}
               onClose={this.handleAlertClose}
-              message={alert.message}
+              message={message}
             />
           </Snackbar>
         }
-
+        <Menu open={menuOpen} toggleDrawer={this.toggleMenu} />
       </div>
     )
   }

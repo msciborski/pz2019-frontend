@@ -42,7 +42,7 @@ class NavBar extends Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { classes, loggedIn } = this.props;
+    const { classes, loggedIn, toggleMenu } = this.props;
     const isMenuOpen = Boolean(anchorEl);
 
     const renderMenu = (
@@ -62,12 +62,16 @@ class NavBar extends Component {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open menu"
-            >
-              <MenuIcon />
-            </IconButton>
+            {
+              loggedIn &&
+                <IconButton
+                  color="inherit"
+                  aria-label="Open menu"
+                  onClick={toggleMenu}
+                >
+                  <MenuIcon />
+                </IconButton>
+            }
             <Typography
               variant="h6"
               color="inherit"
