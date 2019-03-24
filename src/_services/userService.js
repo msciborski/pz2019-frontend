@@ -61,16 +61,7 @@ function getById(id) {
   return fetch(`${config.apiUrl}/api/v1/users/${id}`, options)
     .then(handleResponse)
     .then(user => {
-      user.address = {
-        ...userAddress,
-        ...user.address,
-      };
-
-      user.medicalInformation = {
-        ...user.medicalInformation,
-        ...medicalInformation,
-      };
-
+      console.log(user);
       return user;
     });
 }

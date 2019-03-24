@@ -12,7 +12,7 @@ class BasicUserInfoEdit extends Component {
   constructor(props) {
     super(props);
     const { user } = this.props;
-
+    console.log('User from redux', user);
     this.state = {
       userToUpdate: {
         voivodeship: user.address.voivodeship,
@@ -20,6 +20,7 @@ class BasicUserInfoEdit extends Component {
         street: user.address.street,
         number: user.address.number,
         zipCode: user.address.zipCode,
+        phone: user.phone,
       },
     }
   }
@@ -27,9 +28,6 @@ class BasicUserInfoEdit extends Component {
   handleEditChange = event => {
     const { name, value } = event.target;
     const { userToUpdate } = this.state;
-
-    console.log('UserToUpdate:', userToUpdate);
-    console.log(`${name} ${value}`);
 
     this.setState({
       userToUpdate: {
@@ -42,23 +40,22 @@ class BasicUserInfoEdit extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { updatePatient, user } = this.props;
+    const { updatePatient, user, handleClose } = this.props;
     const { userToUpdate } = this.state;
-
-    this.setState({ open: false });
 
     console.log(userToUpdate);
     updatePatient({
       ...user,
-      ...userToUpdate,
       address: {
         voivodeship: userToUpdate.voivodeship,
         city: userToUpdate.city,
         street: userToUpdate.street,
         number: userToUpdate.number,
-        zipCode: userToUpdate.zipCode,
+        zipCode: userToUpdate.zipCode
       },
+      phone: userToUpdate.phone,
     });
+    handleClose();
   }
 
   render() {
