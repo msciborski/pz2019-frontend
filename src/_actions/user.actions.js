@@ -39,7 +39,6 @@ function getById(id) {
     userService.getById(id)
       .then(user => {
         dispatch(success(user));
-        history.push('/profile');
       }, error => {
         dispatch(failure(error));
         dispatch(alertActions.error(error));

@@ -8,20 +8,6 @@ export const userService = {
   getById,
 };
 
-const userAddress = {
-  voivodeship: '',
-  city: '',
-  street: '',
-  number: '',
-  zipCode: '',
-};
-
-const medicalInformation = {
-  bloodType: 'A+',
-  weight: 1000,
-  height: 180,
-};
-
 function login(email, password) {
   const options = {
     method: 'POST',

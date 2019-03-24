@@ -8,7 +8,7 @@ import { patientActions } from "../../_actions";
 
 const Transition = props => (<Slide direction="up" {...props} />);
 
-class BasicUserInfoEdit extends Component {
+class BasicPatientInfoEdit extends Component {
   constructor(props) {
     super(props);
     const { user } = this.props;
@@ -59,7 +59,7 @@ class BasicUserInfoEdit extends Component {
   }
 
   render() {
-    const { open, handleClose } = this.props;
+    const { open, handleClose, user } = this.props;
     const { userToUpdate } = this.state;
 
     return (
@@ -67,7 +67,7 @@ class BasicUserInfoEdit extends Component {
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={this.handleClose}
+        onClose={handleClose}
         aria-labelledby="edit-basic-info"
         aria-describedby="edit-basic-info-description"
       >
@@ -77,7 +77,7 @@ class BasicUserInfoEdit extends Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {`Update user: ${userToUpdate.name} ${userToUpdate.surname}`}
+              {`Update user: ${user.name} ${user.surname}`}
             </DialogContentText>
             <InputWithLabel
               label="Voivodeship"
@@ -166,5 +166,5 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-const connectedBasicUserInfoEdit = connect(mapStateToProps, mapDispatchToProps)(BasicUserInfoEdit);
-export { connectedBasicUserInfoEdit as BasicUserInfoEdit };
+const connectedBasicUserInfoEdit = connect(mapStateToProps, mapDispatchToProps)(BasicPatientInfoEdit);
+export { connectedBasicUserInfoEdit as BasicPatientInfoEdit };

@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import { Typography, Button, Grid, Paper, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/styles";
-import { BasicUserInfo } from "../_components/BasicUserInfo";
+import { PatientBasicInfo } from "../_components/PatientBasicInfo";
 import LocalHospital from "@material-ui/icons/LocalHospital";
 import { MedicalInformation } from "../_components/MedicalInformation";
-import { BasicUserInfoEdit } from "../_components/BasicUserInfoEdit/BasicUserInfoEdit";
+import { BasicPatientInfoEdit } from "../_components/BasicPatientInfoEdit"
+import { DoctorBasicInfo } from "../_components/DoctorBasicInfo";
 
 const styles = {
   root: {
@@ -33,8 +34,8 @@ const styles = {
     fontSize: '5.25rem !important',
   },
   hospitalIcon: {
-    width: '8rem',
-    height: '8rem',
+    width: '8rem !important',
+    height: '8rem !important',
   },
   editButton: {
     width: '80%',
@@ -44,7 +45,7 @@ const styles = {
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
-
+    console.log('Constructor');
     this.state = {
       editBasicOpen: false,
       editMedicalInformationOpen: false,
@@ -52,8 +53,8 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    const { getUser, id } = this.props;
-    getUser(id);
+    const { getUser, authUser } = this.props;
+    getUser(authUser.id);
   }
 
   handleEditChange = event => {
@@ -74,8 +75,10 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { user, classes } = this.props;
+    const { user, classes, authUser } = this.props;
     const { editBasicOpen } = this.state;
+
+    console.log('User profile render:', user);
 
     const { userType, medicalInformation } = {...user}
 
@@ -107,7 +110,12 @@ class ProfilePage extends Component {
                         }
                       </Grid>
                       <Grid item lg={9} sm={6}>
-                        <BasicUserInfo user={user} />
+                      {
+                        user.userType === 'patient' ?
+                          <PatientBasicInfo />
+                        :
+                          <DoctorBasicInfo />
+                      }
                       </Grid>
                     </Grid>
                   </ExpansionPanelDetails>
@@ -125,7 +133,10 @@ class ProfilePage extends Component {
                             <Avatar className={classes.avatar}>
                               <LocalHospital className={classes.hospitalIcon} />
                             </Avatar>
-                            <Button className={classes.editButton} color="primary" onClick={this.handleEditMedicalInformationOpen}>Edit</Button>
+                            {
+                              authUser.userType === 'doctor' &&
+                              <Button className={classes.editButton} color="primary" onClick={this.handleEditMedicalInformationOpen}>Edit</Button>
+                            }
                           </div>
                         </Grid>
                         <Grid item xs>
@@ -136,10 +147,15 @@ class ProfilePage extends Component {
                   </ExpansionPanel>
                 }
               </Paper>
-              <BasicUserInfoEdit
-                open={editBasicOpen}
-                handleClose={this.handleEditBasicClose}
-              />
+              {
+                authUser.userType === 'patient' ?
+                <BasicPatientInfoEdit
+                    open={editBasicOpen}
+                    handleClose={this.handleEditBasicClose}
+                />
+                :
+                <div></div>
+              }
             </div>
           }
         </Grid>
@@ -152,7 +168,7 @@ const mapStateToProps = state => {
   const { user } = state.users;
   return {
     user,
-    id: authentication.user.user.id,
+    authUser: authentication.user.user,
   };
 }
 
