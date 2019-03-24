@@ -70,13 +70,14 @@ function updateUser(updatedUser) {
     headers: authHeader(),
     body: JSON.stringify(updateUser),
   };
-
+  console.log('Body:', options.body);
   return fetch(`${config.apiUrl}/api/v1/users/${updatedUser.id}`, options)
     .then(handleResponse);
 }
 
 function handleResponse(response) {
   return response.text().then(text => {
+    console.log('Text:', text);
     const data = text && JSON.parse(text);
     console.log('Response ok:', response.ok);
     if (!response.ok) {
@@ -88,6 +89,7 @@ function handleResponse(response) {
       console.log('Register error:', error);
       return Promise.reject(error);
     }
+    console.log('Data:', data);
     return data;
   })
 }

@@ -12,7 +12,7 @@ class BasicUserInfoEdit extends Component {
   constructor(props) {
     super(props);
     const { user } = this.props;
-    console.log('Constructor');
+
     this.state = {
       userToUpdate: {
         voivodeship: user.address.voivodeship,
@@ -27,9 +27,6 @@ class BasicUserInfoEdit extends Component {
   handleEditChange = event => {
     const { name, value } = event.target;
     const { userToUpdate } = this.state;
-
-    console.log('UserToUpdate:', userToUpdate);
-    console.log(`${name} ${value}`);
 
     this.setState({
       userToUpdate: {
@@ -48,6 +45,13 @@ class BasicUserInfoEdit extends Component {
     this.setState({ open: false });
 
     console.log(userToUpdate);
+    const x = {
+      ...user,
+      address: {
+        ...userToUpdate,
+      }
+    }
+    console.log('X', x);
     updateUser({
       ...user,
       address: {

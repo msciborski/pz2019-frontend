@@ -82,6 +82,7 @@ function updateUser(updateUser) {
         getById(updateUser.id);
         dispatch(success());
       }, error => {
+        console.log('Error:', error);
         dispatch(failure(error));
         dispatch(alertActions.error(error));
       })

@@ -46,8 +46,6 @@ const variantIcon = {
 
 const Alert = props => {
   const { classes, message, onClose, variant, ...other } = props;
-  console.log('Message', message);
-  console.log(variant);
   const Icon = variantIcon[variant];
 
   return (
