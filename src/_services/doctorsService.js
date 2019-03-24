@@ -12,9 +12,8 @@ function getSpecializations() {
 
 function handleResponse(response) {
   return response.text().then(text => {
-    console.log('Text:', text);
     const data = text && JSON.parse(text);
-
+    console.log(data);
     if (!response.ok) {
       if (response.status === 401) {
         userService.logout();

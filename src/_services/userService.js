@@ -47,14 +47,12 @@ function getById(id) {
   return fetch(`${config.apiUrl}/api/v1/users/${id}`, options)
     .then(handleResponse)
     .then(user => {
-      console.log(user);
       return user;
     });
 }
 
 function handleResponse(response) {
   return response.text().then(text => {
-    console.log('Text:', text);
     const data = text && JSON.parse(text);
 
     if (!response.ok) {

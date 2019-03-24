@@ -18,7 +18,7 @@ function getSpecializations() {
       });
   }
 
-  function request(specizalizations) { return { type: doctorsContants.GET_SPECIALIZATIONS_REQUEST, specizalizations } };
-  function success(specizalizations) { return { type: doctorsContants.GET_SPECIALIZATIONS_SUCCESS, specizalizations } };
+  function request(specializations) { return { type: doctorsContants.GET_SPECIALIZATIONS_REQUEST, specializations } };
+  function success(specializations) { return { type: doctorsContants.GET_SPECIALIZATIONS_SUCCESS, specializations } };
   function failure(error) { return { type: doctorsContants.GET_SPECIALIZATIONS_FAILURE, error } };
 }

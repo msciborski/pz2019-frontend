@@ -60,7 +60,6 @@ function register(user) {
         history.push('/login');
         dispatch(alertActions.success('Registratioon successful'));
       }, error => {
-        console.log('Register error:', error);
         dispatch(failure(error))
         dispatch(alertActions.error(error));
       });

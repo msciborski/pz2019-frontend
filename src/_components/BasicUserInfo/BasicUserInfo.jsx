@@ -5,7 +5,6 @@ import { BasicDoctorInfoEdit } from "../BasicDoctorInfoEdit";
 
 const BasicUserInfo = (props) => {
   const { user } = { ...props };
-  console.log('BasicUserInfo:', user);
   return (
     user.userType === 'patient' ?
       <BasicPatientInfoEdit />

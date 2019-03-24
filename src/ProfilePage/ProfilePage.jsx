@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { userActions } from "../_actions";
+import { userActions, doctorsActions } from "../_actions";
 import { connect } from "react-redux";
 import { Typography, Button, Grid, Paper, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -10,6 +10,7 @@ import LocalHospital from "@material-ui/icons/LocalHospital";
 import { MedicalInformation } from "../_components/MedicalInformation";
 import { BasicPatientInfoEdit } from "../_components/BasicPatientInfoEdit"
 import { DoctorBasicInfo } from "../_components/DoctorBasicInfo";
+import { BasicDoctorInfoEdit } from "../_components/BasicDoctorInfoEdit/BasicDoctorInfoEdit";
 
 const styles = {
   root: {
@@ -45,7 +46,6 @@ const styles = {
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
-    console.log('Constructor');
     this.state = {
       editBasicOpen: false,
       editMedicalInformationOpen: false,
@@ -53,7 +53,8 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    const { getUser, authUser } = this.props;
+    const { getUser, authUser, getSpecializations } = this.props;
+    getSpecializations();
     getUser(authUser.id);
   }
 
@@ -78,7 +79,6 @@ class ProfilePage extends Component {
     const { user, classes, authUser } = this.props;
     const { editBasicOpen } = this.state;
 
-    console.log('User profile render:', user);
 
     const { userType, medicalInformation } = {...user}
 
@@ -154,7 +154,10 @@ class ProfilePage extends Component {
                     handleClose={this.handleEditBasicClose}
                 />
                 :
-                <div></div>
+                <BasicDoctorInfoEdit
+                  open={editBasicOpen}
+                  handleClose={this.handleEditBasicClose}
+                />
               }
             </div>
           }
@@ -175,6 +178,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getUser: id => dispatch(userActions.getById(id)),
+    getSpecializations: () => dispatch(doctorsActions.getSpecializations()),
   };
 }
 

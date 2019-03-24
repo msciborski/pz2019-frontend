@@ -12,7 +12,6 @@ class BasicPatientInfoEdit extends Component {
   constructor(props) {
     super(props);
     const { user } = this.props;
-    console.log('User from redux', user);
     this.state = {
       userToUpdate: {
         voivodeship: user.address.voivodeship,
@@ -43,7 +42,6 @@ class BasicPatientInfoEdit extends Component {
     const { updatePatient, user, handleClose } = this.props;
     const { userToUpdate } = this.state;
 
-    console.log(userToUpdate);
     updatePatient({
       ...user,
       address: {
