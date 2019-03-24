@@ -18,9 +18,18 @@ const BasicUserInfo = (props) => {
       <Grid item sm={12}>
         <Divider light />
       </Grid>
+      <Grid item sm={4} xs={6}>
+        <Typography>Phone number</Typography>
+      </Grid>
+      <Grid item sm={8} xs={6}>
+        <Typography>{user.phone}</Typography>
+      </Grid>
+      <Grid item sm={12}>
+        <Divider light />
+      </Grid>
       {
         user.userType !== 'doctor' &&
-          <div>
+        <>
             <Grid item sm={4} xs={6}>
               <Typography>Pesel</Typography>
             </Grid>
@@ -30,7 +39,7 @@ const BasicUserInfo = (props) => {
             <Grid item sm={12}>
               <Divider light />
             </Grid>
-          </div>
+        </>
       }
       <Grid item sm={4} xs={6}>
         <Typography>Voivodeship</Typography>

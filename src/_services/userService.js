@@ -6,7 +6,6 @@ export const userService = {
   logout,
   register,
   getById,
-  updateUser,
 };
 
 const userAddress = {
@@ -15,6 +14,12 @@ const userAddress = {
   street: '',
   number: '',
   zipCode: '',
+};
+
+const medicalInformation = {
+  bloodType: 'A+',
+  weight: 1000,
+  height: 180,
 };
 
 function login(email, password) {
@@ -59,37 +64,31 @@ function getById(id) {
       user.address = {
         ...userAddress,
         ...user.address,
-      }
+      };
+
+      user.medicalInformation = {
+        ...user.medicalInformation,
+        ...medicalInformation,
+      };
+
       return user;
     });
-}
-
-function updateUser(updatedUser) {
-  const options = {
-    method: 'PUT',
-    headers: authHeader(),
-    body: JSON.stringify(updateUser),
-  };
-  console.log('Body:', options.body);
-  return fetch(`${config.apiUrl}/api/v1/users/${updatedUser.id}`, options)
-    .then(handleResponse);
 }
 
 function handleResponse(response) {
   return response.text().then(text => {
     console.log('Text:', text);
     const data = text && JSON.parse(text);
-    console.log('Response ok:', response.ok);
+
     if (!response.ok) {
       if (response.status === 401) {
         logout();
         window.location.reload(true)
       }
       const error = (data && data.message) || response.statusText;
-      console.log('Register error:', error);
+
       return Promise.reject(error);
     }
-    console.log('Data:', data);
     return data;
   })
 }
