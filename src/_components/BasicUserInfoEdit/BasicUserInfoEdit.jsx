@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Slide, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@material-ui/core";
 import { InputWithLabel } from "../InputWithLabel";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import { userActions } from "../../_actions";
+import { patientActions } from "../../_actions";
 
 const Transition = props => (<Slide direction="up" {...props} />);
 
@@ -30,7 +30,7 @@ class BasicUserInfoEdit extends Component {
 
     console.log('UserToUpdate:', userToUpdate);
     console.log(`${name} ${value}`);
-
+    
     this.setState({
       userToUpdate: {
         ...userToUpdate,
@@ -42,16 +42,21 @@ class BasicUserInfoEdit extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { updateUser, user } = this.props;
+    const { updatePatient, user } = this.props;
     const { userToUpdate } = this.state;
 
     this.setState({ open: false });
 
     console.log(userToUpdate);
-    updateUser({
+    updatePatient({
       ...user,
+      ...userToUpdate,
       address: {
-        ...userToUpdate,
+        voivodeship: userToUpdate.voivodeship,
+        city: userToUpdate.city,
+        street: userToUpdate.street,
+        number: userToUpdate.number,
+        zipCode: userToUpdate.zipCode,
       },
     });
   }
@@ -122,6 +127,15 @@ class BasicUserInfoEdit extends Component {
               autoComplete="zipCode"
               isFullWidth={true}
             />
+            <InputWithLabel
+              label="Phone"
+              onChange={this.handleEditChange}
+              value={userToUpdate.phone}
+              name="phone"
+              margin="normal"
+              autoComplete="phone"
+              isFullWidth={true}
+            />
           </DialogContent>
           <DialogActions>
             <Button color="primary" onClick={handleClose}>
@@ -151,7 +165,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateUser: updatedUser => dispatch(userActions.updateUser(updatedUser)),
+    updatePatient: updatedPatient => dispatch(patientActions.updatePatient(updatedPatient)),
   };
 }
 
