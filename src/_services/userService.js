@@ -67,3 +67,14 @@ function handleResponse(response) {
     return data;
   })
 }
+
+function changePassword(patientToUpdate) {
+  const options = {
+      method: 'PUT',
+      headers: authHeader(),
+      body: JSON.stringify(patientToUpdate),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${patientToUpdate.id}/password`, options)
+      .then(handleResponse);
+}
