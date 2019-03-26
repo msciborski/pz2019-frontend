@@ -1,5 +1,6 @@
 import React from "react";
-import { Drawer, List, ListItemText, Typography, Divider } from "@material-ui/core";
+import { Drawer, List, ListItemText, Typography, Divider, ListItem } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 
 
@@ -19,9 +20,11 @@ const styles = {
   listItem: {
     marginLeft: '30px',
     '&:hover': {
-
     }
-  }
+  },
+  link : {
+    textDecoration: 'none',
+  },
 }
 
 const Menu = (props) => {
@@ -45,7 +48,11 @@ const Menu = (props) => {
           </Typography>
           <Divider light className={classes.divider} />
           <List>
-            <ListItemText className={classes.listItem} primary="Doctors" />
+            <Link to="doctors" className={classes.link}>
+              <ListItem button>
+                <ListItemText primary="Doctors" />
+              </ListItem>
+            </Link>
           </List>
         </div>
       </div>

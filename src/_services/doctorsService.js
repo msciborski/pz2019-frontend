@@ -1,12 +1,24 @@
 import { config } from "../config";
 import { userService } from "./userService";
+import { authHeader } from "../_helpers";
 
 export const doctorsService = {
   getSpecializations,
+  getDoctors,
 };
 
 function getSpecializations() {
   return fetch(`${config.apiUrl}/api/v1/doctors/specializations`)
+    .then(handleResponse);
+}
+
+function getDoctors() {
+  const options = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/doctors`, options)
     .then(handleResponse);
 }
 

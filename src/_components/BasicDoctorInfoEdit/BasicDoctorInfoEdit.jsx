@@ -1,9 +1,21 @@
 import React from "react";
 import { Component } from "react";
 import { connect } from "react-redux";
+import { withStyles } from "@material-ui/styles";
 import { Slide, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Select, FormControl, Input, MenuItem, Chip } from "@material-ui/core";
 
 const Transition = props => (<Slide direction="up" {...props} />);
+
+const styles = {
+  select: {
+    minWidth: '250px',
+    maxWidth: '550px',
+  },
+  chip: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+}
 
 class BasicDoctorInfoEdit extends Component {
   constructor(props) {
@@ -29,7 +41,7 @@ class BasicDoctorInfoEdit extends Component {
   }
 
   render() {
-    const { open, handleClose, user, specializations } = this.props;
+    const { open, handleClose, user, specializations, classes } = this.props;
     console.log('Props spec:', specializations)
     return (
       <Dialog
@@ -39,6 +51,7 @@ class BasicDoctorInfoEdit extends Component {
         onClose={handleClose}
         aria-labelledby="edit-basic-info"
         aria-describedby="edit-basic-info-description"
+        className={classes.root}
       >
         <FormControl onSubmit={handleClose.submit}>
           <DialogTitle id="edit-basic-info-title">
@@ -57,10 +70,12 @@ class BasicDoctorInfoEdit extends Component {
               renderValue={selected => (
                 <div>
                   {selected.map(value => (
-                    <Chip key={value} label={value} />
+                    <Chip key={value} label={value} className={classes.chip} />
                   ))}
                 </div>
               )}
+              fullWidth
+              className={classes.select}
             >
               {specializations.map(spec => (<MenuItem key={spec.name} value={spec.name}> {spec.name} </MenuItem>)) }
             </Select>
@@ -94,5 +109,6 @@ const mapStateToProps = state => {
   };
 }
 
-const connectedBasicUserInfoEdit = connect(mapStateToProps)(BasicDoctorInfoEdit);
-export { connectedBasicUserInfoEdit as BasicDoctorInfoEdit };
+const connectedBasicDoctorInfoEdit = connect(mapStateToProps)(BasicDoctorInfoEdit);
+const styledConnectedBasicDoctorInfoEdit = withStyles(styles)(connectedBasicDoctorInfoEdit);
+export { styledConnectedBasicDoctorInfoEdit as BasicDoctorInfoEdit };
