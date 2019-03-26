@@ -8,6 +8,7 @@ export const userActions = {
   register,
   logout,
   getById,
+  changePassword,
 };
 
 function login(email, password) {
@@ -68,4 +69,23 @@ function register(user) {
   function request(user) { return { type: userConstants.REGISTER_REQUEST, user } };
   function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } };
   function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } };
+}
+
+function changePassword(patientToUpdate) {
+  return dispatch => {
+    dispatch(request());
+
+    return userService.changePassword(patientToUpdate)
+      .then(() => {
+        dispatch(userActions.getById(patientToUpdate.id));
+        dispatch(success());
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: userConstants.CHANGE_PASSWORD_REQUEST } };
+  function success() { return { type: userConstants.CHANGE_PASSWORD_SUCCESS } };
+  function failure(error) { return { type: userConstants.CHANGE_PASSWORD_FAILURE, error }};
 }
