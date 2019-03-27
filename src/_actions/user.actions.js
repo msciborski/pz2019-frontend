@@ -71,13 +71,12 @@ function register(user) {
   function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } };
 }
 
-function changePassword(patientToUpdate) {
+function changePassword(oldPassword, newPassword) {
   return dispatch => {
     dispatch(request());
 
-    return userService.changePassword(patientToUpdate)
+    return userService.changePassword(oldPassword, newPassword)
       .then(() => {
-        dispatch(userActions.getById(patientToUpdate.id));
         dispatch(success());
       }, error => {
         dispatch(failure(error));

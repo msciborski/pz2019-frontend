@@ -6,6 +6,7 @@ export const userService = {
   logout,
   register,
   getById,
+  changePassword,
 };
 
 function login(email, password) {
@@ -68,11 +69,11 @@ function handleResponse(response) {
   })
 }
 
-function changePassword(patientToUpdate) {
+function changePassword(oldPassword, newPassword) {
   const options = {
       method: 'PUT',
       headers: authHeader(),
-      body: JSON.stringify(patientToUpdate),
+      body: JSON.stringify({ oldPassword, newPassword }),
   };
 
   return fetch(`${config.apiUrl}/api/v1/users/${patientToUpdate.id}/password`, options)
