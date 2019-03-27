@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { history } from "../_helpers";
 import { Snackbar } from "@material-ui/core";
 import { Menu } from "../_components/Menu";
+import { DoctorListPage } from "../DoctorListPage";
 
 const styles = {
   root: {
@@ -62,6 +63,7 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/profile" component={ProfilePage} />
+            <Route path="/doctors" component={DoctorListPage} />
           </Switch>
         </Grid>
         {
