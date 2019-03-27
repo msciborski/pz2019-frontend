@@ -38,7 +38,7 @@ class DoctorListPage extends Component {
                                   {doctors.map(doctor => (
                                     <TableRow id={doctor.id}>
                                       <TableCell>{`${doctor.name} ${doctor.surname}`}</TableCell>
-                                      <TableCell>{doctor.specializations.join(',')}</TableCell>
+                                      <TableCell>{doctor.specializations.map(spec => spec.name).join(', ')}</TableCell>
                                     </TableRow>
                                   ))}
                                 </TableBody>

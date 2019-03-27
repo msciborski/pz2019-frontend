@@ -53,9 +53,11 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    const { getUser, authUser, getSpecializations } = this.props;
+    const { getUser, getSpecializations } = this.props;
+    const { id } = this.props.match.params;
+    console.log('Props match:', this.props.match)
     getSpecializations();
-    getUser(authUser.id);
+    getUser(id);
   }
 
   handleEditChange = event => {

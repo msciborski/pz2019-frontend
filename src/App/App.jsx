@@ -62,7 +62,7 @@ class App extends Component {
             <Route exact path="/" component={RandomPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
-            <Route path="/profile" component={ProfilePage} />
+            <Route path="/profile/:id" component={ProfilePage} />
             <Route path="/doctors" component={DoctorListPage} />
           </Switch>
         </Grid>

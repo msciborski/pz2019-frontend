@@ -42,7 +42,8 @@ class NavBar extends Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { classes, loggedIn, toggleMenu } = this.props;
+    const { classes, loggedIn, toggleMenu, authUser } = this.props;
+    const { id } = {...authUser};
     const isMenuOpen = Boolean(anchorEl);
 
     const renderMenu = (
@@ -53,7 +54,7 @@ class NavBar extends Component {
         open={isMenuOpen}
         onClose={this.handleProfileMenuClose}
       >
-        <MenuItem onClick={this.handleProfileMenuClose} component={Link} to="/profile">Profile</MenuItem>
+        <MenuItem onClick={this.handleProfileMenuClose} component={Link} to={`/profile/${id}`}>Profile</MenuItem>
         <MenuItem onClick={this.handleLogoutClick} component={Link} to="/">Logout</MenuItem>
       </Menu>
     )
@@ -121,9 +122,10 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => {
-  const { loggedIn } = state.authentication;
+  const { loggedIn, user } = state.authentication;
   return {
     loggedIn,
+    authUser: user ? user.user : {},
   };
 }
 

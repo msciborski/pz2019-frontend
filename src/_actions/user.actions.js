@@ -16,7 +16,8 @@ function login(email, password) {
     return userService.login(email, password)
       .then(user => {
         dispatch(success(user))
-        history.push('/profile');
+        console.log('User action:', user);
+        history.push('/profile/' + user.user.id);
       }, error => {
         dispatch(failure(error));
         dispatch(alertActions.error(error));

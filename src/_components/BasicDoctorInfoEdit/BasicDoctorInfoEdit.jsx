@@ -102,7 +102,6 @@ class BasicDoctorInfoEdit extends Component {
 const mapStateToProps = state => {
   const { user } = state.users;
   const { specializations} = state.doctors;
-  console.log(state);
   return {
     user,
     specializations: specializations,
