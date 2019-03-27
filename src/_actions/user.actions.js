@@ -75,7 +75,7 @@ function changePassword(oldPassword, newPassword) {
   return dispatch => {
     dispatch(request());
 
-    return userService.changePassword(oldPassword, newPassword)
+    return userService.changePassword(oldPassword, newPassword, userId)
       .then(() => {
         dispatch(success());
       }, error => {

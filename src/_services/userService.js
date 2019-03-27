@@ -69,13 +69,13 @@ function handleResponse(response) {
   })
 }
 
-function changePassword(oldPassword, newPassword) {
+function changePassword(oldPassword, newPassword, userId) {
   const options = {
       method: 'PUT',
       headers: authHeader(),
       body: JSON.stringify({ oldPassword, newPassword }),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/users/${patientToUpdate.id}/password`, options)
+  return fetch(`${config.apiUrl}/api/v1/users/${userId}/password`, options)
       .then(handleResponse);
 }
