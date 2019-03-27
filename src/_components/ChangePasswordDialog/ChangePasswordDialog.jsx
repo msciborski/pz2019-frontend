@@ -8,6 +8,7 @@ class ChangePasswordDialog extends Component {
         this.state = {
             oldPassword: '',
             newPassword: '',
+            repPassword: '',
         }
     }
 
@@ -19,15 +20,15 @@ class ChangePasswordDialog extends Component {
         });
     }
     handleSubmit = () => {
-        const { oldPassword, newPassword } = this.state;
+        const { oldPassword, newPassword, repPassword } = this.state;
         const { userId, changePassword } = this.props;
 
         changePassword(oldPassword, newPassword, userId);
     }
 
     render() {
-        const { open, handleClose, user } = this.props;
-        const { userToUpdate } = this.state;
+        const { open, handleClose, userId } = this.props;
+        const { oldPassword, newPassword } = this.state;
 
         return (
         <Dialog
@@ -47,58 +48,34 @@ class ChangePasswordDialog extends Component {
                 {`Update user: ${user.name} ${user.surname}`}
                 </DialogContentText>
                 <InputWithLabel
-                label="Voivodeship"
-                onChange={this.handleEditChange}
-                value={userToUpdate.voivodeship}
-                name="voivodeship"
+                label="Old password"
+                onChange={this.handleChange}
+                value={oldPassword}
+                name="oldPassword"
                 margin="normal"
-                autoComplete="voivodeship"
+                autoComplete="Old password"
                 isFullWidth={true}
+                type="password"
                 />
                 <InputWithLabel
-                label="Street"
-                onChange={this.handleEditChange}
-                value={userToUpdate.street}
-                name="street"
+                label="New password"
+                onChange={this.handleChange}
+                value={newPassword}
+                name="newPassword"
                 margin="normal"
-                autoComplete="street"
+                autoComplete="New password"
                 isFullWidth={true}
+                type="password"
                 />
                 <InputWithLabel
-                label="City"
-                onChange={this.handleEditChange}
-                value={userToUpdate.city}
+                label="Repeat password"
+                onChange={this.handleChange}
+                value={newPassword}
                 name="city"
                 margin="normal"
                 autoComplete="city"
                 isFullWidth={true}
-                />
-                <InputWithLabel
-                label="Number"
-                onChange={this.handleEditChange}
-                value={userToUpdate.number}
-                name="number"
-                margin="normal"
-                autoComplete="number"
-                isFullWidth={true}
-                />
-                <InputWithLabel
-                label="Zip Code"
-                onChange={this.handleEditChange}
-                value={userToUpdate.zipCode}
-                name="zipCode"
-                margin="normal"
-                autoComplete="zipCode"
-                isFullWidth={true}
-                />
-                <InputWithLabel
-                label="Phone"
-                onChange={this.handleEditChange}
-                value={userToUpdate.phone}
-                name="phone"
-                margin="normal"
-                autoComplete="phone"
-                isFullWidth={true}
+                type="password"
                 />
             </DialogContent>
             <DialogActions>
