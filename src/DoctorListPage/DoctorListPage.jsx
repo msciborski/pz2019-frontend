@@ -24,7 +24,6 @@ class DoctorListPage extends Component {
 
     render() {
         const { doctors, classes } = this.props;
-        console.log('Doctors', doctors);
 
         return (
             <Grid item xs={12} className={classes.root}>

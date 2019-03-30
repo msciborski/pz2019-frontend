@@ -55,7 +55,6 @@ class ProfilePage extends Component {
   componentDidMount() {
     const { getUser, getSpecializations } = this.props;
     const { id } = this.props.match.params;
-    console.log('Props match:', this.props.match)
     getSpecializations();
     getUser(id);
   }
@@ -150,7 +149,7 @@ class ProfilePage extends Component {
                 }
               </Paper>
               {
-                authUser.userType == 'patient' ?
+                user.userType === 'patient' ?
                 <BasicPatientInfoEdit
                     open={editBasicOpen}
                     handleClose={this.handleEditBasicClose}

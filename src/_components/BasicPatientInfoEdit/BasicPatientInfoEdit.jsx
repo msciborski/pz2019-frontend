@@ -42,6 +42,7 @@ class BasicPatientInfoEdit extends Component {
     const { updateUser, user, handleClose } = this.props;
     const { userToUpdate } = this.state;
 
+    console.log('User update:', userToUpdate);
     updateUser({
       ...user,
       address: {

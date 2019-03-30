@@ -31,7 +31,6 @@ class BasicDoctorInfoEdit extends Component {
   }
 
   handleChange = event => {
-    console.log('Value', event.target.value)
     this.setState({ specializations: event.target.value });
   }
 
@@ -42,7 +41,6 @@ class BasicDoctorInfoEdit extends Component {
 
   render() {
     const { open, handleClose, user, specializations, classes } = this.props;
-    console.log('Props spec:', specializations)
     return (
       <Dialog
         open={open}

@@ -17,7 +17,6 @@ function login(email, password) {
     return userService.login(email, password)
       .then(user => {
         dispatch(success(user))
-        console.log('User action:', user);
         history.push('/profile/' + user.user.id);
       }, error => {
         dispatch(failure(error));
@@ -76,7 +75,7 @@ function updateUser(updatePatient) {
   return dispatch => {
     dispatch(request());
 
-    return userService.updatePatient(updatePatient)
+    return userService.updateUser(updatePatient)
       .then(() => {
         dispatch(userActions.getById(updatePatient.id));
         dispatch(success());
