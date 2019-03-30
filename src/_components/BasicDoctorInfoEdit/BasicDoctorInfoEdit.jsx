@@ -20,10 +20,10 @@ const styles = {
 class BasicDoctorInfoEdit extends Component {
   constructor(props) {
     super(props);
+    const { specializations } = { ...props.user };
 
-    const { specializations } = { ...props.user }
     this.state = {
-      specializations: [ specializations.map(spec => spec.name)],
+      specializations: !specializations ? [] : [ specializations.map(spec => spec.name)],
     };
   }
 

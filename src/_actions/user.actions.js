@@ -8,6 +8,7 @@ export const userActions = {
   register,
   logout,
   getById,
+  updateUser,
 };
 
 function login(email, password) {
@@ -69,4 +70,23 @@ function register(user) {
   function request(user) { return { type: userConstants.REGISTER_REQUEST, user } };
   function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } };
   function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } };
+}
+
+function updateUser(updatePatient) {
+  return dispatch => {
+    dispatch(request());
+
+    return userService.updatePatient(updatePatient)
+      .then(() => {
+        dispatch(userActions.getById(updatePatient.id));
+        dispatch(success());
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: userConstants.UPDATE_USER_REQUEST } };
+  function success() { return { type: userConstants.UPDATE_USER_SUCCESS } };
+  function failure(error) { return { type: userConstants.UPDATE_USER_FAILURE, error }};
 }

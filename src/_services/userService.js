@@ -6,6 +6,7 @@ export const userService = {
   logout,
   register,
   getById,
+  updateUser,
 };
 
 function login(email, password) {
@@ -49,6 +50,17 @@ function getById(id) {
     .then(user => {
       return user;
     });
+}
+
+function updateUser(patientToUpdate) {
+  const options = {
+      method: 'PUT',
+      headers: authHeader(),
+      body: JSON.stringify(patientToUpdate),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${patientToUpdate.id}`, options)
+      .then(handleResponse);
 }
 
 function handleResponse(response) {

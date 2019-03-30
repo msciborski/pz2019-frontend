@@ -150,7 +150,7 @@ class ProfilePage extends Component {
                 }
               </Paper>
               {
-                authUser.userType === 'patient' ?
+                authUser.userType == 'patient' ?
                 <BasicPatientInfoEdit
                     open={editBasicOpen}
                     handleClose={this.handleEditBasicClose}

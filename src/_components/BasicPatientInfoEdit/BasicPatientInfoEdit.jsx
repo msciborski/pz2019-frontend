@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Slide, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@material-ui/core";
 import { InputWithLabel } from "../InputWithLabel";
 import { ValidatorForm } from "react-material-ui-form-validator";
-import { patientActions } from "../../_actions";
+import { userActions} from "../../_actions";
 
 const Transition = props => (<Slide direction="up" {...props} />);
 
@@ -39,10 +39,10 @@ class BasicPatientInfoEdit extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { updatePatient, user, handleClose } = this.props;
+    const { updateUser, user, handleClose } = this.props;
     const { userToUpdate } = this.state;
 
-    updatePatient({
+    updateUser({
       ...user,
       address: {
         voivodeship: userToUpdate.voivodeship,
@@ -160,7 +160,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updatePatient: updatedPatient => dispatch(patientActions.updatePatient(updatedPatient)),
+    updateUser: updateUser => dispatch(userActions.updateUser(updateUser)),
   };
 }
 
