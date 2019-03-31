@@ -11,6 +11,8 @@ import { MedicalInformation } from "../_components/MedicalInformation";
 import { BasicPatientInfoEdit } from "../_components/BasicPatientInfoEdit"
 import { DoctorBasicInfo } from "../_components/DoctorBasicInfo";
 import { BasicDoctorInfoEdit } from "../_components/BasicDoctorInfoEdit/BasicDoctorInfoEdit";
+import { UploadDocumentationSection } from "../_components/UploadDocumentationSection";
+
 
 const styles = {
   root: {
@@ -81,48 +83,49 @@ class ProfilePage extends Component {
     const { editBasicOpen } = this.state;
 
 
-    const { userType, medicalInformation } = {...user}
+    const { userType, medicalInformation } = { ...user }
 
-      return (
-        <Grid item xs={12} className={classes.root}>
-          {
-            user &&
-            <div>
-              <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
-              <Paper className={classes.paper}>
-                <ExpansionPanel>
-                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography>Basic information</Typography>
-                  </ExpansionPanelSummary>
-                  <ExpansionPanelDetails>
-                    <Grid container>
-                      <Grid item lg={2} sm={6}>
-                        {
-                          user.avatarUrl ?
-                            <div className={classes.avatarSection}>
-                              <Avatar src={user.avatarUrl} className={classes.avatar} />
-                              <Button color="primary" onClick={this.handleEditBasicOpen} className={classes.editButton}>Edit</Button>
-                            </div>
-                            :
-                            <div className={classes.avatarSection}>
-                              <Avatar className={classes.avatar}>{user.name[0]}{user.surname[0]}</Avatar>
-                              <Button className={classes.editButton} color="primary" onClick={this.handleEditBasicOpen}>Edit</Button>
-                            </div>
-                        }
-                      </Grid>
-                      <Grid item lg={9} sm={6}>
+    return (
+      <Grid item xs={12} className={classes.root}>
+        {
+          user &&
+          <div>
+            <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+            <Paper className={classes.paper}>
+              <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Basic information</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Grid container>
+                    <Grid item lg={2} sm={6}>
+                      {
+                        user.avatarUrl ?
+                          <div className={classes.avatarSection}>
+                            <Avatar src={user.avatarUrl} className={classes.avatar} />
+                            <Button color="primary" onClick={this.handleEditBasicOpen} className={classes.editButton}>Edit</Button>
+                          </div>
+                          :
+                          <div className={classes.avatarSection}>
+                            <Avatar className={classes.avatar}>{user.name[0]}{user.surname[0]}</Avatar>
+                            <Button className={classes.editButton} color="primary" onClick={this.handleEditBasicOpen}>Edit</Button>
+                          </div>
+                      }
+                    </Grid>
+                    <Grid item lg={9} sm={6}>
                       {
                         user.userType === 'patient' ?
                           <PatientBasicInfo />
-                        :
+                          :
                           <DoctorBasicInfo />
                       }
-                      </Grid>
                     </Grid>
-                  </ExpansionPanelDetails>
-                </ExpansionPanel>
-                {
-                  userType === 'patient' &&
+                  </Grid>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+              {
+                userType === 'patient' &&
+                <>
                   <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography>Medical information</Typography>
@@ -146,25 +149,34 @@ class ProfilePage extends Component {
                       </Grid>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
-                }
-              </Paper>
-              {
-                user.userType === 'patient' ?
+                  <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                      <Typography>Medical documentation</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <UploadDocumentationSection />
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                </>
+              }
+            </Paper>
+            {
+              user.userType === 'patient' ?
                 <BasicPatientInfoEdit
-                    open={editBasicOpen}
-                    handleClose={this.handleEditBasicClose}
+                  open={editBasicOpen}
+                  handleClose={this.handleEditBasicClose}
                 />
                 :
                 <BasicDoctorInfoEdit
                   open={editBasicOpen}
                   handleClose={this.handleEditBasicClose}
                 />
-              }
-            </div>
-          }
-        </Grid>
-      );
-    }
+            }
+          </div>
+        }
+      </Grid>
+    );
+  }
 }
 
 const mapStateToProps = state => {

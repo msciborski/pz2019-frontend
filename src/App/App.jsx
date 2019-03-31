@@ -15,12 +15,17 @@ import { history } from "../_helpers";
 import { Snackbar } from "@material-ui/core";
 import { Menu } from "../_components/Menu";
 import { DoctorListPage } from "../DoctorListPage";
+import { createMuiTheme } from "@material-ui/core/styles";
+import ThemeProvider from "@material-ui/styles/ThemeProvider";
 
 const styles = {
   root: {
     justifyContent: 'center',
   },
 }
+
+const theme = createMuiTheme();
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -38,54 +43,56 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.alert.type) {
+    if (nextProps.alert.type) {
       this.setState({ alertOpen: true });
     }
   }
 
-  handleAlertClose = () => this.setState(prevState => ({alertOpen: !prevState.alertOpen}));
-  toggleMenu = () => this.setState(prevState => ({ menuOpen: !prevState.menuOpen}));
+  handleAlertClose = () => this.setState(prevState => ({ alertOpen: !prevState.alertOpen }));
+  toggleMenu = () => this.setState(prevState => ({ menuOpen: !prevState.menuOpen }));
 
   render() {
-    const { classes, alert } = {...this.props};
-    const { type, message } = {...alert};
+    const { classes, alert } = { ...this.props };
+    const { type, message } = { ...alert };
     let { alertOpen, menuOpen } = this.state;
 
 
     return (
-      <div>
-        <Grid container className={classes.root}>
-          <Grid item xs={12}>
-            <NavBar toggleMenu={this.toggleMenu} />
+      <ThemeProvider theme={theme}>
+        <div>
+          <Grid container className={classes.root}>
+            <Grid item xs={12}>
+              <NavBar toggleMenu={this.toggleMenu} />
+            </Grid>
+            <Switch>
+              <Route exact path="/" component={RandomPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/register" component={RegisterPage} />
+              <Route path="/profile/:id" component={ProfilePage} />
+              <Route path="/doctors" component={DoctorListPage} />
+            </Switch>
           </Grid>
-          <Switch>
-            <Route exact path="/" component={RandomPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/register" component={RegisterPage} />
-            <Route path="/profile/:id" component={ProfilePage} />
-            <Route path="/doctors" component={DoctorListPage} />
-          </Switch>
-        </Grid>
-        {
-          type &&
-          <Snackbar
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            open={alertOpen}
-            autoHideDuration={6000}
-            onClose={this.handleAlertClose}
-          >
-            <Alert
-              variant={type}
+          {
+            type &&
+            <Snackbar
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              open={alertOpen}
+              autoHideDuration={6000}
               onClose={this.handleAlertClose}
-              message={message}
-            />
-          </Snackbar>
-        }
-        <Menu open={menuOpen} toggleDrawer={this.toggleMenu} />
-      </div>
+            >
+              <Alert
+                variant={type}
+                onClose={this.handleAlertClose}
+                message={message}
+              />
+            </Snackbar>
+          }
+          <Menu open={menuOpen} toggleDrawer={this.toggleMenu} />
+        </div>
+      </ThemeProvider>
     )
   }
 }

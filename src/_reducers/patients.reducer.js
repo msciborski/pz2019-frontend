@@ -2,13 +2,13 @@ import { patientConstants } from "../_constants";
 
 export const patients = (state = {}, action) => {
     switch (action.type) {
-        case patientConstants.UPDATE_PATIENT_REQUEST: 
+        case patientConstants.ADD_PATIENT_DOCUMENTATION_REQUEST:
             return {
-                updatingPatient: true,
+                addingFiles: true,
             };
-        case patientConstants.UPDATE_PATIENT_SUCCESS: 
+        case patientConstants.ADD_PATIENT_DOCUMENTATION_SUCCESS:
             return { };
-        case patientConstants.UPDATE_PATIENT_FAILURE:
+        case patientConstants.ADD_PATIENT_DOCUMENTATION_FAILURE:
             return {
                 error: action.error,
             };
