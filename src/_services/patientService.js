@@ -4,6 +4,7 @@ import { userService } from "./userService";
 
 export const patientService = {
   addDocumentationForPatient,
+  getPatientDocumentation,
 };
 
 function addDocumentationForPatient(files, patientId, doctorId) {
@@ -18,8 +19,17 @@ function addDocumentationForPatient(files, patientId, doctorId) {
     body: formData,
   };
 
-
   return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/patients/${patientId}/documentation`, options)
+    .then(handleResponse);
+}
+
+function getPatientDocumentation(patientId) {
+  const options = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${patientId}/documentatin`, options)
     .then(handleResponse);
 }
 
