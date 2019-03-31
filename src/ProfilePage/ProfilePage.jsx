@@ -13,12 +13,15 @@ import { DoctorBasicInfo } from "../_components/DoctorBasicInfo";
 import { BasicDoctorInfoEdit } from "../_components/BasicDoctorInfoEdit/BasicDoctorInfoEdit";
 import { UploadDocumentationSection } from "../_components/UploadDocumentationSection";
 import { ChangePasswordDialog } from "../_components/ChangePasswordDialog/ChangePasswordDialog";
-
+import { DocumentationList } from "../_components/DocumentationList";
 
 const styles = {
   root: {
     maxWidth: '1500px !important',
     margin: '20px 0 20px 0 !important',
+  },
+  documentationExpansion: {
+    flexDirection: 'column',
   },
   paper: {
     margin: '20px 0 20px 0',
@@ -91,8 +94,6 @@ class ProfilePage extends Component {
     const { user, classes, authUser } = this.props;
     const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
     const { id } = this.props.match.params;
-    console.log('Url id:', id);
-    console.log('Auth user id:', authUser.id);
 
 
     const { userType, medicalInformation } = { ...user }
@@ -180,8 +181,9 @@ class ProfilePage extends Component {
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                       <Typography>Medical documentation</Typography>
                     </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
+                    <ExpansionPanelDetails className={classes.documentationExpansion}>
                       <UploadDocumentationSection />
+                      <DocumentationList />
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
                 </>
