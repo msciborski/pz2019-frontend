@@ -1,6 +1,7 @@
 import React from "react";
-import { Grid, Typography, Divider} from "@material-ui/core";
+import { Grid, Typography, Divider } from "@material-ui/core";
 import { connect } from "react-redux";
+import { GridTextWithLabel } from "../GridTextWithLabel";
 
 const PatientBasicInfo = (props) => {
   const { user } = props;
@@ -8,78 +9,60 @@ const PatientBasicInfo = (props) => {
 
   return (
     <Grid container>
-      <Grid item sm={4} xs={6}>
-        <Typography>Email</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{user.email}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Phone number</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{user.phone}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Pesel</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6} >
-        <Typography>{user.pesel}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Voivodeship</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{address.voivodeship}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>City</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{address.city}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Street</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{address.street}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Number</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{address.number}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Zip code</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{address.zipCode}</Typography>
-      </Grid>
-      <Grid item sm={12}>
-        <Divider light />
-      </Grid>
+      <GridTextWithLabel
+        label="Email"
+        text={user.email}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Phone number"
+        text={user.phoone}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Pesel"
+        text={user.pesel}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Voivodeship"
+        text={address.voivodeship}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Voivodeship"
+        text={address.voivodeship}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="City"
+        text={address.city}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Street"
+        text={address.street}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Number"
+        text={address.number}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Zip code"
+        text={address.zipCode}
+        smSize={4}
+        xsSize={6}
+      />
     </Grid>
   );
 }

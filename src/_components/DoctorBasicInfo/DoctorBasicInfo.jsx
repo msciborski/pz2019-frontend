@@ -1,30 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, Typography, Divider } from "@material-ui/core";
+import { GridTextWithLabel } from "../GridTextWithLabel";
 
 const DoctorBasicInfo = (props) => {
   const { user } = props;
 
   return (
     <Grid container>
-      <Grid item sm={4} xs={6}>
-        <Typography>Email</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{user.email}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Divider light />
-      </Grid>
-      <Grid item sm={4} xs={6}>
-        <Typography>Specializations</Typography>
-      </Grid>
-      <Grid item sm={8} xs={6}>
-        <Typography>{user.specializations.join(',')}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Divider light />
-      </Grid>
+      <GridTextWithLabel
+        label="Email"
+        text={user.email}
+        smSize={4}
+        xsSize={6}
+      />
+      <GridTextWithLabel
+        label="Specializations"
+        text={user.specializations.join(',')}
+        smSize={4}
+        xsSize={6}
+      />
     </Grid>
   );
 }
