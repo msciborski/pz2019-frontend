@@ -12,6 +12,7 @@ import { BasicPatientInfoEdit } from "../_components/BasicPatientInfoEdit"
 import { DoctorBasicInfo } from "../_components/DoctorBasicInfo";
 import { BasicDoctorInfoEdit } from "../_components/BasicDoctorInfoEdit/BasicDoctorInfoEdit";
 import { UploadDocumentationSection } from "../_components/UploadDocumentationSection";
+import { ChangePasswordDialog } from "../_components/ChangePasswordDialog/ChangePasswordDialog";
 
 
 const styles = {
@@ -51,6 +52,7 @@ class ProfilePage extends Component {
     this.state = {
       editBasicOpen: false,
       editMedicalInformationOpen: false,
+      changePasswordOpen: false,
     };
   }
 
@@ -78,9 +80,19 @@ class ProfilePage extends Component {
     this.setState({ editMedicalInformationOpen: true });
   }
 
+  handleChangePasswordOpen = () => {
+    this.setState({ changePasswordOpen: true });
+  }
+  handleChangePasswordClose = () => {
+    this.setState({ changePasswordOpen: false });
+  }
+
   render() {
     const { user, classes, authUser } = this.props;
-    const { editBasicOpen } = this.state;
+    const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
+    const { id } = this.props.match.params;
+    console.log('Url id:', id);
+    console.log('Auth user id:', authUser.id);
 
 
     const { userType, medicalInformation } = { ...user }
@@ -104,11 +116,19 @@ class ProfilePage extends Component {
                           <div className={classes.avatarSection}>
                             <Avatar src={user.avatarUrl} className={classes.avatar} />
                             <Button color="primary" onClick={this.handleEditBasicOpen} className={classes.editButton}>Edit</Button>
+                            {
+                              authUser.id == id &&
+                              <Button color="primary" onClick={this.handleChangePasswordOpen} className={classes.editButton}>Change Password</Button>
+                            }
                           </div>
                           :
                           <div className={classes.avatarSection}>
                             <Avatar className={classes.avatar}>{user.name[0]}{user.surname[0]}</Avatar>
                             <Button className={classes.editButton} color="primary" onClick={this.handleEditBasicOpen}>Edit</Button>
+                            {
+                              authUser.id == id &&
+                              <Button color="primary" onClick={this.handleChangePasswordOpen} className={classes.editButton}>Change Password</Button>
+                            }
                           </div>
                       }
                     </Grid>
@@ -139,7 +159,14 @@ class ProfilePage extends Component {
                             </Avatar>
                             {
                               authUser.userType === 'doctor' &&
-                              <Button className={classes.editButton} color="primary" onClick={this.handleEditMedicalInformationOpen}>Edit</Button>
+                              <Button
+                                className={classes.editButton}
+                                color="primary"
+                                open={editMedicalInformationOpen}
+                                onClick={this.handleEditMedicalInformationOpen}
+                              >
+                                Edit
+                              </Button>
                             }
                           </div>
                         </Grid>
@@ -172,6 +199,10 @@ class ProfilePage extends Component {
                   handleClose={this.handleEditBasicClose}
                 />
             }
+            <ChangePasswordDialog
+              open={changePasswordOpen}
+              handleClose={this.handleChangePasswordClose}
+            />
           </div>
         }
       </Grid>

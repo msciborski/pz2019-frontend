@@ -98,13 +98,15 @@ function changePassword(oldPassword, newPassword, userId) {
     return userService.changePassword(oldPassword, newPassword, userId)
       .then(() => {
         dispatch(success());
+        dispatch(userActions.getById(userId));
+        dispatch(alertActions.success('Password changed successfully.'));
       }, error => {
         dispatch(failure(error));
         dispatch(alertActions.error(error));
       })
   }
 
-  function request() { return { type: userConstants.UPDATE_USER_REQUEST } };
-  function success() { return { type: userConstants.UPDATE_USER_SUCCESS } };
-  function failure(error) { return { type: userConstants.UPDATE_USER_FAILURE, error }};
+  function request() { return { type: userConstants.CHANGE_PASSWORD_REQUEST } };
+  function success() { return { type: userConstants.CHANGE_PASSWORD_SUCCESS} };
+  function failure(error) { return { type: userConstants.CHANGE_PASSWORD_FAILURE, error }};
 }
