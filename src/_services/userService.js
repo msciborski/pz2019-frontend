@@ -7,6 +7,7 @@ export const userService = {
   register,
   getById,
   updateUser,
+  changePassword,
 };
 
 function login(email, password) {
@@ -63,6 +64,17 @@ function updateUser(patientToUpdate) {
       .then(handleResponse);
 }
 
+function changePassword(oldPassword, newPassword, userId) {
+  const options = {
+      method: 'PUT',
+      headers: authHeader(),
+      body: JSON.stringify({ oldPassword, newPassword }),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${userId}/password`, options)
+      .then(handleResponse);
+}
+
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
@@ -79,3 +91,4 @@ function handleResponse(response) {
     return data;
   })
 }
+

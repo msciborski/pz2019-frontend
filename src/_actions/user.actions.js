@@ -9,6 +9,7 @@ export const userActions = {
   logout,
   getById,
   updateUser,
+  changePassword,
 };
 
 function login(email, password) {
@@ -78,6 +79,24 @@ function updateUser(updatePatient) {
     return userService.updateUser(updatePatient)
       .then(() => {
         dispatch(userActions.getById(updatePatient.id));
+        dispatch(success());
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: userConstants.UPDATE_USER_REQUEST } };
+  function success() { return { type: userConstants.UPDATE_USER_SUCCESS } };
+  function failure(error) { return { type: userConstants.UPDATE_USER_FAILURE, error }};
+}
+
+function changePassword(oldPassword, newPassword, userId) {
+  return dispatch => {
+    dispatch(request());
+
+    return userService.changePassword(oldPassword, newPassword, userId)
+      .then(() => {
         dispatch(success());
       }, error => {
         dispatch(failure(error));

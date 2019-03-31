@@ -20,6 +20,12 @@ export const users = (state={}, action) => {
       return {};
     case userConstants.UPDATE_USER_FAILURE:
       return {};
+    case userConstants.CHANGE_PASSWORD_REQUEST:
+      return { changingPassword: true};
+    case userConstants.CHANGE_PASSWORD_SUCCESS:
+      return {};
+    case userConstants.CHANGE_PASSWORD_FAILURE:
+      return {};
     default:
       return state;
   }
