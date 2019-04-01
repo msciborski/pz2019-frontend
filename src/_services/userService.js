@@ -8,6 +8,7 @@ export const userService = {
   getById,
   updateUser,
   changePassword,
+  activateUser,
 };
 
 function login(email, password) {
@@ -73,6 +74,10 @@ function changePassword(oldPassword, newPassword, userId) {
 
   return fetch(`${config.apiUrl}/api/v1/users/${userId}/password`, options)
       .then(handleResponse);
+}
+
+function activateUser(token) {
+
 }
 
 function handleResponse(response) {
