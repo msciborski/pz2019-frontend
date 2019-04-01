@@ -10,6 +10,7 @@ export const userActions = {
   getById,
   updateUser,
   changePassword,
+  activateUser,
 };
 
 function login(email, password) {
@@ -109,4 +110,24 @@ function changePassword(oldPassword, newPassword, userId) {
   function request() { return { type: userConstants.CHANGE_PASSWORD_REQUEST } };
   function success() { return { type: userConstants.CHANGE_PASSWORD_SUCCESS} };
   function failure(error) { return { type: userConstants.CHANGE_PASSWORD_FAILURE, error }};
+}
+
+function activateUser(activateToken) {
+  return dispatch => {
+    dispatch(request());
+
+    return userService.activateUser(activateToken)
+      .then(() => {
+        dispatch(success());
+        dispatch(alertActions.success('User has been activated.'));
+        history.push('/login');
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: userConstants.USER_ACTIVATE_REQUEST } };
+  function success() { return { type: userConstants.USER_ACTIVATE_SUCCESS } };
+  function failure(error) { return { type: userConstants.USER_ACTIVATE_FAILURE, error} }
 }
