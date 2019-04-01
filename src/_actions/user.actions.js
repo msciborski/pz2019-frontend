@@ -10,6 +10,7 @@ export const userActions = {
   getById,
   updateUser,
   changePassword,
+  resetPassword,
 };
 
 function login(email, password) {
@@ -109,4 +110,24 @@ function changePassword(oldPassword, newPassword, userId) {
   function request() { return { type: userConstants.CHANGE_PASSWORD_REQUEST } };
   function success() { return { type: userConstants.CHANGE_PASSWORD_SUCCESS} };
   function failure(error) { return { type: userConstants.CHANGE_PASSWORD_FAILURE, error }};
+}
+
+function resetPassword(userId, newPassword, resetPasswordToken) {
+  return dispatch => {
+    dispatch(request());
+
+    return userService.resetPassword(userId, newPassword, resetPasswordToken)
+      .then(() => {
+        dispatch(success());
+        dispatch(alertActions.success('Your password has been changed.'));
+        history.push('/login');
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.failure(error));
+      })
+  }
+
+  function request() { return { type: userConstants.RESET_PASSWORD_REQUEST } };
+  function success() { return { type: userConstants.RESET_PASSWORD_SUCCESS } };
+  function failure(error) { return { type: userConstants.RESET_PASSWORD_FAILURE, error } };
 }

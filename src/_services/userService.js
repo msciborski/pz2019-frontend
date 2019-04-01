@@ -8,6 +8,7 @@ export const userService = {
   getById,
   updateUser,
   changePassword,
+  resetPassword,
 };
 
 function login(email, password) {
@@ -73,6 +74,16 @@ function changePassword(oldPassword, newPassword, userId) {
 
   return fetch(`${config.apiUrl}/api/v1/users/${userId}/password`, options)
       .then(handleResponse);
+}
+
+function resetPassword(userId, newPassword, resetPasswordToken) {
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify({ newPassword, resetPasswordToken })
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${userId}/password`, options)
+    .then(handleResponse);
 }
 
 function handleResponse(response) {
