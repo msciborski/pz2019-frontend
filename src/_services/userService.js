@@ -78,6 +78,8 @@ function changePassword(oldPassword, newPassword, userId) {
 }
 
 function resetPassword(userId, newPassword, resetPasswordToken) {
+  console.log('token:', resetPasswordToken);
+  console.log('password:', newPassword);
   const options = {
     method: 'PUT',
     body: JSON.stringify({ newPassword, resetPasswordToken })

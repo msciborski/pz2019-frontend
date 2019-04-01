@@ -5,6 +5,7 @@ import { ValidatorForm } from "react-material-ui-form-validator";
 import { userActions } from "../_actions";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
+import queryString from "querystring";
 
 const styles = {
   paper: {
@@ -41,17 +42,19 @@ class ResetPasswordPage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    let params = queryString.parse(this.props.location.search);
     const { newPassword } = this.state;
-    const { resetPasswordRequest } = this.props;
+    const { resetPassword } = this.props;
 
-    // if (newPassword !== '') {
-    //   resetPassword(newPassword);
-    // }
+
+    if (newPassword !== '') {
+       resetPassword(1, newPassword, params['?token']);
+    }
   }
 
   render() {
     const { classes } = this.props;
-    const { newPassword } = this.props;
+    const { newPassword } = this.state;
     return (
       <Grid item xs={12} className={classes.resetForm}>
       <Paper className={classes.paper}>
@@ -64,12 +67,13 @@ class ResetPasswordPage extends Component {
             onChange={this.handleChange}
             value={newPassword}
             name="newPassword"
-            validators={['required', 'isEmail']}
-            errorMessages={['This field is required', 'Email is not valid']}
+            validators={['required']}
+            errorMessages={['This field is required', 'Password is not valid']}
             margin="normal"
-            autoComplete="email address"
+            autoComplete="Password"
             hasAutoFocus={true}
             isFullWidth={true}
+            type="password"
           />
           <Button
             type="submit"
@@ -91,7 +95,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    resetPassword: (newPassword, resetPasswordToken) => dispatch(userActions.resetPassword(1, newPassword, resetPasswordToken)),
+    resetPassword: (userId = 1, newPassword, resetPasswordToken) => dispatch(userActions.resetPassword(userId, newPassword, resetPasswordToken)),
   };
 }
 

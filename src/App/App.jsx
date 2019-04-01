@@ -7,6 +7,7 @@ import { RegisterPage } from "../RegisterPage";
 import { RandomPage } from "../RandomPage";
 import { Route, Switch } from "react-router-dom";
 import { ProfilePage } from "../ProfilePage";
+import { ResetPasswordPage } from "../ResetPasswordPage";
 import { withStyles } from "@material-ui/styles";
 import { Alert } from "../_components/Alert";
 import { alertActions } from "../_actions";
@@ -72,7 +73,7 @@ class App extends Component {
               <Route path="/profile/:id" component={ProfilePage} />
               <Route path="/doctors" component={DoctorListPage} />
               <Route path="/resetPasword/request" component={ResetPasswordRequestPage} />
-              <Route path="/resetPassword" />
+              <Route path="/resetPassword" component={ResetPasswordPage}/>
             </Switch>
           </Grid>
           {

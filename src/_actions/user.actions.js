@@ -132,6 +132,7 @@ function resetPasswordRequest(email) {
 }
 
 function resetPassword(userId, newPassword, resetPasswordToken) {
+  console.log('R:', resetPasswordToken)
   return dispatch => {
     dispatch(request());
 
