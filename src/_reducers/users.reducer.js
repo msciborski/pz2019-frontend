@@ -30,6 +30,14 @@ export const users = (state={}, action) => {
       return {
         error: action.error,
       };
+    case userConstants.RESET_PASSWORD_REQUEST_REQUEST:
+      return {};
+    case userConstants.RESET_PASSWORD_REQUEST_SUCCESS:
+      return {};
+    case userConstants.RESET_PASSWORD_REQUEST_FAILURE:
+      return {
+        error: action.error,
+      };
     case userConstants.RESET_PASSWORD_REQUEST:
       return {};
     case userConstants.RESET_PASSWORD_SUCCESS:

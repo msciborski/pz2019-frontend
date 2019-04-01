@@ -8,6 +8,7 @@ export const userService = {
   getById,
   updateUser,
   changePassword,
+  resetPasswordRequest,
   resetPassword,
 };
 
@@ -83,6 +84,16 @@ function resetPassword(userId, newPassword, resetPasswordToken) {
   };
 
   return fetch(`${config.apiUrl}/api/v1/users/${userId}/password`, options)
+    .then(handleResponse);
+}
+
+function resetPasswordRequest(email) {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ email }),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/password/reset`, options)
     .then(handleResponse);
 }
 

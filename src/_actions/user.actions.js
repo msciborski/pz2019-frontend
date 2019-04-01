@@ -10,6 +10,7 @@ export const userActions = {
   getById,
   updateUser,
   changePassword,
+  resetPasswordRequest,
   resetPassword,
 };
 
@@ -110,6 +111,24 @@ function changePassword(oldPassword, newPassword, userId) {
   function request() { return { type: userConstants.CHANGE_PASSWORD_REQUEST } };
   function success() { return { type: userConstants.CHANGE_PASSWORD_SUCCESS} };
   function failure(error) { return { type: userConstants.CHANGE_PASSWORD_FAILURE, error }};
+}
+
+function resetPasswordRequest(email) {
+  return dispatch => {
+    dispatch(request());
+    return userService.resetPasswordRequest(email)
+      .then(() => {
+        dispatch(success());
+        dispatch(alertActions.success('Email with changing your password has been sent.'));
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: userConstants.RESET_PASSWORD_REQUEST_REQUEST } };
+  function success() { return { type: userConstants.RESET_PASSWORD_REQUEST_SUCCESS } };
+  function failure(error) { return { type: userConstants.RESET_PASSWORD_REQUEST_FAILURE, error } };
 }
 
 function resetPassword(userId, newPassword, resetPasswordToken) {
