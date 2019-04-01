@@ -12,6 +12,7 @@ export const userActions = {
   changePassword,
   resetPasswordRequest,
   resetPassword,
+  activateUser,
 };
 
 function login(email, password) {
@@ -150,4 +151,24 @@ function resetPassword(userId, newPassword, resetPasswordToken) {
   function request() { return { type: userConstants.RESET_PASSWORD_REQUEST } };
   function success() { return { type: userConstants.RESET_PASSWORD_SUCCESS } };
   function failure(error) { return { type: userConstants.RESET_PASSWORD_FAILURE, error } };
+}
+
+function activateUser(activateToken) {
+  return dispatch => {
+    dispatch(request());
+
+    return userService.activateUser(activateToken)
+      .then(() => {
+        dispatch(success());
+        dispatch(alertActions.success('User has been activated.'));
+        history.push('/login');
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: userConstants.USER_ACTIVATE_REQUEST } };
+  function success() { return { type: userConstants.USER_ACTIVATE_SUCCESS } };
+  function failure(error) { return { type: userConstants.USER_ACTIVATE_FAILURE, error} }
 }

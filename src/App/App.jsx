@@ -11,6 +11,7 @@ import { ResetPasswordPage } from "../ResetPasswordPage";
 import { withStyles } from "@material-ui/styles";
 import { Alert } from "../_components/Alert";
 import { alertActions } from "../_actions";
+import { AccountActivationPage } from "../AccountActivationPage";
 import { connect } from "react-redux";
 import { history } from "../_helpers";
 import { Snackbar } from "@material-ui/core";
@@ -74,6 +75,7 @@ class App extends Component {
               <Route path="/doctors" component={DoctorListPage} />
               <Route path="/resetPasword/request" component={ResetPasswordRequestPage} />
               <Route path="/resetPassword" component={ResetPasswordPage}/>
+              <Route path="/activateUser" component={AccountActivationPage} />
             </Switch>
           </Grid>
           {

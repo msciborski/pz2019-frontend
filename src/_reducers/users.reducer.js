@@ -46,6 +46,16 @@ export const users = (state={}, action) => {
       return {
         error: action.error,
       }
+    case userConstants.USER_ACTIVATE_REQUEST:
+      return {};
+    case userConstants.USER_ACTIVATE_SUCCESS:
+      return {
+        userActivated: true,
+      };
+    case userConstants.USER_ACTIVATE_FAILURE:
+      return {
+        error: action.error,
+      };
     default:
       return state;
   }

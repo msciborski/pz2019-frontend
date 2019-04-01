@@ -10,6 +10,7 @@ export const userService = {
   changePassword,
   resetPasswordRequest,
   resetPassword,
+  activateUser,
 };
 
 function login(email, password) {
@@ -96,6 +97,15 @@ function resetPasswordRequest(email) {
   };
 
   return fetch(`${config.apiUrl}/api/v1/users/password/reset`, options)
+    .then(handleResponse);
+}
+function activateUser(activationToken) {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ activationToken }),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/activate`, options)
     .then(handleResponse);
 }
 
