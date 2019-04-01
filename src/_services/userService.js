@@ -76,8 +76,14 @@ function changePassword(oldPassword, newPassword, userId) {
       .then(handleResponse);
 }
 
-function activateUser(token) {
+function activateUser(activateToken) {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({ activateToken }),
+  };
 
+  return fetch(`${config.apiUrl}/api/v1/users/activate`, options)
+    .then(handleResponse);
 }
 
 function handleResponse(response) {
