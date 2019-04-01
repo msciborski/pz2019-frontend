@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Paper, Typography, Button, Grid } from "@material-ui/core";
-import { ValidatorForm } from "react-material-ui-form-validator";
+import { Paper, Grid, Button, Typography } from "@material-ui/core";
 import { InputWithLabel } from "../_components/InputWithLabel";
+import { ValidatorForm } from "react-material-ui-form-validator";
 import { userActions } from "../_actions";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
@@ -24,12 +24,12 @@ const styles = {
   },
 }
 
-class ResetPasswordRequestPage extends Component {
+class ResetPasswordPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
+      newPassword: '',
     };
   }
 
@@ -41,17 +41,17 @@ class ResetPasswordRequestPage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { email } = this.state;
+    const { newPassword } = this.state;
     const { resetPasswordRequest } = this.props;
 
-    if (email !== '') {
-      resetPasswordRequest(email);
-    }
+    // if (newPassword !== '') {
+    //   resetPassword(newPassword);
+    // }
   }
 
   render() {
     const { classes } = this.props;
-    const { email } = this.state;
+    const { newPassword } = this.props;
     return (
       <Grid item xs={12} className={classes.resetForm}>
       <Paper className={classes.paper}>
@@ -60,10 +60,10 @@ class ResetPasswordRequestPage extends Component {
         </Typography>
         <ValidatorForm onSubmit={this.handleSubmit} className={classes.form}  >
           <InputWithLabel
-            label="Email Address"
+            label="New Password"
             onChange={this.handleChange}
-            value={email}
-            name="email"
+            value={newPassword}
+            name="newPassword"
             validators={['required', 'isEmail']}
             errorMessages={['This field is required', 'Email is not valid']}
             margin="normal"
@@ -77,7 +77,7 @@ class ResetPasswordRequestPage extends Component {
             variant="contained"
             color="primary"
           >
-            Forgot Password
+            Reset Password
         </Button>
         </ValidatorForm>
       </Paper>
@@ -91,11 +91,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    resetPasswordRequest: (email) => dispatch(userActions.resetPasswordRequest(email)),
+    resetPassword: (newPassword, resetPasswordToken) => dispatch(userActions.resetPassword(1, newPassword, resetPasswordToken)),
   };
 }
 
-const connectedResetPasswordRequestPage = connect(mapStateToProps, mapDispatchToProps)(ResetPasswordRequestPage);
-const styledConnectedResetPasswordRequestPage = withStyles(styles)(connectedResetPasswordRequestPage);
+const connectedResetPasswordPage = connect(mapStateToProps, mapDispatchToProps)(ResetPasswordPage);
+const styledConnectedResetPasswordPage = withStyles(styles)(connectedResetPasswordPage);
 
-export { styledConnectedResetPasswordRequestPage as ResetPasswordRequestPage };
+export { styledConnectedResetPasswordPage as ResetPasswordPage };

@@ -72,6 +72,7 @@ class App extends Component {
               <Route path="/profile/:id" component={ProfilePage} />
               <Route path="/doctors" component={DoctorListPage} />
               <Route path="/resetPasword/request" component={ResetPasswordRequestPage} />
+              <Route path="/resetPassword" />
             </Switch>
           </Grid>
           {
