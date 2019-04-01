@@ -4,7 +4,8 @@ import { alertActions } from "../_actions";
 
 
 export const patientActions = {
-  addPatientDocumentation
+  addPatientDocumentation,
+  getPatientDocumentation,
 };
 
 function addPatientDocumentation(files, patientId, doctorId) {
@@ -23,7 +24,23 @@ function addPatientDocumentation(files, patientId, doctorId) {
   function request() { return { type: patientConstants.ADD_PATIENT_DOCUMENTATION_REQUEST } };
   function success() { return { type: patientConstants.ADD_PATIENT_DOCUMENTATION_SUCCESS } };
   function failure(error) { return { type: patientConstants.ADD_PATIENT_DOCUMENTATION_FAILURE, error } };
+}
 
+function getPatientDocumentation(patientId) {
+  return dispatch => {
+    dispatch(request([]));
+    patientService.getPatientDocumentation(patientId)
+      .then(documentation => {
+        dispatch(success(documentation));
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request(documentation) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_REQUEST, documentation } };
+  function success(documentation) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_SUCCESS, documentation } };
+  function failure(error) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_FAILURE, error } };
 }
 
 

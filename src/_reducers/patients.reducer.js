@@ -12,6 +12,19 @@ export const patients = (state = {}, action) => {
             return {
                 error: action.error,
             };
+        case patientConstants.GET_PATIENT_DOCUMENTATION_REQUEST:
+            return {
+              loadingPatientDocumentation: true,
+              documentation: action.documentation,
+            };
+        case patientConstants.GET_PATIENT_DOCUMENTATION_SUCCESS:
+            return {
+              documentation: action.documentation,
+            };
+        case patientConstants.GET_PATIENT_DOCUMENTATION_FAILURE:
+            return {
+              error: action.error,
+            };
         default:
             return state;
     }

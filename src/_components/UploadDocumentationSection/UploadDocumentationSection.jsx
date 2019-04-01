@@ -14,7 +14,7 @@ const styles = theme => {
       alignItems: 'center',
     },
     addButton: {
-      margin: '20px 0 0 0 !important',
+      margin: '20px 0 20px 0 !important',
       width: '20%',
     },
     dropzone: {
@@ -52,7 +52,7 @@ class UploadDocumentationSection extends Component {
           onChange={this.handleChange}
           className={classes.dropzone}
         />
-        <Button type="submit" className={classes.addButton} onClick={this.handleSubmit}>Add documentation</Button>
+        <Button color="primary" type="submit" className={classes.addButton} onClick={this.handleSubmit}>Add documentation</Button>
       </FormControl>
     )
   }
