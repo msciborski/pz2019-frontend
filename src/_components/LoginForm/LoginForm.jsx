@@ -3,6 +3,7 @@ import { Paper, Typography, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { InputWithLabel } from "../InputWithLabel";
 import { ValidatorForm } from "react-material-ui-form-validator";
+import { Link } from "react-router-dom";
 
 const styles = {
   paper: {
@@ -13,6 +14,9 @@ const styles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
+  },
+  button: {
+    margin: '10px 0 10px 0 !important',
   }
 }
 const LoginForm = (props) => {
@@ -54,8 +58,19 @@ const LoginForm = (props) => {
           fullWidth
           variant="contained"
           color="primary"
+          className={classes.button}
         >
           Sign in
+        </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          color="secondary"
+          component={Link}
+          to='/resetPasword/request'
+          className={classes.button}
+        >
+          Forgot password?
         </Button>
       </ValidatorForm>
     </Paper>
