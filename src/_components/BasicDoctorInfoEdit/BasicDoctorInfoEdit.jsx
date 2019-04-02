@@ -22,7 +22,7 @@ class BasicDoctorInfoEdit extends Component {
   constructor(props) {
     super(props);
     const { specializations } = { ...props.user };
-    console.log('User specializations:', specializations);
+
     this.state = {
       specializations: !specializations ? [] : specializations.map(spec => spec.name),
     };
@@ -44,8 +44,9 @@ class BasicDoctorInfoEdit extends Component {
 
   render() {
     const { open, handleClose, user, specializations, classes } = this.props;
-    console.log('State:', this.state.specializations);
+
     return (
+      specializations ?
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -63,7 +64,7 @@ class BasicDoctorInfoEdit extends Component {
             <DialogContentText>
               {`Update user: ${user.name} ${user.surname}`}
             </DialogContentText>
-            {/* <Select
+            <Select
               multiple
               value={this.state.specializations}
               onChange={this.handleChange}
@@ -72,7 +73,6 @@ class BasicDoctorInfoEdit extends Component {
               renderValue={selected => (
                 <div>
                   {selected.map(value => (
-                    console.log('Value:', value),
                     <Chip key={value} label={value} className={classes.chip} />
                   ))}
                 </div>
@@ -80,8 +80,8 @@ class BasicDoctorInfoEdit extends Component {
               fullWidth
               className={classes.select}
             >
-              {specializations.map(spec => (console.log('spec', spec), <MenuItem key={spec.name} value={spec.name}> {spec.name} </MenuItem>)) }
-            </Select> */}
+              {specializations.map(spec => (<MenuItem key={spec.name} value={spec.name}> {spec.name} </MenuItem>))}
+            </Select>
           </DialogContent>
           <DialogActions>
             <Button color="primary" onClick={handleClose}>
@@ -96,6 +96,8 @@ class BasicDoctorInfoEdit extends Component {
           </DialogActions>
         </FormControl>
       </Dialog>
+      :
+      <></>
     )
   }
 
@@ -104,7 +106,8 @@ class BasicDoctorInfoEdit extends Component {
 
 const mapStateToProps = state => {
   const { user } = state.users;
-  const { specializations} = state.doctors;
+  const { specializations } = state.doctors;
+
   return {
     user,
     specializations: specializations,

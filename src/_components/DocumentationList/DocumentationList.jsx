@@ -12,7 +12,7 @@ class DocumentationList extends Component {
 
   render() {
     const { documentation } = this.props;
-    console.log('Documentation list props:', this.props);
+
     return (
       documentation ?
         <Table>

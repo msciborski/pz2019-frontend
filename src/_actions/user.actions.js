@@ -43,6 +43,7 @@ function getById(id) {
     dispatch(request({ id }));
     userService.getById(id)
       .then(user => {
+        console.log('User action:', user);
         dispatch(success(user));
       }, error => {
         dispatch(failure(error));

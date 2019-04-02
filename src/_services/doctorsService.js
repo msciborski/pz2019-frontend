@@ -13,7 +13,6 @@ function getSpecializations() {
 }
 
 function getDoctors() {
-  console.log('Get doctors');
   const options = {
     method: 'GET',
     headers: authHeader(),
