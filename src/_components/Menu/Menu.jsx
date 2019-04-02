@@ -48,7 +48,7 @@ const Menu = (props) => {
           </Typography>
           <Divider light className={classes.divider} />
           <List>
-            <Link to="doctors" className={classes.link}>
+            <Link to="/doctors" className={classes.link}>
               <ListItem button>
                 <ListItemText primary="Doctors" />
               </ListItem>

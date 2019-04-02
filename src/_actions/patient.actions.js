@@ -15,6 +15,7 @@ function addPatientDocumentation(files, patientId, doctorId) {
       .then(() => {
         dispatch(success());
         dispatch(alertActions.success('Docummentation has been added successfully.'));
+        dispatch(getPatientDocumentation(patientId));
       }, error => {
         dispatch(failure(error));
         dispatch(alertActions.error(error));

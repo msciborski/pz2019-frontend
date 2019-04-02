@@ -16,7 +16,7 @@ const DoctorBasicInfo = (props) => {
       />
       <GridTextWithLabel
         label="Specializations"
-        text={user.specializations.join(',')}
+        text={user.specializations.map(spec => spec.name).join(', ')}
         smSize={4}
         xsSize={6}
       />

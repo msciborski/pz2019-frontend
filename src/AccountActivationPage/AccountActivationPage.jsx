@@ -15,7 +15,6 @@ class AccountActivationPage extends Component {
   render() {
     const { userActivated } = this.props;
     return (
-      userActivated &&
         <div>You have been activated.</div>
     );
   }

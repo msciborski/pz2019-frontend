@@ -3,6 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import { Slide, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Select, FormControl, Input, MenuItem, Chip } from "@material-ui/core";
+import { doctorsActions } from "../../_actions";
 
 const Transition = props => (<Slide direction="up" {...props} />);
 
@@ -21,13 +22,15 @@ class BasicDoctorInfoEdit extends Component {
   constructor(props) {
     super(props);
     const { specializations } = { ...props.user };
-
+    console.log('User specializations:', specializations);
     this.state = {
-      specializations: !specializations ? [] : [ specializations.map(spec => spec.name)],
+      specializations: !specializations ? [] : specializations.map(spec => spec.name),
     };
   }
 
   componentDidMount() {
+    const { getSpecializations } = this.props;
+    getSpecializations();
   }
 
   handleChange = event => {
@@ -41,6 +44,7 @@ class BasicDoctorInfoEdit extends Component {
 
   render() {
     const { open, handleClose, user, specializations, classes } = this.props;
+    console.log('State:', this.state.specializations);
     return (
       <Dialog
         open={open}
@@ -59,7 +63,7 @@ class BasicDoctorInfoEdit extends Component {
             <DialogContentText>
               {`Update user: ${user.name} ${user.surname}`}
             </DialogContentText>
-            <Select
+            {/* <Select
               multiple
               value={this.state.specializations}
               onChange={this.handleChange}
@@ -68,6 +72,7 @@ class BasicDoctorInfoEdit extends Component {
               renderValue={selected => (
                 <div>
                   {selected.map(value => (
+                    console.log('Value:', value),
                     <Chip key={value} label={value} className={classes.chip} />
                   ))}
                 </div>
@@ -75,8 +80,8 @@ class BasicDoctorInfoEdit extends Component {
               fullWidth
               className={classes.select}
             >
-              {specializations.map(spec => (<MenuItem key={spec.name} value={spec.name}> {spec.name} </MenuItem>)) }
-            </Select>
+              {specializations.map(spec => (console.log('spec', spec), <MenuItem key={spec.name} value={spec.name}> {spec.name} </MenuItem>)) }
+            </Select> */}
           </DialogContent>
           <DialogActions>
             <Button color="primary" onClick={handleClose}>
@@ -106,6 +111,12 @@ const mapStateToProps = state => {
   };
 }
 
-const connectedBasicDoctorInfoEdit = connect(mapStateToProps)(BasicDoctorInfoEdit);
+const mapDispatchToProps = dispatch => {
+  return {
+    getSpecializations: () => dispatch(doctorsActions.getSpecializations()),
+  }
+}
+
+const connectedBasicDoctorInfoEdit = connect(mapStateToProps, mapDispatchToProps)(BasicDoctorInfoEdit);
 const styledConnectedBasicDoctorInfoEdit = withStyles(styles)(connectedBasicDoctorInfoEdit);
 export { styledConnectedBasicDoctorInfoEdit as BasicDoctorInfoEdit };
