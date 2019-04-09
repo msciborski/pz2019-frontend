@@ -25,9 +25,8 @@ class StarsRating extends Component {
   }
 
   renderIcon(i) {
-    // index giwazdki do wyrenderowania, pierwszy index to 1
-    const { value } = this.props; // wybrana wartość, w sensie, że user ma ocene 3
-    const { hoverValue } = this.state; // najechana gwiazdka
+    const { value } = this.props;
+    const { hoverValue } = this.state;
 
     const primary = i <= value && i <= hoverValue;
     const secondary = i <= value && hoverValue <= value || i > value && hoverValue >= i;
@@ -45,7 +44,7 @@ class StarsRating extends Component {
 
   render() {
     const stars = [];
-    const { max } = this.props;
+    const { max, handleClick } = this.props;
     for (let i = 1; i <= max; i++) {
       stars.push(
         <IconButton
@@ -53,6 +52,7 @@ class StarsRating extends Component {
           key={i}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
+          onClick={() => { handleClick(i) }}
         >
           {this.renderIcon(i)}
         </IconButton>
