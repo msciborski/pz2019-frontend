@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { userActions, doctorsActions } from "../_actions";
+import { userActions, doctorsActions, patientActions } from "../_actions";
 import { connect } from "react-redux";
 import { Typography, Button, Grid, Paper, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -90,6 +90,11 @@ class ProfilePage extends Component {
   handleChangePasswordClose = () => {
     this.setState({ changePasswordOpen: false });
   }
+  handleRatingChange = (i) => {
+    const { addDoctorRating, authUser, user } = this.props;
+
+    addDoctorRating(authUser.id, user.id, i, '');
+  }
 
   render() {
     const { user, classes, authUser } = this.props;
@@ -109,7 +114,7 @@ class ProfilePage extends Component {
               <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
               {
                 authUser.userType === 'doctor' &&
-                <StarsRating value={3} max={5} disabled={ratingEnabled} onClick={(i) => console.log(i)} />
+                <StarsRating value={3} max={5} disabled={ratingEnabled} onClick={this.handleRatingChange} />
               }
             </div>
             <Paper className={classes.paper}>
@@ -233,6 +238,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getUser: id => dispatch(userActions.getById(id)),
     getSpecializations: () => dispatch(doctorsActions.getSpecializations()),
+    addRatingToDoctor: (patientId, doctorId, rating, comment = '') => dispatch(patientActions.addDoctorRating(patientId, doctorId, rating, comment)),
   };
 }
 
