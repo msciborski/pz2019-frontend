@@ -25,6 +25,14 @@ export const patients = (state = {}, action) => {
             return {
               error: action.error,
             };
+        case patientConstants.ADD_DOCTOR_RATING_REQUEST:
+            return { };
+        case patientConstants.ADD_DOCTOR_RATING_SUCCESS:
+            return { };
+        case patientConstants.ADD_PATIENT_DOCUMENTATION_FAILURE:
+            return {
+                error: action.error,
+            };
         default:
             return state;
     }
