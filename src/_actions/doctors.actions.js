@@ -1,10 +1,12 @@
 import { doctorsContants } from "../_constants";
 import { doctorsService } from "../_services";
 import { alertActions } from "../_actions";
+import { fail } from "assert";
 
 export const doctorsActions = {
   getSpecializations,
   getDoctors,
+  getDoctorRatings,
 };
 
 function getSpecializations() {
@@ -39,4 +41,22 @@ function getDoctors() {
   function request() { return { type: doctorsContants.GET_DOCTORS_REQUEST } };
   function success(doctors) { return { type: doctorsContants.GET_DOCTORS_SUCCESS, doctors } };
   function failure(error) { return { type: doctorsContants.GET_DOCTORS_FAILURE, error } };
+}
+
+function getDoctorRatings(doctorId) {
+  return dispatch => {
+    dispatch(request());
+    
+    return doctorsService.getDoctorRatings(doctorId)
+      .then(ratings => {
+        dispatch(success(ratings));
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: doctorsContants.GET_DOCTORS_RATING_REQUEST } };
+  function success(ratings) { return { type: doctorsContants.GET_DOCTORS_RATING_SUCCESS, ratings } };
+  function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
 }

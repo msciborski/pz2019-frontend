@@ -103,7 +103,9 @@ class ProfilePage extends Component {
         {
           user &&
           <div>
+            <div>
             <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+            </div>
             <Paper className={classes.paper}>
               <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
