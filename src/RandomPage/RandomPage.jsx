@@ -18,7 +18,7 @@ class RandomPage extends Component {
     const { value } = this.state;
     return (
       <Grid item xs={12}>
-        <StarsRating value={value} max={5} handleClick={this.handleRatingClick} />
+        <StarsRating value={value} max={5} handleClick={this.handleRatingClick} disabled={true} />
 
         Test Page
       </Grid>

@@ -44,12 +44,13 @@ class StarsRating extends Component {
 
   render() {
     const stars = [];
-    const { max, handleClick } = this.props;
+    const { max, handleClick, disabled } = this.props;
     for (let i = 1; i <= max; i++) {
       stars.push(
         <IconButton
           star-index={i}
           key={i}
+          disabled={disabled}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
           onClick={() => { handleClick(i) }}

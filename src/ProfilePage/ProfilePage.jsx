@@ -14,6 +14,7 @@ import { BasicDoctorInfoEdit } from "../_components/BasicDoctorInfoEdit/BasicDoc
 import { UploadDocumentationSection } from "../_components/UploadDocumentationSection";
 import { ChangePasswordDialog } from "../_components/ChangePasswordDialog/ChangePasswordDialog";
 import { DocumentationList } from "../_components/DocumentationList";
+import { StarsRating } from "../_components/StarsRating";
 
 const styles = {
   root: {
@@ -94,7 +95,8 @@ class ProfilePage extends Component {
     const { user, classes, authUser } = this.props;
     const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
     const { id } = this.props.match.params;
-
+    const ratingEnabled = authUser.userType === 'patient';
+    // get value from user
 
     const { userType, medicalInformation } = { ...user }
 
@@ -104,7 +106,11 @@ class ProfilePage extends Component {
           user &&
           <div>
             <div>
-            <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+              <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+              {
+                authUser.userType === 'doctor' &&
+                <StarsRating value={3} max={5} disabled={ratingEnabled} onClick={(i) => console.log(i)} />
+              }
             </div>
             <Paper className={classes.paper}>
               <ExpansionPanel>
