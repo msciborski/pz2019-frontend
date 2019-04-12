@@ -20,12 +20,14 @@ import { DoctorListPage } from "../DoctorListPage";
 import { createMuiTheme } from "@material-ui/core/styles";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { ResetPasswordRequestPage } from "../ResetPasswordRequestPage/ResetPasswordRequestPage";
+import { ChatBotWidget } from "../_components/ChatBot";
 
 const styles = {
   root: {
     justifyContent: 'center',
   },
 }
+
 
 const theme = createMuiTheme();
 
@@ -97,6 +99,7 @@ class App extends Component {
             </Snackbar>
           }
           <Menu open={menuOpen} toggleDrawer={this.toggleMenu} />
+          <ChatBotWidget/>
         </div>
       </ThemeProvider>
     )
