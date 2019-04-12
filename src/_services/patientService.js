@@ -41,7 +41,7 @@ function addDoctorRating(patientId, doctorId, rating, comment = '') {
     body: JSON.stringify({ value: rating, comment }),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/doctors/${doctorId}/ratings`)
+  return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/doctors/${doctorId}/ratings`, options)
     .then(handleResponse);
 }
 

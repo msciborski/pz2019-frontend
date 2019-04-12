@@ -91,18 +91,19 @@ class ProfilePage extends Component {
     this.setState({ changePasswordOpen: false });
   }
   handleRatingChange = (i) => {
-    const { addDoctorRating, authUser, user } = this.props;
+    const { addRatingToDoctor, authUser, user } = this.props;
 
-    addDoctorRating(authUser.id, user.id, i, '');
+    addRatingToDoctor(authUser.id, user.id, i, '');
   }
 
   render() {
     const { user, classes, authUser } = this.props;
     const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
     const { id } = this.props.match.params;
-    const ratingEnabled = authUser.userType === 'patient';
+    const ratingEnabled = authUser.userType !== 'patient';
     // get value from user
-
+    console.log(authUser.userType);
+    console.log('ratingEnabled', ratingEnabled);
     const { userType, medicalInformation } = { ...user }
 
     return (
@@ -113,8 +114,8 @@ class ProfilePage extends Component {
             <div>
               <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
               {
-                authUser.userType === 'doctor' &&
-                <StarsRating value={3} max={5} disabled={ratingEnabled} onClick={this.handleRatingChange} />
+                userType === 'doctor' &&
+                <StarsRating value={3} max={5} disabled={ratingEnabled} handleClick={this.handleRatingChange} />
               }
             </div>
             <Paper className={classes.paper}>
