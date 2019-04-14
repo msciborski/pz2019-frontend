@@ -13,7 +13,7 @@ export const userActions = {
   resetPasswordRequest,
   resetPassword,
   activateUser,
-  getUserVisit,
+  getUserVisits,
 };
 
 function login(email, password) {
@@ -188,5 +188,5 @@ function getUserVisits(userId) {
 
   function request(visits) { return { type: userConstants.GET_USER_VISITS_REQUEST, visits } };
   function success(visits) { return { type: userConstants.GET_USER_VISITS_SUCCESS, visits } };
-  function failure(error) { return { type: userConstants.GET_USER_VISITS_FAILURE, visits } };
+  function failure(error) { return { type: userConstants.GET_USER_VISITS_FAILURE, error } };
 }

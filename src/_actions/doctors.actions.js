@@ -64,7 +64,7 @@ function getDoctorRatings(doctorId) {
 
 function getDoctorWorkingHours(doctorId) {
   return dispatch => {
-    dispatch(request([]));
+    dispatch(request());
 
     return doctorsService.getDoctorWorkingHoursInfo(doctorId)
       .then(workingHours => {
@@ -75,7 +75,7 @@ function getDoctorWorkingHours(doctorId) {
       })
   }
 
-  function request(workingHours) { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_REQUEST, workingHours } };
+  function request() { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_REQUEST } };
   function success(workingHours) { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_SUCCESS, workingHours } };
   function failure(error) { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_FAILURE, error } };
 }
