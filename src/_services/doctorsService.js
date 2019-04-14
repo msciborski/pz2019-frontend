@@ -30,7 +30,7 @@ function getDoctorRatings(doctorId) {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/ratings`)
+  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/ratings`, options)
     .then(handleResponse);
 }
 
@@ -40,7 +40,7 @@ function getDoctorWorkingHoursInfo(doctorId) {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/working-hours`)
+  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/working-hours`, options)
     .then(handleResponse);
 }
 

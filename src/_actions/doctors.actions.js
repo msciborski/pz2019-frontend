@@ -75,7 +75,7 @@ function getDoctorWorkingHours(doctorId) {
       })
   }
 
-  function request(workingHours) { return { type: doctorsContants.GET_DOCTORS_RATING_REQUEST, workingHours } };
-  function success(workingHours) { return { type: doctorsContants.GET_DOCTORS_RATING_SUCCESS, workingHours } };
-  function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
+  function request(workingHours) { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_REQUEST, workingHours } };
+  function success(workingHours) { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_SUCCESS, workingHours } };
+  function failure(error) { return { type: doctorsContants.GET_DOCTORS_WORKING_HOURS_FAILURE, error } };
 }
