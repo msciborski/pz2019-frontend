@@ -43,7 +43,6 @@ function getById(id) {
     dispatch(request({ id }));
     userService.getById(id)
       .then(user => {
-        console.log('User action:', user);
         dispatch(success(user));
       }, error => {
         dispatch(failure(error));
@@ -134,7 +133,6 @@ function resetPasswordRequest(email) {
 }
 
 function resetPassword(userId, newPassword, resetPasswordToken) {
-  console.log('R:', resetPasswordToken)
   return dispatch => {
     dispatch(request());
 

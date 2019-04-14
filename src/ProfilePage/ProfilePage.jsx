@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { userActions, doctorsActions } from "../_actions";
+import { userActions, doctorsActions, patientActions } from "../_actions";
 import { connect } from "react-redux";
 import { Typography, Button, Grid, Paper, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -14,6 +14,7 @@ import { BasicDoctorInfoEdit } from "../_components/BasicDoctorInfoEdit/BasicDoc
 import { UploadDocumentationSection } from "../_components/UploadDocumentationSection";
 import { ChangePasswordDialog } from "../_components/ChangePasswordDialog/ChangePasswordDialog";
 import { DocumentationList } from "../_components/DocumentationList";
+import { StarsRating } from "../_components/StarsRating";
 
 const styles = {
   root: {
@@ -89,21 +90,34 @@ class ProfilePage extends Component {
   handleChangePasswordClose = () => {
     this.setState({ changePasswordOpen: false });
   }
+  handleRatingChange = (i) => {
+    const { addRatingToDoctor, authUser, user } = this.props;
+
+    addRatingToDoctor(authUser.id, user.id, i, '');
+  }
 
   render() {
     const { user, classes, authUser } = this.props;
     const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
     const { id } = this.props.match.params;
-
-
-    const { userType, medicalInformation } = { ...user }
+    const ratingEnabled = authUser.userType !== 'patient';
+    // get value from user
+    console.log(authUser.userType);
+    console.log('ratingEnabled', ratingEnabled);
+    const { userType, medicalInformation, avgRating } = { ...user }
 
     return (
       <Grid item xs={12} className={classes.root}>
         {
           user &&
           <div>
-            <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+            <div>
+              <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
+              {
+                userType === 'doctor' &&
+                <StarsRating value={avgRating} max={5} disabled={ratingEnabled} handleClick={this.handleRatingChange} />
+              }
+            </div>
             <Paper className={classes.paper}>
               <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -225,6 +239,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getUser: id => dispatch(userActions.getById(id)),
     getSpecializations: () => dispatch(doctorsActions.getSpecializations()),
+    addRatingToDoctor: (patientId, doctorId, rating, comment = '') => dispatch(patientActions.addDoctorRating(patientId, doctorId, rating, comment)),
   };
 }
 

@@ -24,6 +24,18 @@ export const doctors = (state= {}, action) => {
       return {
         error: action.error,
       }
+    case doctorsContants.GET_DOCTORS_RATING_REQUEST:
+      return {
+        loadingDoctors: true,
+      };
+    case doctorsContants.GET_DOCTORS_RATING_SUCCESS:
+      return {
+        ratings: action.ratings,
+      };
+    case doctorsContants.GET_DOCTORS_RATING_FAILURE:
+      return {
+        error: action.error,
+      };
     default:
       return state;
   }

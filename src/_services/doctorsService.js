@@ -5,6 +5,7 @@ import { authHeader } from "../_helpers";
 export const doctorsService = {
   getSpecializations,
   getDoctors,
+  getDoctorRatings,
 };
 
 function getSpecializations() {
@@ -19,6 +20,16 @@ function getDoctors() {
   };
 
   return fetch(`${config.apiUrl}/api/v1/doctors`, options)
+    .then(handleResponse);
+}
+
+function getDoctorRatings(doctorId) {
+  const options = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/doctors/{doctorId}/ratings`)
     .then(handleResponse);
 }
 

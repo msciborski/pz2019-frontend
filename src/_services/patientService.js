@@ -5,6 +5,7 @@ import { userService } from "./userService";
 export const patientService = {
   addDocumentationForPatient,
   getPatientDocumentation,
+  addDoctorRating,
 };
 
 function addDocumentationForPatient(files, patientId, doctorId) {
@@ -30,6 +31,17 @@ function getPatientDocumentation(patientId) {
   };
 
   return fetch(`${config.apiUrl}/api/v1/users/${patientId}/documentation`, options)
+    .then(handleResponse);
+}
+
+function addDoctorRating(patientId, doctorId, rating, comment = '') {
+  const options = {
+    method: 'POST',
+    headers: authHeader(),
+    body: JSON.stringify({ rate: rating, comment }),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/doctors/${doctorId}/ratings`, options)
     .then(handleResponse);
 }
 

@@ -1,12 +1,30 @@
 import { patientConstants } from "../_constants";
 import { patientService } from "../_services";
-import { alertActions } from "../_actions";
+import { alertActions, userActions } from "../_actions";
 
 
 export const patientActions = {
   addPatientDocumentation,
   getPatientDocumentation,
+  addDoctorRating,
 };
+
+function addDoctorRating(patientId, doctorId, rating, comment = '') {
+  return dispatch => {
+    dispatch(request());
+    patientService.addDoctorRating(patientId, doctorId, rating, comment)
+      .then(() => {
+        dispatch(success());
+        dispatch(userActions.getById(doctorId));
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+  function request() { return { type: patientConstants.ADD_DOCTOR_RATING_REQUEST } };
+  function success() { return { type: patientConstants.ADD_DOCTOR_RATING_SUCCESS } };
+  function failure(error) { return { type: patientConstants.ADD_DOCTOR_RATING_FAILURE, error } }; 
+}
 
 function addPatientDocumentation(files, patientId, doctorId) {
   return dispatch => {
