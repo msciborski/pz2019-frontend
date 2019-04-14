@@ -6,6 +6,7 @@ export const doctorsService = {
   getSpecializations,
   getDoctors,
   getDoctorRatings,
+  getDoctorWorkingHoursInfo,
 };
 
 function getSpecializations() {
@@ -29,7 +30,17 @@ function getDoctorRatings(doctorId) {
     headers: authHeader(),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/doctors/{doctorId}/ratings`)
+  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/ratings`)
+    .then(handleResponse);
+}
+
+function getDoctorWorkingHoursInfo(doctorId) {
+  const options = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/working-hours`)
     .then(handleResponse);
 }
 

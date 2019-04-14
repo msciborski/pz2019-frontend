@@ -7,6 +7,7 @@ export const doctorsActions = {
   getSpecializations,
   getDoctors,
   getDoctorRatings,
+  getDoctorWorkingHours,
 };
 
 function getSpecializations() {
@@ -58,5 +59,23 @@ function getDoctorRatings(doctorId) {
 
   function request() { return { type: doctorsContants.GET_DOCTORS_RATING_REQUEST } };
   function success(ratings) { return { type: doctorsContants.GET_DOCTORS_RATING_SUCCESS, ratings } };
+  function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
+}
+
+function getDoctorWorkingHours(doctorId) {
+  return dispatch => {
+    dispatch(request([]));
+
+    return doctorsService.getDoctorWorkingHoursInfo(doctorId)
+      .then(workingHours => {
+        dispatch(success(workingHours));
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request(workingHours) { return { type: doctorsContants.GET_DOCTORS_RATING_REQUEST, workingHours } };
+  function success(workingHours) { return { type: doctorsContants.GET_DOCTORS_RATING_SUCCESS, workingHours } };
   function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
 }

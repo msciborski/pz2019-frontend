@@ -36,6 +36,18 @@ export const doctors = (state= {}, action) => {
       return {
         error: action.error,
       };
+    case doctorsContants.GET_DOCTORS_WORKING_HOURS_REQUEST:
+      return {
+        workingHours: action.workingHours,
+      };
+    case doctorsContants.GET_DOCTORS_RATING_SUCCESS:
+      return {
+        workingHours: action.workingHours,
+      };
+    case doctorsContants.GET_DOCTORS_RATING_FAILURE:
+      return {
+        error: action.error,
+      };
     default:
       return state;
   }
