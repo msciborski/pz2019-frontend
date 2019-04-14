@@ -11,6 +11,7 @@ export const userService = {
   resetPasswordRequest,
   resetPassword,
   activateUser,
+  getUserVisit,
 };
 
 function login(email, password) {
@@ -104,6 +105,16 @@ function activateUser(activationToken) {
   };
 
   return fetch(`${config.apiUrl}/api/v1/users/activate`, options)
+    .then(handleResponse);
+}
+
+function getUserVisit(userId) {
+  const options = {
+    method: 'GET',
+    headers: authHeader(),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/users/${userId}/appointments`, options)
     .then(handleResponse);
 }
 

@@ -13,6 +13,7 @@ export const userActions = {
   resetPasswordRequest,
   resetPassword,
   activateUser,
+  getUserVisit,
 };
 
 function login(email, password) {
@@ -170,4 +171,22 @@ function activateUser(activateToken) {
   function request() { return { type: userConstants.USER_ACTIVATE_REQUEST } };
   function success() { return { type: userConstants.USER_ACTIVATE_SUCCESS } };
   function failure(error) { return { type: userConstants.USER_ACTIVATE_FAILURE, error} }
+}
+
+function getUserVisits(userId) {
+  return dispatch => {
+    dispatch(request([]));
+
+    return userService.getUserVisit(userId)
+      .then(visits => {
+        dispatch(success(visits));
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request(visits) { return { type: userConstants.GET_USER_VISITS_REQUEST, visits } };
+  function success(visits) { return { type: userConstants.GET_USER_VISITS_SUCCESS, visits } };
+  function failure(error) { return { type: userConstants.GET_USER_VISITS_FAILURE, visits } };
 }

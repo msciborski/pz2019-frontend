@@ -56,6 +56,18 @@ export const users = (state={}, action) => {
       return {
         error: action.error,
       };
+    case userConstants.GET_USER_VISITS_REQUEST:
+      return {
+        visits: action.visits,
+      };
+    case userConstants.GET_USER_VISITS_SUCCESS:
+      return {
+        visits: action.visits,
+      };
+    case userConstants.GET_USER_VISITS_FAILURE:
+      return {
+        error: action.error,
+      };
     default:
       return state;
   }
