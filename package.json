@@ -7,6 +7,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^3.0.0-alpha.10",
     "classnames": "^2.2.6",
+    "crypto-js": "^3.1.9-1",
     "history": "^4.7.2",
     "material-ui-dropzone": "^2.3.2",
     "query-string": "^6.4.2",
@@ -16,10 +17,10 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "react-simple-chatbot": "latest",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "react-simple-chatbot": "latest",
     "styled-components": "latest"
   },
   "scripts": {

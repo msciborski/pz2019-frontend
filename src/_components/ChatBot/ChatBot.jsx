@@ -4,12 +4,12 @@ import { Component } from "react";
 import { ThemeProvider } from 'styled-components';
 import ChatBot from 'react-simple-chatbot';
 import bot_avatar from './bot_avatar.png';
-import { chatBotSteps } from "../../_helpers";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import {ChatBotSteps} from "./_components/ChatBotSteps";
 
 const styles = {
 	fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-	headerFontSize: "20px",
+	headerFontSize: "17px",
 	headerBgColor: "#3f51b5",
 	headerFontColor: "#fff",
 	userFontColor: "#000",
@@ -33,12 +33,13 @@ class ChatBotWidget extends Component {
 					loggedIn &&
 
 					<ChatBot
-						steps={chatBotSteps}
+						steps={ChatBotSteps}
 						botAvatar={bot_avatar}
 						headerTitle="Clinic Manager Chat"
 						floating="true"
-						customDelay="500"
-						width="300px"
+						userDelay="800"
+						botDelay="800"
+						width="350px"
 						height="400px"
 					/>
 				}
