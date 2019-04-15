@@ -33,6 +33,14 @@ export const patients = (state = {}, action) => {
             return {
                 error: action.error,
             };
+        case patientConstants.ADD_VISIT_REQUEST:
+            return { };
+        case patientConstants.ADD_VISIT_SUCCESS:
+            return { };
+        case patientConstants.ADD_VISIT_FAILURE:
+            return {
+                error: action.error,
+            };
         default:
             return state;
     }

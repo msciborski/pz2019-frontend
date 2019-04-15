@@ -7,6 +7,7 @@ export const patientActions = {
   addPatientDocumentation,
   getPatientDocumentation,
   addDoctorRating,
+  addVisit,
 };
 
 function addDoctorRating(patientId, doctorId, rating, comment = '') {
@@ -48,7 +49,7 @@ function addPatientDocumentation(files, patientId, doctorId) {
 function getPatientDocumentation(patientId) {
   return dispatch => {
     dispatch(request([]));
-    patientService.getPatientDocumentation(patientId)
+    return patientService.getPatientDocumentation(patientId)
       .then(documentation => {
         dispatch(success(documentation));
       }, error => {
@@ -60,6 +61,24 @@ function getPatientDocumentation(patientId) {
   function request(documentation) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_REQUEST, documentation } };
   function success(documentation) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_SUCCESS, documentation } };
   function failure(error) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_FAILURE, error } };
+}
+
+function addVisit(patientId, doctorId, visitDate) {
+  return dispatch => {
+    dispatch(success());
+
+    return patientService.addVisit(patientId, doctorId, visitDate)
+      .then(() => {
+        dispatch(success());
+      }, error => {
+        dispatch(failure(error));
+        dispatch(alertActions.error(error));
+      })
+  }
+
+  function request() { return { type: patientConstants.ADD_VISIT_REQUEST } };
+  function success() { return { type: patientConstants.ADD_VISIT_SUCCESS } };
+  function failure(error) { return { type: patientConstants.ADD_DOCTOR_RATING_FAILURE, error } }; 
 }
 
 

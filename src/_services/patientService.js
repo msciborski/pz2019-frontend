@@ -6,6 +6,7 @@ export const patientService = {
   addDocumentationForPatient,
   getPatientDocumentation,
   addDoctorRating,
+  addVisit,
 };
 
 function addDocumentationForPatient(files, patientId, doctorId) {
@@ -42,6 +43,17 @@ function addDoctorRating(patientId, doctorId, rating, comment = '') {
   };
 
   return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/doctors/${doctorId}/ratings`, options)
+    .then(handleResponse);
+}
+
+function addVisit(patientId, doctorId, visitDate) {
+  const options = {
+    method: 'POST',
+    headers: authHeader(),
+    body: JSON.stringify({ doctorId, start: visitDate.valueOf() }),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/appointments`, options)
     .then(handleResponse);
 }
 
