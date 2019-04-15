@@ -1,4 +1,4 @@
-import { addMinutes, isAfter } from "date-fns";
+import { addMinutes, subMinutes, isAfter, isEqual } from "date-fns";
 
 export const visitHelper = {
     getAvailableVisitsForDate,
@@ -17,21 +17,21 @@ function getAvailableVisitsForDate(selectedDate, workingHoursInfo, doctorsVisits
             selectedDate.getDate(), 
             workingHoursForDay.start.hour, 
             workingHoursForDay.start.minute);
-        const lastVisit = new Date(
+        const lastVisit = subMinutes(new Date(
             selectedDate.getFullYear(),
             selectedDate.getMonth(),
             selectedDate.getDate(),
             workingHoursForDay.end.hour,
-            workingHoursForDay.end.minute);
-
+            workingHoursForDay.end.minute), workingHoursForDay.interval);
+        
         let newDate;
         let counter = 1;
         do {
             newDate = addMinutes(firstVisit, workingHoursForDay.interval * counter);
             visits.push(newDate);
             counter += 1;
-        } while(!isAfter(newDate, lastVisit));
-        
+        } while(!isAfter(newDate, lastVisit) && !isEqual(newDate, lastVisit));
+        return visits;
     }
 
     return [];
