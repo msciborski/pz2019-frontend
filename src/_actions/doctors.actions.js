@@ -7,6 +7,7 @@ export const doctorsActions = {
   getSpecializations,
   getDoctors,
   getDoctorRatings,
+  addPrescription,
 };
 
 function getSpecializations() {
@@ -60,3 +61,5 @@ function getDoctorRatings(doctorId) {
   function success(ratings) { return { type: doctorsContants.GET_DOCTORS_RATING_SUCCESS, ratings } };
   function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
 }
+
+function addPrescription()
