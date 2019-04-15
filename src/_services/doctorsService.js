@@ -6,6 +6,7 @@ export const doctorsService = {
   getSpecializations,
   getDoctors,
   getDoctorRatings,
+  addPrescription,
 };
 
 function getSpecializations() {
@@ -47,4 +48,15 @@ function handleResponse(response) {
     }
     return data;
   })
+}
+
+function addPrescription(){
+  const options = {
+    method: 'PUT',
+    headers: authHeader(),
+    body: JSON.stringify(),
+  };
+
+return fetch(``, options)
+    .then(handleResponse);
 }
