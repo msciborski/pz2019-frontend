@@ -10,30 +10,35 @@ function getAvailableVisitsForDate(selectedDate, workingHoursInfo, doctorsVisits
 
     if (workingHoursForDay)
     {
-        const visits = [];
         const firstVisit = new Date(
             selectedDate.getFullYear(), 
             selectedDate.getMonth(), 
             selectedDate.getDate(), 
             workingHoursForDay.start.hour, 
             workingHoursForDay.start.minute);
+
         const lastVisit = subMinutes(new Date(
             selectedDate.getFullYear(),
             selectedDate.getMonth(),
             selectedDate.getDate(),
             workingHoursForDay.end.hour,
             workingHoursForDay.end.minute), workingHoursForDay.interval);
-        
-        let newDate;
-        let counter = 1;
-        do {
-            newDate = addMinutes(firstVisit, workingHoursForDay.interval * counter);
-            visits.push(newDate);
-            counter += 1;
-        } while(!isAfter(newDate, lastVisit) && !isEqual(newDate, lastVisit));
-        return visits;
+
+        const visits = generateAllVisitsForDoctor(firstVisit, lastVisit, workingHoursForDay.interval);
     }
 
     return [];
+}
 
+function generateAllVisitsForDoctor(firstVisit, lastVisit, interval) {
+    const visits = [];
+    let newDate;
+    let counter = 1;
+    
+    do {
+        newDate = addMinutes(firstVisit, interval * counter);
+        visits.push(newDate);
+        counter += 1;
+    } while(!isAfter(newDate, lastVisit) && !isEqual(newDate, lastVisit));
+    return visits;
 }
