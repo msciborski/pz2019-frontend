@@ -25,6 +25,7 @@ function getAvailableVisitsForDate(selectedDate, workingHoursInfo, doctorsVisits
             workingHoursForDay.end.minute), workingHoursForDay.interval);
 
         const visits = generateAllVisitsForDoctor(firstVisit, lastVisit, workingHoursForDay.interval);
+        return visits;
     }
 
     return [];
