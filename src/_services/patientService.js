@@ -46,11 +46,11 @@ function addDoctorRating(patientId, doctorId, rating, comment = '') {
     .then(handleResponse);
 }
 
-function addVisit(patientId, doctorId, visitDate) {
+function addVisit(patientId, doctorId, visitEpoch) {
   const options = {
     method: 'POST',
     headers: authHeader(),
-    body: JSON.stringify({ doctorId, start: visitDate.valueOf() }),
+    body: JSON.stringify({ doctorId, start: visitEpoch }),
   };
 
   return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/appointments`, options)

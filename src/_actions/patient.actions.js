@@ -63,13 +63,15 @@ function getPatientDocumentation(patientId) {
   function failure(error) { return { type: patientConstants.GET_PATIENT_DOCUMENTATION_FAILURE, error } };
 }
 
-function addVisit(patientId, doctorId, visitDate) {
+function addVisit(patientId, doctorId, visitEpoch) {
   return dispatch => {
-    dispatch(success());
+    dispatch(request());
 
-    return patientService.addVisit(patientId, doctorId, visitDate)
+    return patientService.addVisit(patientId, doctorId, visitEpoch)
       .then(() => {
         dispatch(success());
+        dispatch(userActions.getUserVisits(patientId));
+        
       }, error => {
         dispatch(failure(error));
         dispatch(alertActions.error(error));

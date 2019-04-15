@@ -2,7 +2,7 @@ import React from "react";
 import { Table, TableHead, TableRow, TableCell, TableBody, Button } from "@material-ui/core";
 
 const AvailableVisits = props => {
-    const { visits } = props;
+    const { visits, onClick } = props;
 
     return (
         <Table>
@@ -18,7 +18,11 @@ const AvailableVisits = props => {
                     <TableRow>
                         <TableCell>{visit.toDateString()}</TableCell>
                         <TableCell>{visit.toLocaleTimeString()}</TableCell>
-                        <TableCell><Button>Make visit</Button></TableCell>
+                        <TableCell>
+                            <Button color="primary" onClick={(() => onClick(visit.getTime() / 1000))}>
+                                Make visit
+                            </Button>
+                        </TableCell>
                     </TableRow>
                     ))}
             </TableBody>

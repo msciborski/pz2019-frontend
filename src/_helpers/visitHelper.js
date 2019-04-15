@@ -25,7 +25,9 @@ function getAvailableVisitsForDate(selectedDate, workingHoursInfo, doctorsVisits
             workingHoursForDay.end.minute), workingHoursForDay.interval);
 
         const visits = generateAllVisitsForDoctor(firstVisit, lastVisit, workingHoursForDay.interval);
-        return visits;
+        const startDoctorVisits = doctorsVisits.map(visit => visit.start);
+        const filteredDate = visits.filter(visit => !startDoctorVisits.includes(visit.getTime() / 1000));
+        return filteredDate;
     }
 
     return [];
