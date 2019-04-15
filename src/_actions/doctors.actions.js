@@ -62,11 +62,11 @@ function getDoctorRatings(doctorId) {
   function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
 }
 
-function addPrescription() {
+function addPrescription(prescription) {
   return dispatch => {
     dispatch(request());
 
-    return doctorService.addPrescription()
+    return doctorsService.addPrescription(prescription)
       .then(() => {
         dispatch(success());
       }, error => {
@@ -75,7 +75,7 @@ function addPrescription() {
       })
   }
 
-  function request() { return { type: doctorConstants.ADD_PRESCRIPTION_REQUEST } };
-  function success() { return { type: doctorConstants.ADD_PRESCRIPTION_SUCCESS } };
-  function failure(error) { return { type: doctorConstants.ADD_PRESCRIPTION_FAILURE, error }};
+  function request() { return { type: doctorsContants.ADD_PRESCRIPTION_REQUEST } };
+  function success() { return { type: doctorsContants.ADD_PRESCRIPTION_SUCCESS } };
+  function failure(error) { return { type: doctorsContants.ADD_PRESCRIPTION_FAILURE, error }};
 }

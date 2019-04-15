@@ -50,13 +50,13 @@ function handleResponse(response) {
   })
 }
 
-function addPrescription(){
+function addPrescription(prescription){
   const options = {
     method: 'PUT',
     headers: authHeader(),
-    body: JSON.stringify(),
+    body: JSON.stringify(prescription),
   };
 
-return fetch(``, options)
+  return fetch(`${config.apiUrl}/api/v1/doctors/${prescription.doctorId}/patients/${prescription.patientId}/${prescription}`, options)
     .then(handleResponse);
 }
