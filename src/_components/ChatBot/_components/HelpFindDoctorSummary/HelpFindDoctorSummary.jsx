@@ -12,7 +12,7 @@ class HelpFindDoctorSummary extends Component {
 		this.state = {
 			yearOfBirth: '',
 			gender: '',
-			selectedSymptoms: '',
+			selectedSymptoms: ''
 		};
 	}
 
@@ -36,7 +36,9 @@ class HelpFindDoctorSummary extends Component {
 				getSymptoms(token);
 			}
 			if (symptoms) {
-				getDiagnosis(token, this.state.gender.value, this.state.selectedSymptoms.value, this.state.yearOfBirth.value);
+				const symptom = symptoms.find(symptom => symptom.Name === this.state.selectedSymptoms.value);
+				console.log(symptom);
+				getDiagnosis(token, this.state.gender.value, symptom.ID, this.state.yearOfBirth.value);
 			}
 		}
 	}
