@@ -103,9 +103,10 @@ class ProfilePage extends Component {
     const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
     const { id } = this.props.match.params;
     const ratingEnabled = authUser.userType !== 'patient';
-
-    console.log('Visits:', visits);
-    const { userType, medicalInformation } = { ...user }
+    // get value from user
+    console.log(authUser.userType);
+    console.log('ratingEnabled', ratingEnabled);
+    const { userType, medicalInformation, avgRating } = { ...user }
 
     return (
       <Grid item xs={12} className={classes.root}>
@@ -116,7 +117,7 @@ class ProfilePage extends Component {
               <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
               {
                 userType === 'doctor' &&
-                <StarsRating value={3} max={5} disabled={ratingEnabled} handleClick={this.handleRatingChange} />
+                <StarsRating value={avgRating} max={5} disabled={ratingEnabled} handleClick={this.handleRatingChange} />
               }
             </div>
             <Paper className={classes.paper}>

@@ -39,7 +39,7 @@ function addDoctorRating(patientId, doctorId, rating, comment = '') {
   const options = {
     method: 'POST',
     headers: authHeader(),
-    body: JSON.stringify({ value: rating, comment }),
+    body: JSON.stringify({ rate: rating, comment }),
   };
 
   return fetch(`${config.apiUrl}/api/v1/patients/${patientId}/doctors/${doctorId}/ratings`, options)
