@@ -28,12 +28,16 @@ class HelpFindDoctorSummary extends Component {
 		this.setState({ yearOfBirth, gender, selectedSymptoms } );
 	}
 
-	componentWillReceiveProps(nextProps) {
-		const { token } = nextProps;
-		const { getDiagnosis } = this.props;
+	componentDidUpdate(prevProps) {
+		const { getDiagnosis, getSymptoms, symptoms, token } = this.props;
 
-		if (token) {
-			getDiagnosis(token, this.state.gender.value, this.state.selectedSymptoms.value, this.state.yearOfBirth.value);
+		if (prevProps.token !== token || prevProps.symptoms !== symptoms) {
+			if (token) {
+				getSymptoms(token);
+			}
+			if (symptoms) {
+				getDiagnosis(token, this.state.gender.value, this.state.selectedSymptoms.value, this.state.yearOfBirth.value);
+			}
 		}
 	}
 
