@@ -31,7 +31,7 @@ class HelpFindDoctorSummary extends Component {
 	componentDidUpdate(prevProps) {
 		const { getDiagnosis, getSymptoms, symptoms, token } = this.props;
 
-		if (prevProps.token !== token || prevProps.symptoms !== symptoms) {
+		if (prevProps.token !== token || !prevProps.symptoms) {
 			if (token) {
 				getSymptoms(token);
 			}
