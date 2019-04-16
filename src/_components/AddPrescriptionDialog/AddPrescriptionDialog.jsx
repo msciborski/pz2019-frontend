@@ -12,8 +12,10 @@ class AddPrescriptionDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      oldPassword: '',
-      newPassword: '',
+      patientId: '',
+      drug: '',
+      dosage: '',
+      remission: '',
     }
   }
 
@@ -26,16 +28,16 @@ class AddPrescriptionDialog extends Component {
   }
 
   handleSubmit = () => {
-    const { oldPassword, newPassword } = this.state;
-    const { authUser, changePassword, handleClose } = this.props;
+    const { patientId, drug, dosage, remission } = this.state;
+    const { authUser, addPrescription, handleClose } = this.props;
 
-    changePassword(oldPassword, newPassword, authUser.id);
+    addPrescription(patientId, drug, dosage, remission, authUser.id);
     handleClose();
   }
 
   render() {
     const { open, handleClose } = this.props;
-    const { oldPassword, newPassword } = this.state;
+    const { patientId, drug, dosage, remission } = this.state;
 
     return (
       <Dialog
@@ -43,36 +45,56 @@ class AddPrescriptionDialog extends Component {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-labelledby="change-password"
-        aria-describedby="change-password-description"
+        aria-labelledby="add-prescription"
+        aria-describedby="add-prescription-description"
       >
         <ValidatorForm onSubmit={this.handleSubmit}>
-          <DialogTitle id="edit-basic-info-title">
-            {"Edit"}
+          <DialogTitle id="add-prescription-title">
+            {"Add prescription"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {"Change password"}
+              {"Add prescription"}
             </DialogContentText>
             <InputWithLabel
-              label="Old password"
+              label="Patient ID"
               onChange={this.handleChange}
-              value={oldPassword}
-              name="oldPassword"
+              value={patientId}
+              name="patientId"
               margin="normal"
-              autoComplete="Old password"
+              autoComplete="Patient ID"
               isFullWidth={true}
-              type="password"
+              type="text"
             />
             <InputWithLabel
-              label="New password"
+              label="Drug"
               onChange={this.handleChange}
-              value={newPassword}
-              name="newPassword"
+              value={drug}
+              name="drug"
               margin="normal"
-              autoComplete="New password"
+              autoComplete="Drug"
               isFullWidth={true}
-              type="password"
+              type="text"
+            />
+            <InputWithLabel
+              label="Dosage"
+              onChange={this.handleChange}
+              value={dosage}
+              name="dosage"
+              margin="normal"
+              autoComplete="Dosage"
+              isFullWidth={true}
+              type="text"
+            />
+            <InputWithLabel
+              label="Remission"
+              onChange={this.handleChange}
+              value={remission}
+              name="remission"
+              margin="normal"
+              autoComplete="Remission"
+              isFullWidth={true}
+              type="text"
             />
           </DialogContent>
           <DialogActions>
@@ -83,7 +105,7 @@ class AddPrescriptionDialog extends Component {
               color="primary"
               type="submit"
             >
-              Change Password
+              Add prescription
             </Button>
           </DialogActions>
         </ValidatorForm>
@@ -102,10 +124,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changePassword: (oldPassword, newPassword, userId) => dispatch(userActions.changePassword(oldPassword, newPassword, userId)),
+      //todo
+    changePassword: (userId, drug, dosage, remission) => dispatch(doctorsActions.addPrescription(prescription)),
   };
 }
 
-const connectedChangePasswordDialog = connect(mapStateToProps, mapDispatchToProps)(ChangePasswordDialog);
+const connectedAddPrescriptionDialog = connect(mapStateToProps, mapDispatchToProps)(AddPrescriptionDialog);
 
-export { connectedChangePasswordDialog as ChangePasswordDialog };
+export { connectedAddPrescriptionDialog as AddPrescriptionDialog };
