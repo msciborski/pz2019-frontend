@@ -34,12 +34,6 @@ const PatientBasicInfo = (props) => {
         xsSize={6}
       />
       <GridTextWithLabel
-        label="Voivodeship"
-        text={address.voivodeship}
-        smSize={4}
-        xsSize={6}
-      />
-      <GridTextWithLabel
         label="City"
         text={address.city}
         smSize={4}

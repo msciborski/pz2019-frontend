@@ -5,6 +5,8 @@ import { alert } from "./alert.reducer";
 import { users } from "./users.reducer";
 import { doctors } from "./doctors.reducer";
 import { patients } from "./patients.reducer";
+import { medicapi } from "./medicapi.reducer";
+
 
 const rootReducer = combineReducers({
   registration,
@@ -13,6 +15,7 @@ const rootReducer = combineReducers({
   alert,
   doctors,
   patients,
+  medicapi
 });
 
 export default rootReducer;
