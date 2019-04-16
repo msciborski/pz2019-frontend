@@ -20,6 +20,7 @@ import { DoctorListPage } from "../DoctorListPage";
 import { createMuiTheme } from "@material-ui/core/styles";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { ResetPasswordRequestPage } from "../ResetPasswordRequestPage/ResetPasswordRequestPage";
+import { AddPrescriptionDialog } from "../_components/AddPrescriptionDialog/AddPrescriptionDialog";
 
 const styles = {
   root: {
@@ -76,6 +77,7 @@ class App extends Component {
               <Route path="/resetPasword/request" component={ResetPasswordRequestPage} />
               <Route path="/resetPassword" component={ResetPasswordPage}/>
               <Route path="/activateUser" component={AccountActivationPage} />
+              <Route path="/addPrescription" component={AddPrescriptionDialog} />
             </Switch>
           </Grid>
           {
