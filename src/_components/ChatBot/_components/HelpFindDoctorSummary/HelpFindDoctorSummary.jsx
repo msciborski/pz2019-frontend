@@ -44,7 +44,7 @@ class HelpFindDoctorSummary extends Component {
 	render() {
 		const { diagnosis } = this.props;
 		const { selectedSymptoms } = this.state;
-
+		
 		return (
 			diagnosis ?
 				<div style={{ width: '100%' }}>
