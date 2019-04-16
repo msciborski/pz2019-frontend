@@ -22,6 +22,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { ResetPasswordRequestPage } from "../ResetPasswordRequestPage/ResetPasswordRequestPage";
 import { VisitPage } from "../VisitPage/VisitPage";
 import { ChatBotWidget } from "../_components/ChatBot";
+import { AddPrescriptionPage } from "../AddPrescriptionPage";
 
 const styles = {
   root: {
@@ -79,7 +80,7 @@ class App extends Component {
               <Route path="/resetPasword/request" component={ResetPasswordRequestPage} />
               <Route path="/resetPassword" component={ResetPasswordPage}/>
               <Route path="/activateUser" component={AccountActivationPage} />
-              <Route path="/visits" component={VisitPage} />
+              <Route path="/addPrescription" component={AddPrescriptionPage} />
             </Switch>
           </Grid>
           {
