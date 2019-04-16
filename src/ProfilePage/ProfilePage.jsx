@@ -108,6 +108,8 @@ class ProfilePage extends Component {
     console.log('ratingEnabled', ratingEnabled);
     const { userType, medicalInformation, avgRating } = { ...user }
 
+    console.log('Avg rating:', Math.ceil(avgRating));
+
     return (
       <Grid item xs={12} className={classes.root}>
         {
@@ -117,7 +119,7 @@ class ProfilePage extends Component {
               <Typography variant="h3" className={classes.nameHeader}>{user.name} {user.surname}</Typography>
               {
                 userType === 'doctor' &&
-                <StarsRating value={avgRating} max={5} disabled={ratingEnabled} handleClick={this.handleRatingChange} />
+                <StarsRating value={Math.ceil(avgRating)} max={5} disabled={ratingEnabled} handleClick={this.handleRatingChange} />
               }
             </div>
             <Paper className={classes.paper}>

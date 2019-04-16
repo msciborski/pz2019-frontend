@@ -7,6 +7,7 @@ export const doctorsService = {
   getDoctors,
   getDoctorRatings,
   getDoctorWorkingHoursInfo,
+  addPrescription,
 };
 
 function getSpecializations() {
@@ -58,4 +59,15 @@ function handleResponse(response) {
     }
     return data;
   })
+}
+
+function addPrescription(doctorId, patientId, prescription){
+  const options = {
+    method: 'PUT',
+    headers: authHeader(),
+    body: JSON.stringify(prescription),
+  };
+
+  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/patients/${patientId}/${prescription}`, options)
+    .then(handleResponse);
 }
