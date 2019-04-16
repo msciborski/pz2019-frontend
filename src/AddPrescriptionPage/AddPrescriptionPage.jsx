@@ -21,7 +21,7 @@ const styles = {
   },
 }
 
-class AddPrescriptionDialog extends Component {
+class AddPrescriptionPage extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -70,76 +70,75 @@ class AddPrescriptionDialog extends Component {
     const { open, handleClose } = this.props;
     const { patientId, drug, dosage, remission } = this.state;
     return (
-        <Dialog
-          open={open}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={handleClose}
-          aria-labelledby="add-prescription"
-          aria-describedby="add-prescription-description"
-        >
-          <ValidatorForm onSubmit={this.handleSubmit}>
-            <DialogTitle id="add-prescription-title">
-              {"Add prescription"}
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                {"Add prescription"}
-              </DialogContentText>
-              <InputWithLabel
-                label="Patient ID"
-                onChange={this.handleChange}
-                value={patientId}
-                name="patientId"
-                margin="normal"
-                autoComplete="Patient ID"
-                isFullWidth={true}
-                type="text"
-              />
-              <InputWithLabel
-                label="Drug"
-                onChange={this.handleChange}
-                value={drug}
-                name="drug"
-                margin="normal"
-                autoComplete="Drug"
-                isFullWidth={true}
-                type="text"
-              />
-              <InputWithLabel
-                label="Dosage"
-                onChange={this.handleChange}
-                value={dosage}
-                name="dosage"
-                margin="normal"
-                autoComplete="Dosage"
-                isFullWidth={true}
-                type="text"
-              />
-              <InputWithLabel
-                label="Remission"
-                onChange={this.handleChange}
-                value={remission}
-                name="remission"
-                margin="normal"
-                autoComplete="Remission"
-                isFullWidth={true}
-                type="text"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button color="primary" onClick={handleClose}>
-                Cancel
-                  </Button>
-              <Button
-                color="primary"
-                type="submit"
-              >
-                Add prescription
-              </Button>
-            </DialogActions>
+        <Grid item xs={12} className={styles.form}>
+        <Paper className={styles.paper}>
+          <Typography component="h1" variant="h5" align="center">
+            Add prescription:
+          </Typography>
+          <ValidatorForm onSubmit={this.handleSubmit} className={styles.form}  >
+            <InputWithLabel
+              label="Patient ID"
+              onChange={this.handleChange}
+              value={patientId}
+              name="patientId"
+              validators={['required']}
+              errorMessages={['This field is required', 'text is not valid']}
+              margin="normal"
+              autoComplete="Patient ID"
+              hasAutoFocus={true}
+              isFullWidth={true}
+              type="text"
+            />
+            <InputWithLabel
+              label="Drug"
+              onChange={this.handleChange}
+              value={drug}
+              name="drug"
+              validators={['required']}
+              errorMessages={['This field is required', 'text is not valid']}
+              margin="normal"
+              autoComplete="Drug"
+              hasAutoFocus={true}
+              isFullWidth={true}
+              type="text"
+            />
+            <InputWithLabel
+              label="Dosage"
+              onChange={this.handleChange}
+              value={dosage}
+              name="dosage"
+              validators={['required']}
+              errorMessages={['This field is required', 'text is not valid']}
+              margin="normal"
+              autoComplete="text"
+              hasAutoFocus={true}
+              isFullWidth={true}
+              type="text"
+            />
+            <InputWithLabel
+              label="Remission"
+              onChange={this.handleChange}
+              value={remission}
+              name="remission"
+              validators={['required']}
+              errorMessages={['This field is required', 'text is not valid']}
+              margin="normal"
+              autoComplete="remission"
+              hasAutoFocus={true}
+              isFullWidth={true}
+              type="text"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Submit
+          </Button>
           </ValidatorForm>
-        </Dialog>
+        </Paper>
+        </Grid>
       )
     }
   }
@@ -159,6 +158,6 @@ class AddPrescriptionDialog extends Component {
     };
   }
   
-  const connectedAddPrescriptionDialog = connect(mapStateToProps, mapDispatchToProps)(AddPrescriptionDialog);
+  const connectedAddPrescriptionPage = connect(mapStateToProps, mapDispatchToProps)(AddPrescriptionPage);
   
-  export { connectedAddPrescriptionDialog as AddPrescriptionDialog };
+  export { connectedAddPrescriptionPage as AddPrescriptionPage };

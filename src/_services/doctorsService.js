@@ -52,11 +52,11 @@ function handleResponse(response) {
 
 function addPrescription(doctorId, patientId, prescription){
   const options = {
-    method: 'PUT',
+    method: 'POST',
     headers: authHeader(),
     body: JSON.stringify(prescription),
   };
 
-  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/patients/${patientId}/${prescription}`, options)
+  return fetch(`${config.apiUrl}/api/v1/doctors/${doctorId}/patients/${patientId}/prescription`, options)
     .then(handleResponse);
 }
