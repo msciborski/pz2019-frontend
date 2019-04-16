@@ -15,6 +15,7 @@ import { UploadDocumentationSection } from "../_components/UploadDocumentationSe
 import { ChangePasswordDialog } from "../_components/ChangePasswordDialog/ChangePasswordDialog";
 import { DocumentationList } from "../_components/DocumentationList";
 import { StarsRating } from "../_components/StarsRating";
+import { VisitList } from "../_components/VisitList/VisitList";
 
 const styles = {
   root: {
@@ -61,10 +62,11 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    const { getUser, getSpecializations } = this.props;
+    const { getUser, getSpecializations, getUserVisits, authUser } = this.props;
     const { id } = this.props.match.params;
     getSpecializations();
     getUser(id);
+    getUserVisits(id);
   }
 
   handleEditChange = event => {
@@ -97,13 +99,12 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { user, classes, authUser } = this.props;
+    const { user, classes, authUser, visits } = this.props;
     const { editBasicOpen, editMedicalInformationOpen, changePasswordOpen } = this.state;
     const { id } = this.props.match.params;
     const ratingEnabled = authUser.userType !== 'patient';
-    // get value from user
-    console.log(authUser.userType);
-    console.log('ratingEnabled', ratingEnabled);
+
+    console.log('Visits:', visits);
     const { userType, medicalInformation } = { ...user }
 
     return (
@@ -200,6 +201,19 @@ class ProfilePage extends Component {
                       <DocumentationList />
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
+                  {
+                    authUser.id === user.id && visits ?
+                      <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                          <Typography>Visits</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                          <VisitList visits={visits} isDoctor={user.userType === 'doctor'} />
+                        </ExpansionPanelDetails>
+                      </ExpansionPanel>
+                      :
+                      <></>
+                  }
                 </>
               }
             </Paper>
@@ -227,11 +241,13 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { authentication } = state;
-  const { user } = state.users;
+  const { authentication, users } = state;
+  const { user } = users;
+
   return {
     user,
     authUser: authentication.user.user,
+    visits: users.visits,
   };
 }
 
@@ -240,6 +256,7 @@ const mapDispatchToProps = dispatch => {
     getUser: id => dispatch(userActions.getById(id)),
     getSpecializations: () => dispatch(doctorsActions.getSpecializations()),
     addRatingToDoctor: (patientId, doctorId, rating, comment = '') => dispatch(patientActions.addDoctorRating(patientId, doctorId, rating, comment)),
+    getUserVisits: (userId) => dispatch(userActions.getUserVisits(userId)),
   };
 }
 

@@ -175,7 +175,7 @@ function activateUser(activateToken) {
 
 function getUserVisits(userId) {
   return dispatch => {
-    dispatch(request([]));
+    dispatch(request());
 
     return userService.getUserVisit(userId)
       .then(visits => {
@@ -186,7 +186,7 @@ function getUserVisits(userId) {
       })
   }
 
-  function request(visits) { return { type: userConstants.GET_USER_VISITS_REQUEST, visits } };
+  function request() { return { type: userConstants.GET_USER_VISITS_REQUEST } };
   function success(visits) { return { type: userConstants.GET_USER_VISITS_SUCCESS, visits } };
   function failure(error) { return { type: userConstants.GET_USER_VISITS_FAILURE, error } };
 }

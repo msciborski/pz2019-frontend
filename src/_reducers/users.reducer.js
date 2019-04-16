@@ -4,10 +4,12 @@ export const users = (state={}, action) => {
   switch (action.type) {
     case userConstants.GET_REQUEST:
       return {
+        ...state,
         loading: true,
       };
     case userConstants.GET_SUCCESS:
       return {
+        ...state,
         user: action.user,
       }
     case userConstants.GET_FAILURE:
@@ -58,10 +60,12 @@ export const users = (state={}, action) => {
       };
     case userConstants.GET_USER_VISITS_REQUEST:
       return {
+        ...state,
         visits: action.visits,
       };
     case userConstants.GET_USER_VISITS_SUCCESS:
       return {
+        ...state,
         visits: action.visits,
       };
     case userConstants.GET_USER_VISITS_FAILURE:
