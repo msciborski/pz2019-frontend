@@ -62,11 +62,11 @@ function getDoctorRatings(doctorId) {
   function failure(error) { return { type: doctorsContants.GET_DOCTORS_RATING_FAILURE, error } };
 }
 
-function addPrescription(prescription) {
+function addPrescription(doctorId, patientId, prescription) {
   return dispatch => {
     dispatch(request());
 
-    return doctorsService.addPrescription(prescription)
+    return doctorsService.addPrescription(doctorId, patientId, prescription)
       .then(() => {
         dispatch(success());
       }, error => {

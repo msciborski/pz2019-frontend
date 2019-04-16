@@ -37,13 +37,9 @@ export const doctors = (state= {}, action) => {
         error: action.error,
       };
     case doctorsContants.ADD_PRESCRIPTION_REQUEST:
-      return {
-        //todo
-      };
+      return {};
     case doctorsContants.ADD_PRESCRIPTION_SUCCESS:
-      return {
-        //todo
-      };
+      return {};
     case doctorsContants.ADD_PRESCRIPTION_FAILURE:
       return {
         error: action.error,

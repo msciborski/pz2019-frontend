@@ -31,7 +31,25 @@ class AddPrescriptionDialog extends Component {
     const { patientId, drug, dosage, remission } = this.state;
     const { authUser, addPrescription, handleClose } = this.props;
 
-    addPrescription(patientId, drug, dosage, remission, authUser.id);
+    addPrescription(patientId, authUser.id,{
+        patient: {
+            additionalRights: true,
+            nfzBranch: "05",
+        },
+        prescriptionData: [
+            {
+                drug: "Trexan 10mg",
+                dosage: "1 raz na dobę 1 tabl. przez 3 m-ce",
+                remission: "B"
+            },
+            {
+                drug: "Mercaptopurinum 50mg",
+                dosage: "2 razy na dobę 1 tabl. przez 3 m-ce",
+                remission: "B"
+            }
+        ],
+        "realizationDateFromToday": true
+    });
     handleClose();
   }
 
@@ -125,7 +143,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
       //todo
-    changePassword: (userId, drug, dosage, remission) => dispatch(doctorsActions.addPrescription(prescription)),
+    addPrescription: (doctorId, patientId, prescription) => dispatch(doctorsActions.addPrescription(doctorId, patientId, prescription)),
   };
 }
 
