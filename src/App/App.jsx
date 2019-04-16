@@ -20,7 +20,7 @@ import { DoctorListPage } from "../DoctorListPage";
 import { createMuiTheme } from "@material-ui/core/styles";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { ResetPasswordRequestPage } from "../ResetPasswordRequestPage/ResetPasswordRequestPage";
-import { AddPrescriptionPage } from "../_components/AddPrescriptionDialog/AddPrescriptionPage";
+import { AddPrescriptionPage } from "../_components/AddPrescriptionPage/AddPrescriptionPage";
 
 const styles = {
   root: {
