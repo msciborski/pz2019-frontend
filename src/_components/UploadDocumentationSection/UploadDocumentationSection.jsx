@@ -51,6 +51,7 @@ class UploadDocumentationSection extends Component {
         <DropzoneArea
           onChange={this.handleChange}
           className={classes.dropzone}
+          acceptedFiles={['image/*, application/pdf']}
         />
         <Button color="primary" type="submit" className={classes.addButton} onClick={this.handleSubmit}>Add documentation</Button>
       </FormControl>

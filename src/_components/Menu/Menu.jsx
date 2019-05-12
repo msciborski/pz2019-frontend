@@ -58,6 +58,11 @@ const Menu = (props) => {
                 <ListItemText primary="Visits" />
               </ListItem>
             </Link>
+            <Link to="/addPrescription" className={classes.link}>
+              <ListItem button>
+                <ListItemText primary="Add prescription" />
+              </ListItem>
+            </Link>
           </List>
         </div>
       </div>
