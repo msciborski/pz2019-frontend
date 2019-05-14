@@ -144,7 +144,7 @@ function resetPassword(userId, newPassword, resetPasswordToken) {
         history.push('/login');
       }, error => {
         dispatch(failure(error));
-        dispatch(alertActions.failure(error));
+        dispatch(alertActions.error(error));
       })
   }
 
