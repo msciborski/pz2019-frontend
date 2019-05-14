@@ -81,7 +81,7 @@ class NavBar extends Component {
               to="/"
               className={classes.title}
             >
-              Title
+              Clinic Manager
                 </Typography>
             {
               !!loggedIn ?

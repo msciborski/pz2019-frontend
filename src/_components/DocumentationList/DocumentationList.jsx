@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
+import { Table, TableHead, TableBody, TableRow, TableCell, Button, Link } from "@material-ui/core";
 import { connect } from "react-redux";
 import { patientActions } from "../../_actions";
+import { config } from "../../config";
 
 class DocumentationList extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class DocumentationList extends Component {
             <TableCell>Extension</TableCell>
             <TableCell>Author</TableCell>
             <TableCell>Upload date</TableCell>
-            <TableCell>Open</TableCell>
+            <TableCell>Download</TableCell>
           </TableHead>
           <TableBody>
             {documentation.map(doc => {
@@ -43,7 +44,10 @@ class DocumentationList extends Component {
                     {`${doc.author.name} ${doc.author.surname}`}
                   </TableCell>
                   <TableCell>
-                    {new Date(doc.createdAt).toDateString()}
+                    {new Date(doc.createdAt * 1000).toDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <Button><Link target="_blank" href={`${config.apiUrl}${doc.link}`} download>Download</Link></Button>
                   </TableCell>
                 </TableRow>
               )
